@@ -11,6 +11,8 @@
 		26C3F4232A76E1510082F068 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F4222A76E1510082F068 /* ContentView.swift */; };
 		26C3F4252A76E1530082F068 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26C3F4242A76E1530082F068 /* Images.xcassets */; };
 		26C3F4282A76E1530082F068 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26C3F4272A76E1530082F068 /* Preview Assets.xcassets */; };
+		26C3F4352A76E79D0082F068 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F4342A76E79D0082F068 /* LocationService.swift */; };
+		26C3F43A2A76E89B0082F068 /* WeatherTodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F4392A76E89B0082F068 /* WeatherTodayViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		26C3F4222A76E1510082F068 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		26C3F4242A76E1530082F068 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		26C3F4272A76E1530082F068 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		26C3F4342A76E79D0082F068 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		26C3F4392A76E89B0082F068 /* WeatherTodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTodayViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +57,7 @@
 			children = (
 				26C3F42E2A76E51C0082F068 /* SupportingFiles */,
 				26C3F42F2A76E5540082F068 /* App */,
-				26C3F4302A76E5BF0082F068 /* Today */,
+				26C3F4302A76E5BF0082F068 /* WeatherToday */,
 				26C3F4332A76E6330082F068 /* Services */,
 				26C3F4262A76E1530082F068 /* Preview Content */,
 			);
@@ -84,13 +88,13 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		26C3F4302A76E5BF0082F068 /* Today */ = {
+		26C3F4302A76E5BF0082F068 /* WeatherToday */ = {
 			isa = PBXGroup;
 			children = (
 				26C3F4312A76E5DD0082F068 /* Vews */,
 				26C3F4322A76E5ED0082F068 /* ViewModels */,
 			);
-			path = Today;
+			path = WeatherToday;
 			sourceTree = "<group>";
 		};
 		26C3F4312A76E5DD0082F068 /* Vews */ = {
@@ -104,6 +108,7 @@
 		26C3F4322A76E5ED0082F068 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				26C3F4392A76E89B0082F068 /* WeatherTodayViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -111,8 +116,17 @@
 		26C3F4332A76E6330082F068 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				26C3F4362A76E7FB0082F068 /* LocationService */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		26C3F4362A76E7FB0082F068 /* LocationService */ = {
+			isa = PBXGroup;
+			children = (
+				26C3F4342A76E79D0082F068 /* LocationService.swift */,
+			);
+			path = LocationService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,7 +200,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				26C3F4232A76E1510082F068 /* ContentView.swift in Sources */,
+				26C3F4352A76E79D0082F068 /* LocationService.swift in Sources */,
 				26C3F4212A76E1510082F068 /* ForecastApp.swift in Sources */,
+				26C3F43A2A76E89B0082F068 /* WeatherTodayViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,8 +331,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Forecast/Preview Content\"";
+				DEVELOPMENT_TEAM = 5KXS5M32KB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is used to show local weather.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -344,8 +362,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Forecast/Preview Content\"";
+				DEVELOPMENT_TEAM = 5KXS5M32KB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is used to show local weather.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
