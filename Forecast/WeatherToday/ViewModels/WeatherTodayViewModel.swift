@@ -7,7 +7,7 @@
 
 import Combine
 
-class WeatherTodayViewModel: ObservableObject {
+final class WeatherTodayViewModel: ObservableObject {
     //MARK: Public properties
     @Published var authorizationStatus: LocationService.AuthorizationStatus = .loading
 

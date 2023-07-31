@@ -27,7 +27,7 @@ extension LocationService: CLLocationManagerDelegate {
     }
 }
 
-class LocationService: NSObject {
+final class LocationService: NSObject {
     enum AuthorizationStatus: String {
         case loading
         case authorized
@@ -59,7 +59,7 @@ class LocationService: NSObject {
     private func setupLocationManager() {
         locationManager.delegate = self
         // Since there is no need for high accuracy, we can set this value
-        // to increase the response speed of the location
+        // to increase the response speed of the location.
         locationManager.desiredAccuracy = 70
     }
 
@@ -68,9 +68,15 @@ class LocationService: NSObject {
         case .authorizedWhenInUse, .authorizedAlways:
             authorizationStatus.value = .authorized
         case .denied:
-            let isLocationServicesEnables = CLLocationManager.locationServicesEnabled()
+            DispatchQueue.global().async {
+                // In case of calling this methods on the main thread compiler warns about UI unresponsiveness.
+                // We can move it to a background thread.
+                let isLocationServicesEnables = CLLocationManager.locationServicesEnabled()
 
-            authorizationStatus.value = isLocationServicesEnables ? .appLocationDenied : .locationServicesDenied
+                DispatchQueue.main.async {
+                    self.authorizationStatus.value = isLocationServicesEnables ? .appLocationDenied : .locationServicesDenied
+                }
+            }
         case .notDetermined:
             authorizationStatus.value = .notDetermined
         case .restricted:
