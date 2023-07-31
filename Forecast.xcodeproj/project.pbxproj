@@ -19,7 +19,7 @@
 		26C3F4352A76E79D0082F068 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F4342A76E79D0082F068 /* LocationService.swift */; };
 		26C3F43A2A76E89B0082F068 /* WeatherTodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C3F4392A76E89B0082F068 /* WeatherTodayViewModel.swift */; };
 		26D658012A77CDB000346A1F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D658002A77CDB000346A1F /* MainView.swift */; };
-		26D658032A77E63400346A1F /* AppStateViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D658022A77E63400346A1F /* AppStateViewView.swift */; };
+		26D658032A77E63400346A1F /* AppStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D658022A77E63400346A1F /* AppStateView.swift */; };
 		26D658062A77E73D00346A1F /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D658052A77E73D00346A1F /* ViewFactory.swift */; };
 		26D658082A77E77400346A1F /* WeatherTodayContentViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D658072A77E77400346A1F /* WeatherTodayContentViewFactory.swift */; };
 /* End PBXBuildFile section */
@@ -39,7 +39,7 @@
 		26C3F4342A76E79D0082F068 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		26C3F4392A76E89B0082F068 /* WeatherTodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTodayViewModel.swift; sourceTree = "<group>"; };
 		26D658002A77CDB000346A1F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		26D658022A77E63400346A1F /* AppStateViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateViewView.swift; sourceTree = "<group>"; };
+		26D658022A77E63400346A1F /* AppStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateView.swift; sourceTree = "<group>"; };
 		26D658052A77E73D00346A1F /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
 		26D658072A77E77400346A1F /* WeatherTodayContentViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTodayContentViewFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,7 +97,7 @@
 				26C3F42E2A76E51C0082F068 /* SupportingFiles */,
 				26C3F42F2A76E5540082F068 /* App */,
 				26D658042A77E72800346A1F /* ViewFactories */,
-				26D6580B2A77F4C100346A1F /* MainView */,
+				26D6580B2A77F4C100346A1F /* Views */,
 				26C3F4302A76E5BF0082F068 /* WeatherToday */,
 				26C3F4332A76E6330082F068 /* Services */,
 				26586B772A770C8B00853FFD /* Fonts */,
@@ -134,19 +134,18 @@
 		26C3F4302A76E5BF0082F068 /* WeatherToday */ = {
 			isa = PBXGroup;
 			children = (
-				26C3F4312A76E5DD0082F068 /* Vews */,
+				26C3F4312A76E5DD0082F068 /* Views */,
 				26C3F4322A76E5ED0082F068 /* ViewModels */,
 			);
 			path = WeatherToday;
 			sourceTree = "<group>";
 		};
-		26C3F4312A76E5DD0082F068 /* Vews */ = {
+		26C3F4312A76E5DD0082F068 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				26C3F4222A76E1510082F068 /* WeatherTodayContentView.swift */,
-				26D658022A77E63400346A1F /* AppStateViewView.swift */,
 			);
-			path = Vews;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		26C3F4322A76E5ED0082F068 /* ViewModels */ = {
@@ -182,12 +181,13 @@
 			path = ViewFactories;
 			sourceTree = "<group>";
 		};
-		26D6580B2A77F4C100346A1F /* MainView */ = {
+		26D6580B2A77F4C100346A1F /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				26D658002A77CDB000346A1F /* MainView.swift */,
+				26D658022A77E63400346A1F /* AppStateView.swift */,
 			);
-			path = MainView;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,7 +269,7 @@
 				26D658012A77CDB000346A1F /* MainView.swift in Sources */,
 				26C3F4232A76E1510082F068 /* WeatherTodayContentView.swift in Sources */,
 				26C3F4352A76E79D0082F068 /* LocationService.swift in Sources */,
-				26D658032A77E63400346A1F /* AppStateViewView.swift in Sources */,
+				26D658032A77E63400346A1F /* AppStateView.swift in Sources */,
 				26C3F4212A76E1510082F068 /* ForecastApp.swift in Sources */,
 				26C3F43A2A76E89B0082F068 /* WeatherTodayViewModel.swift in Sources */,
 				26D658062A77E73D00346A1F /* ViewFactory.swift in Sources */,

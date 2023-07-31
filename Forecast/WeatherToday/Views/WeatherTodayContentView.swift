@@ -24,13 +24,7 @@ struct WeatherTodayContentView: View {
                             viewModel.requestLocationAndNetworkData()
                         }
                     })
-            case .appLocationDenied:
-                AppStateView()
-            case .locationServicesDenied:
-                AppStateView()
-            case .notDetermined:
-                AppStateView()
-            case .restricted:
+            default:
                 AppStateView()
             }
         }
