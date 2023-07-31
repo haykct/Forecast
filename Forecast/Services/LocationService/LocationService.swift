@@ -9,6 +9,7 @@ import CoreLocation
 import Combine
 
 extension LocationService: CLLocationManagerDelegate {
+    //MARK: Public methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             let latitude = location.coordinate.latitude
@@ -36,19 +37,25 @@ class LocationService: NSObject {
         case restricted
     }
     
+    //MARK: Typealiases
     typealias Location = PassthroughSubject<(lat: CLLocationDegrees, long: CLLocationDegrees), Error>
     typealias Status = CurrentValueSubject<AuthorizationStatus, Never>
 
+    //MARK: Public properties
     let authorizationStatus = Status(.loading)
     let location = Location()
+
+    //MARK: Private properties
     private let locationManager = CLLocationManager()
 
+    //MARK: Initializers
     override init() {
         super.init()
 
         setupLocationManager()
     }
 
+    //MARK: Private methods
     private func setupLocationManager() {
         locationManager.delegate = self
         // Since there is no need for high accuracy, we can set this value
@@ -73,6 +80,7 @@ class LocationService: NSObject {
         }
     }
 
+    //MARK: Public methods
     func requestWhenInUseAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
