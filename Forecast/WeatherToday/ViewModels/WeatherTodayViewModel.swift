@@ -13,13 +13,13 @@ final class WeatherTodayViewModel: ObservableObject {
 
     //MARK: Private properties
     private var locationService = LocationService()
-    private var cancellable: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
 
     //MARK: Public methods
     func subscribeForAuthorizationStatusUpdate() {
         // Subscribing for getting authorization status updates,
         // since users can change the status from settings while the app is running
-        locationService.authorizationStatus
+        locationService.authorizationStatusSubject
             .assign(to: &$authorizationStatus)
     }
 
@@ -27,14 +27,21 @@ final class WeatherTodayViewModel: ObservableObject {
         locationService.requestWhenInUseAuthorization()
     }
 
-    func requestData() {
-        cancellable = locationService.location
+    func requestLocationAndNetworkData() {
+        cancellables.removeAll()
+        
+        locationService.locationSubject
+            .sink(receiveValue: { coordinates in
+                print(coordinates)
+            })
+            .store(in: &cancellables)
+
+        locationService.locationErrorSubject
             .sink { error in
 
-            } receiveValue: { location in
-                print(location.lat, location.long)
             }
-
+            .store(in: &cancellables)
+        
         locationService.requestLocation()
     }
 }

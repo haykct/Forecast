@@ -9,8 +9,7 @@ import SwiftUI
 
 struct WeatherTodayContentView: View {
     //MARK: Private properties
-    @State private var isForecastViewAppeared = false
-    @State private var isWeatherTodayContentViewAppeared = false
+    @State private var isAppeared = false
     @EnvironmentObject private var viewModel: WeatherTodayViewModel
     
     var body: some View {
@@ -20,12 +19,11 @@ struct WeatherTodayContentView: View {
                 ProgressView()
             case .authorized:
                 EmptyView()
-                    .onAppear {
-                        if !isForecastViewAppeared {
-                            isForecastViewAppeared = true
-                            viewModel.requestData()
+                    .onReceive(viewModel.$authorizationStatus, perform: { status in
+                        if status == .authorized {
+                            viewModel.requestLocationAndNetworkData()
                         }
-                    }
+                    })
             case .appLocationDenied:
                 AppStateView()
             case .locationServicesDenied:
@@ -34,12 +32,11 @@ struct WeatherTodayContentView: View {
                 AppStateView()
             case .restricted:
                 AppStateView()
-                Text("Restricted")
             }
         }
         .onAppear {
-            if !isWeatherTodayContentViewAppeared {
-                isWeatherTodayContentViewAppeared = true
+            if !isAppeared {
+                isAppeared = true
                 viewModel.subscribeForAuthorizationStatusUpdate()
             }
         }

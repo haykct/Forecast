@@ -84,7 +84,8 @@ struct AppStateView: View {
             message = "Turn on Location Services to allow \"Forecast\" to determine your location."
         case .restricted:
             isAlertVisible = true
-            break
+            title = "Location is restricted"
+            message = "Change restriction settings to allow \"Forecast\" to determine your location."
         default:
             isAlertVisible = false
             break

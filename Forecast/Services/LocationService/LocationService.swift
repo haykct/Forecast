@@ -11,19 +11,18 @@ import Combine
 extension LocationService: CLLocationManagerDelegate {
     //MARK: Public methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            let latitude = location.coordinate.latitude
-            let longitude = location.coordinate.longitude
-            print(latitude, longitude, locations.count)
+        if let coordinate = locations.last?.coordinate {
+            locationManager.stopUpdatingLocation()
+            locationSubject.send((lat: coordinate.latitude, long: coordinate.longitude))
         }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationErrorSubject.send(error)
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         getAuthorizationStatus()
-    }
-
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
     }
 }
 
@@ -38,12 +37,17 @@ final class LocationService: NSObject {
     }
     
     //MARK: Typealiases
-    typealias Location = PassthroughSubject<(lat: CLLocationDegrees, long: CLLocationDegrees), Error>
-    typealias Status = CurrentValueSubject<AuthorizationStatus, Never>
+    typealias LocationSubject = PassthroughSubject<(lat: CLLocationDegrees, long: CLLocationDegrees), Never>
+    // If I send error to LocationSubject, the subscription will be cancelled which is not I want.
+    // I want to get location updates even after getting an error.
+    // That's the reason I created LocationErrorSubject separate subject for sending errors to downstream.
+    typealias LocationErrorSubject = PassthroughSubject<Error, Never>
+    typealias StatusSubject = CurrentValueSubject<AuthorizationStatus, Never>
 
     //MARK: Public properties
-    let authorizationStatus = Status(.loading)
-    let location = Location()
+    let authorizationStatusSubject = StatusSubject(.loading)
+    let locationSubject = LocationSubject()
+    let locationErrorSubject = LocationErrorSubject()
 
     //MARK: Private properties
     private let locationManager = CLLocationManager()
@@ -66,7 +70,7 @@ final class LocationService: NSObject {
     private func getAuthorizationStatus() {
         switch locationManager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
-            authorizationStatus.value = .authorized
+            authorizationStatusSubject.value = .authorized
         case .denied:
             DispatchQueue.global().async {
                 // In case of calling this methods on the main thread compiler warns about UI unresponsiveness.
@@ -74,13 +78,13 @@ final class LocationService: NSObject {
                 let isLocationServicesEnables = CLLocationManager.locationServicesEnabled()
 
                 DispatchQueue.main.async {
-                    self.authorizationStatus.value = isLocationServicesEnables ? .appLocationDenied : .locationServicesDenied
+                    self.authorizationStatusSubject.value = isLocationServicesEnables ? .appLocationDenied : .locationServicesDenied
                 }
             }
         case .notDetermined:
-            authorizationStatus.value = .notDetermined
+            authorizationStatusSubject.value = .notDetermined
         case .restricted:
-            authorizationStatus.value = .restricted
+            authorizationStatusSubject.value = .restricted
         default:
             break
         }
