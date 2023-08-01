@@ -27,7 +27,7 @@ extension LocationService: CLLocationManagerDelegate {
 }
 
 final class LocationService: NSObject {
-    enum AuthorizationStatus: String {
+    enum AuthorizationStatus {
         case loading
         case authorized
         case appLocationDenied

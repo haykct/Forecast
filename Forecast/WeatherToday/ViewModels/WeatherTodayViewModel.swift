@@ -9,10 +9,11 @@ import Combine
 
 final class WeatherTodayViewModel: ObservableObject {
     //MARK: Public properties
-    @Published var authorizationStatus: LocationService.AuthorizationStatus = .loading
+    @Published private(set) var authorizationStatus: LocationService.AuthorizationStatus = .loading
+    @Published private(set) var serviceError: ServiceError?
 
     //MARK: Private properties
-    private var locationService = LocationService()
+    private let locationService = LocationService()
     private var cancellables = Set<AnyCancellable>()
 
     //MARK: Public methods
@@ -37,11 +38,15 @@ final class WeatherTodayViewModel: ObservableObject {
             .store(in: &cancellables)
 
         locationService.locationErrorSubject
-            .sink { error in
-
+            .sink { [weak self] error in
+                self?.serviceError = .locationError
             }
             .store(in: &cancellables)
         
         locationService.requestLocation()
+    }
+
+    deinit {
+        print("deinit")
     }
 }

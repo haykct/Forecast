@@ -8,62 +8,101 @@
 import SwiftUI
 
 struct AppStateView: View {
+    //MARK: Enums
+    enum CurrentState: Equatable {
+        case location
+        case serviceError(ServiceError)
+
+        var description: String {
+            switch self {
+            case .location:
+                return "Give us permission to see forecast for your current location."
+            case .serviceError(let error):
+                return error.description
+            }
+        }
+
+        var firstLineText: String {
+            self == .location ? "Enable" : "Error"
+        }
+
+        var secondLineText: String {
+            self == .location ? "location" : "fetching"
+        }
+
+        var imageName: String {
+            self == .location ? "location" : "warning"
+        }
+    }
+
     //MARK: Private properties
     @Environment(\.openURL) private var openURL
     @EnvironmentObject private var viewModel: WeatherTodayViewModel
     @State private var isAlertVisible = false
     @State private var title = ""
     @State private var message = ""
+
+    private var state: CurrentState
+
+    //MARK: Initializers
+    init(state: CurrentState) {
+        self.state = state
+    }
     
     var body: some View {
         VStack {
             let contentHeight: CGFloat = UIScreen.main.bounds.height > 667 ? 400 : 352
+            let topPadding: CGFloat = UIScreen.main.bounds.height == 568 ? 80 : 100
 
             VStack(alignment: .leading) {
                 let Inter = Constants.Fonts.Inter.self
                 let titleFont = Font.custom(Inter.bold, size: 64)
-                let descriptionFontSize: CGFloat = 16
 
-                Image("location")
+                Image(state.imageName)
                     .resizable()
                     .renderingMode(.template)
                     .foregroundColor(.black)
                     .frame(width: 43, height: 43)
                     .padding(.top, 7)
                 Spacer()
-                Text("Enable")
+                Text(state.firstLineText)
                     .font(titleFont)
-                Text("location")
+                Text(state.secondLineText)
                     .font(titleFont)
                     .padding(.top, -52)
+
+                if state != .location {
+                    Text("data")
+                        .font(titleFont)
+                        .padding(.top, -52)
+                }
+
                 Spacer()
-                Text("Give us permission to see forecast for your current location.")
-                    .font(Font.custom(Inter.medium, size: descriptionFontSize))
+                Text(state.description)
+                    .font(Font.custom(Inter.medium, size: 16))
                     .lineSpacing(4)
                 Spacer()
-                Button("Enable location") {
-                    openAlert()
-                }
-                .frame(width: 151, height: 40)
-                .font(Font.custom(Inter.semiBold, size: descriptionFontSize))
-                .background(.black)
-                .foregroundColor(.white)
-                .cornerRadius(20)
-                .alert(title, isPresented: $isAlertVisible, actions: {
-                    Button("Settings", action: {
-                        // Opening settings for switching on location services.
-                        // I'm testing on simulator which doesn't support location settings,
-                        // therefore I'm opening settings instead of app location settings or location services settings.
-                        openURL(URL(string: UIApplication.openSettingsURLString)!)
+
+                if state == .location {
+                    AppButton {
+                        openAlert()
+                    }
+                    .alert(title, isPresented: $isAlertVisible, actions: {
+                        Button("Settings", action: {
+                            // Opening settings for switching on location services.
+                            // I'm testing on simulator which doesn't support location settings,
+                            // therefore I'm opening settings instead of app location settings or location services settings.
+                            openURL(URL(string: UIApplication.openSettingsURLString)!)
+                        })
+                        Button("Cancel", action: {})
+                    }, message: {
+                        Text(message)
                     })
-                    Button("Cancel", action: {})
-                }, message: {
-                    Text(message)
-                })
+                }
             }
-            .padding(.leading, 24)
             .frame(maxWidth: .infinity, maxHeight: contentHeight, alignment: .leading)
-            .padding(.top, 100)
+            .padding(.leading, 24)
+            .padding(.top, topPadding)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
@@ -95,6 +134,6 @@ struct AppStateView: View {
 
 struct WeatherTodayView_Previews: PreviewProvider {
     static var previews: some View {
-        AppStateView().environmentObject(WeatherTodayViewModel())
+        AppStateView(state: .serviceError(.locationError)).environmentObject(WeatherTodayViewModel())
     }
 }

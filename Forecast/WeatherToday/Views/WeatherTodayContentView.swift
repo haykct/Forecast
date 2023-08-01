@@ -18,14 +18,18 @@ struct WeatherTodayContentView: View {
             case .loading:
                 ProgressView()
             case .authorized:
-                EmptyView()
-                    .onReceive(viewModel.$authorizationStatus, perform: { status in
-                        if status == .authorized {
-                            viewModel.requestLocationAndNetworkData()
-                        }
-                    })
+                if let error = viewModel.serviceError {
+                    AppStateView(state: .serviceError(error))
+                } else {
+                    EmptyView()
+                        .onReceive(viewModel.$authorizationStatus, perform: { status in
+                            if status == .authorized {
+                                viewModel.requestLocationAndNetworkData()
+                            }
+                        })
+                }
             default:
-                AppStateView()
+                AppStateView(state: .location)
             }
         }
         .onAppear {
