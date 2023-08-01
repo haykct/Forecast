@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2639DF072A79B103000545BD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2639DF062A79B103000545BD /* Alamofire */; };
+		2639DF0A2A79B149000545BD /* XMLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 2639DF092A79B149000545BD /* XMLCoder */; };
 		26586B7C2A770C8B00853FFD /* Inter-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26586B782A770C8B00853FFD /* Inter-Bold.otf */; };
 		26586B7D2A770C8B00853FFD /* Inter-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26586B792A770C8B00853FFD /* Inter-Regular.otf */; };
 		26586B7E2A770C8B00853FFD /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26586B7A2A770C8B00853FFD /* Inter-Medium.otf */; };
@@ -61,6 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2639DF0A2A79B149000545BD /* XMLCoder in Frameworks */,
+				2639DF072A79B103000545BD /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +252,10 @@
 			dependencies = (
 			);
 			name = Forecast;
+			packageProductDependencies = (
+				2639DF062A79B103000545BD /* Alamofire */,
+				2639DF092A79B149000545BD /* XMLCoder */,
+			);
 			productName = Forecast;
 			productReference = 26C3F41D2A76E1510082F068 /* Forecast.app */;
 			productType = "com.apple.product-type.application";
@@ -276,6 +284,10 @@
 				Base,
 			);
 			mainGroup = 26C3F4142A76E1510082F068;
+			packageReferences = (
+				2639DF052A79B103000545BD /* XCRemoteSwiftPackageReference "Alamofire" */,
+				2639DF082A79B149000545BD /* XCRemoteSwiftPackageReference "XMLCoder" */,
+			);
 			productRefGroup = 26C3F41E2A76E1510082F068 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -527,6 +539,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2639DF052A79B103000545BD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		2639DF082A79B149000545BD /* XCRemoteSwiftPackageReference "XMLCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoreOffice/XMLCoder.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.17.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2639DF062A79B103000545BD /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2639DF052A79B103000545BD /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		2639DF092A79B149000545BD /* XMLCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2639DF082A79B149000545BD /* XCRemoteSwiftPackageReference "XMLCoder" */;
+			productName = XMLCoder;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 26C3F4152A76E1510082F068 /* Project object */;
 }
