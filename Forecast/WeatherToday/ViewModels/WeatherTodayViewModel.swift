@@ -9,12 +9,16 @@ import Combine
 
 final class WeatherTodayViewModel: ObservableObject {
     //MARK: Public properties
-    @Published private(set) var authorizationStatus: LocationService.AuthorizationStatus = .loading
+    @Published private(set) var authorizationStatus: AuthorizationStatus = .loading
     @Published private(set) var serviceError: ServiceError?
 
     //MARK: Private properties
-    private let locationService = LocationService()
+    private let locationService: any LocationService
     private var cancellables = Set<AnyCancellable>()
+
+    init(locationService: any LocationService) {
+        self.locationService = locationService
+    }
 
     //MARK: Public methods
     func subscribeForAuthorizationStatusUpdate() {
@@ -32,8 +36,9 @@ final class WeatherTodayViewModel: ObservableObject {
         cancellables.removeAll()
         
         locationService.locationSubject
-            .sink(receiveValue: { coordinates in
+            .sink(receiveValue: { [weak self] coordinates in
                 print(coordinates)
+                self?.serviceError = nil
             })
             .store(in: &cancellables)
 
@@ -46,6 +51,7 @@ final class WeatherTodayViewModel: ObservableObject {
         locationService.requestLocation()
     }
 
+    #warning("Remove deinit")
     deinit {
         print("deinit")
     }

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct WeatherTodayContentViewFactory: ViewFactory {
     func makeView() -> some View {
-        let viewModel = WeatherTodayViewModel()
+        let service = DefaultLocationService()
+        let viewModel = WeatherTodayViewModel(locationService: service)
         let view = WeatherTodayContentView().environmentObject(viewModel)
 
         return view

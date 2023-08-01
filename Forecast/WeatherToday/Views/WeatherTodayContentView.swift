@@ -9,7 +9,8 @@ import SwiftUI
 
 struct WeatherTodayContentView: View {
     //MARK: Private properties
-    @State private var isAppeared = false
+    @State private var isContentViewVisible = false
+    @State private var isWeatherTodayViewVisible = false
     @EnvironmentObject private var viewModel: WeatherTodayViewModel
     
     var body: some View {
@@ -21,20 +22,21 @@ struct WeatherTodayContentView: View {
                 if let error = viewModel.serviceError {
                     AppStateView(state: .serviceError(error))
                 } else {
-                    EmptyView()
-                        .onReceive(viewModel.$authorizationStatus, perform: { status in
-                            if status == .authorized {
+                    WeatherTodayView()
+                        .onAppear {
+                            if !isWeatherTodayViewVisible {
+                                isWeatherTodayViewVisible = true
                                 viewModel.requestLocationAndNetworkData()
                             }
-                        })
+                        }
                 }
             default:
                 AppStateView(state: .location)
             }
         }
         .onAppear {
-            if !isAppeared {
-                isAppeared = true
+            if !isContentViewVisible {
+                isContentViewVisible = true
                 viewModel.subscribeForAuthorizationStatusUpdate()
             }
         }
@@ -43,7 +45,8 @@ struct WeatherTodayContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherTodayContentView().environmentObject(WeatherTodayViewModel())
+        WeatherTodayContentView()
+            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService()))
             .previewDevice("iPhone 12 Pro Max")
 //        WeatherTodayContentView(viewModel: WeatherTodayViewModel())
 //            .previewDevice("iPhone 12")

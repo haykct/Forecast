@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct AppButton: View {
+    //MARK: Private properties
     private let callback: () -> Void
 
+    //MARK: Initializers
     init(_ callback: @escaping () -> Void) {
         self.callback = callback
     }

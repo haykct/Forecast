@@ -50,9 +50,20 @@ struct AppStateView: View {
     }
     
     var body: some View {
-        VStack {
+        ZStack(alignment: .top) {
             let contentHeight: CGFloat = UIScreen.main.bounds.height > 667 ? 400 : 352
             let topPadding: CGFloat = UIScreen.main.bounds.height == 568 ? 80 : 100
+
+            if state != .location {
+                HStack {
+                    ReloadButton {
+                        viewModel.requestLocationAndNetworkData()
+                    }
+                    .padding(.trailing, 24)
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.top, 16)
+            }
 
             VStack(alignment: .leading) {
                 let Inter = Constants.Fonts.Inter.self
@@ -134,6 +145,7 @@ struct AppStateView: View {
 
 struct WeatherTodayView_Previews: PreviewProvider {
     static var previews: some View {
-        AppStateView(state: .serviceError(.locationError)).environmentObject(WeatherTodayViewModel())
+        AppStateView(state: .serviceError(.locationError))
+            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService()))
     }
 }

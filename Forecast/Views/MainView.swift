@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct WeatherTodayView: View {
+    var body: some View {
+        Text("Weather today")
+    }
+}
+
 struct EmptyView: View {
     var body: some View {
         Text("Empty")
