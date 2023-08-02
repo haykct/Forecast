@@ -15,4 +15,7 @@ enum Constants {
         }
     }
 
+    enum BaseUrls {
+        static let weatherApi = "https://api.openweathermap.org/"
+    }
 }

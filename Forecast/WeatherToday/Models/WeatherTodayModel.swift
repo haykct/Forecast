@@ -7,11 +7,11 @@
 
 struct WeatherTodayModel: Decodable {
     let temperature: Double?
-    let humidity: Int?
+    let humidity: Double?
     let precipitation: Double?
     let precipitationMode: String?
-    let pressure: Int?
-    let wind: Int?
+    let pressure: Double?
+    let wind: Double?
     let direction: String?
 
     enum FirstLevelKeys: String, CodingKey {
@@ -37,11 +37,11 @@ struct WeatherTodayModel: Decodable {
         let directionContainer = try windContainer.nestedContainer(keyedBy: ThirdLevelKeys.self, forKey: .direction)
 
         temperature = try? temperatureContainer.decode(Double.self, forKey: .value)
-        humidity = try? humidityContainer.decode(Int.self, forKey: .value)
+        humidity = try? humidityContainer.decode(Double.self, forKey: .value)
         precipitation = try? precipitationContainer.decode(Double.self, forKey: .value)
         precipitationMode = try? precipitationContainer.decode(String.self, forKey: .mode)
-        pressure = try? pressureContainer.decode(Int.self, forKey: .value)
-        wind = try? speedContainer.decode(Int.self, forKey: .value)
+        pressure = try? pressureContainer.decode(Double.self, forKey: .value)
+        wind = try? speedContainer.decode(Double.self, forKey: .value)
         direction = try? directionContainer.decode(String.self, forKey: .code)
     }
 }

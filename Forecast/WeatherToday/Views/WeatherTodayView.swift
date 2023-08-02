@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct WeatherTodayView: View {
+    //MARK: Private properties
+    @EnvironmentObject private var viewModel: WeatherTodayViewModel
+
     var body: some View {
-        Text("Weather today")
+        
     }
 }
 

@@ -11,13 +11,16 @@ final class WeatherTodayViewModel: ObservableObject {
     //MARK: Public properties
     @Published private(set) var authorizationStatus: AuthorizationStatus = .loading
     @Published private(set) var serviceError: ServiceError?
+    @Published private(set) var viewData: WeatherTodayViewData?
 
     //MARK: Private properties
-    private let locationService: any LocationService
+    private let locationService: LocationService
+    private let networkService: NetworkService
     private var cancellables = Set<AnyCancellable>()
 
-    init(locationService: any LocationService) {
+    init(locationService: LocationService, networkService: NetworkService) {
         self.locationService = locationService
+        self.networkService = networkService
     }
 
     //MARK: Public methods
@@ -34,25 +37,32 @@ final class WeatherTodayViewModel: ObservableObject {
 
     func requestLocationAndNetworkData() {
         cancellables.removeAll()
-        
+
         locationService.locationSubject
-            .sink(receiveValue: { [weak self] coordinates in
-                print(coordinates)
-                self?.serviceError = nil
-            })
+            .flatMap { [unowned self] coordinates -> AnyPublisher<WeatherTodayModel, NetworkError> in
+                let request = WeatherTodayRequest(coordinates: coordinates)
+
+                return networkService.request(request)
+            }
+            .sink { [unowned self] completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    serviceError = .networkError(error)
+                }
+            } receiveValue: { [unowned self] model in
+                serviceError = nil
+                viewData = WeatherTodayViewData(model: model)
+            }
             .store(in: &cancellables)
 
         locationService.locationErrorSubject
-            .sink { [weak self] error in
-                self?.serviceError = .locationError
+            .sink { [unowned self] error in
+                serviceError = .locationError
             }
             .store(in: &cancellables)
         
         locationService.requestLocation()
-    }
-
-    #warning("Remove deinit")
-    deinit {
-        print("deinit")
     }
 }

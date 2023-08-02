@@ -146,6 +146,7 @@ struct AppStateView: View {
 struct AppStateView_Previews: PreviewProvider {
     static var previews: some View {
         AppStateView(state: .serviceError(.locationError))
-            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService()))
+            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
+                                                     networkService: DefaultNetworkService()))
     }
 }

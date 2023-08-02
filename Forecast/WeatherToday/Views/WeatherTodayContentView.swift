@@ -46,7 +46,8 @@ struct WeatherTodayContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         WeatherTodayContentView()
-            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService()))
+            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
+                                                     networkService: DefaultNetworkService()))
             .previewDevice("iPhone 12 Pro Max")
 //        WeatherTodayContentView(viewModel: WeatherTodayViewModel())
 //            .previewDevice("iPhone 12")
