@@ -18,11 +18,11 @@ enum NetworkError: Error, Equatable {
     var errorDescription: String {
         switch self {
         case .noConnection:
-            return "No connection"
+            return "No internet connection. Please check your internet connection and try again."
         case .dataNotAvailable:
-            return "Data is not unavailable"
+            return "Something unexpected happened. Please try again later."
         case .unableToDecode:
-            return "Unable to decode the data"
+            return "The data received is in an unexpected format. Please contact support for assistance."
         }
     }
 }

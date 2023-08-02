@@ -7,17 +7,19 @@
 
 import SwiftUI
 
-struct AppButton: View {
+struct CornerRoundedButton: View {
     //MARK: Private properties
     private let callback: () -> Void
+    private let title: String
 
     //MARK: Initializers
-    init(_ callback: @escaping () -> Void) {
+    init(_ title: String, _ callback: @escaping () -> Void) {
+        self.title = title
         self.callback = callback
     }
 
     var body: some View {
-        Button("Enable location") {
+        Button(title) {
             callback()
         }
         .frame(width: 151, height: 40)
@@ -30,6 +32,6 @@ struct AppButton: View {
 
 struct AppButton_Previews: PreviewProvider {
     static var previews: some View {
-        AppButton({})
+        CornerRoundedButton("", {})
     }
 }

@@ -95,12 +95,12 @@ struct AppStateView: View {
                 Spacer()
 
                 if state == .location {
-                    AppButton {
+                    CornerRoundedButton("Enable location") {
                         openAlert()
                     }
                     .alert(title, isPresented: $isAlertVisible, actions: {
                         Button("Settings", action: {
-                            // Opening settings for switching on location services.
+                            // Opening settings to turn on location services.
                             // I'm testing on simulator which doesn't support location settings,
                             // therefore I'm opening settings instead of app location settings or location services settings.
                             openURL(URL(string: UIApplication.openSettingsURLString)!)
@@ -112,8 +112,7 @@ struct AppStateView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: contentHeight, alignment: .leading)
-            .padding(.leading, 24)
-            .padding(.top, topPadding)
+            .padding(EdgeInsets(top: topPadding, leading: 24, bottom: 0, trailing: 24))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
@@ -146,6 +145,7 @@ struct AppStateView: View {
 struct AppStateView_Previews: PreviewProvider {
     static var previews: some View {
         AppStateView(state: .serviceError(.locationError))
+            .previewDevice("iPhone SE (1st generation)")
             .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
                                                      networkService: DefaultNetworkService()))
     }

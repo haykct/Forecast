@@ -12,7 +12,11 @@ struct WeatherTodayView: View {
     @EnvironmentObject private var viewModel: WeatherTodayViewModel
 
     var body: some View {
-        Text("Text")
+        VStack {
+            HStack {
+                
+            }
+        }
     }
 }
 
