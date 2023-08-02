@@ -45,12 +45,7 @@ final class WeatherTodayViewModel: ObservableObject {
                 return networkService.request(request)
             }
             .sink { [unowned self] completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    serviceError = .networkError(error)
-                }
+                if case .failure(let error) = completion { serviceError = .networkError(error) }
             } receiveValue: { [unowned self] model in
                 serviceError = nil
                 viewData = WeatherTodayViewData(model: model)
