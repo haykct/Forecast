@@ -36,8 +36,15 @@ final class WeatherTodayViewModel: ObservableObject {
     }
 
     func requestLocationAndNetworkData() {
+        serviceError = nil
+        
         cancellables.removeAll()
+        setupLocationSubjects()
+        locationService.requestLocation()
+    }
 
+    //MARK: Private methods
+    private func setupLocationSubjects() {
         locationService.locationSubject
             .flatMap { [unowned self] coordinates -> AnyPublisher<WeatherTodayModel, NetworkError> in
                 let request = WeatherTodayRequest(coordinates: coordinates)
@@ -47,7 +54,6 @@ final class WeatherTodayViewModel: ObservableObject {
             .sink { [unowned self] completion in
                 if case .failure(let error) = completion { serviceError = .networkError(error) }
             } receiveValue: { [unowned self] model in
-                serviceError = nil
                 viewData = WeatherTodayViewData(model: model)
             }
             .store(in: &cancellables)
@@ -57,7 +63,5 @@ final class WeatherTodayViewModel: ObservableObject {
                 serviceError = .locationError
             }
             .store(in: &cancellables)
-        
-        locationService.requestLocation()
     }
 }

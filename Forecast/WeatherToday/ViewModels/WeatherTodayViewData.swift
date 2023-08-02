@@ -19,13 +19,13 @@ struct WeatherTodayViewData {
     lazy var temperature: String = {
         guard let temperature = model.temperature else { return empty }
 
-        return String(temperature.rounded()) + "\u{00B0}"
+        return String(Int(temperature)) + "\u{00B0}"
     }()
 
     lazy var humidity: String = {
         guard let humidity = model.humidity else { return empty }
 
-        return String(humidity.rounded()) + "%"
+        return String(Int(humidity)) + "%"
     }()
 
     lazy var precipitation: String = {
@@ -35,15 +35,15 @@ struct WeatherTodayViewData {
     }()
 
     lazy var pressure: String = {
-        guard let pressure = model.humidity else { return empty }
+        guard let pressure = model.pressure else { return empty }
 
-        return String(pressure.rounded()) + " hPa"
+        return String(Int(pressure)) + " hPa"
     }()
 
     lazy var wind: String = {
-        guard let wind = model.humidity else { return empty }
+        guard let wind = model.wind else { return empty }
 
-        return String((wind * 3.6).rounded()) + " KM/H"
+        return String(Int(wind * 3.6)) + " KM/H"
     }()
 
     lazy var direction: String = {

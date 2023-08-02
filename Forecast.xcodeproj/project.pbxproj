@@ -34,6 +34,7 @@
 		26D658032A77E63400346A1F /* AppStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D658022A77E63400346A1F /* AppStateView.swift */; };
 		26D658062A77E73D00346A1F /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D658052A77E73D00346A1F /* ViewFactory.swift */; };
 		26D658082A77E77400346A1F /* WeatherTodayContentViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D658072A77E77400346A1F /* WeatherTodayContentViewFactory.swift */; };
+		26E4A2512A7AD43D00EFBA7C /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		26D658022A77E63400346A1F /* AppStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateView.swift; sourceTree = "<group>"; };
 		26D658052A77E73D00346A1F /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
 		26D658072A77E77400346A1F /* WeatherTodayContentViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTodayContentViewFactory.swift; sourceTree = "<group>"; };
+		26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 			children = (
 				26C3F4222A76E1510082F068 /* WeatherTodayContentView.swift */,
 				2697F1A12A799EFD00B8B7FA /* WeatherTodayView.swift */,
+				26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				26D658032A77E63400346A1F /* AppStateView.swift in Sources */,
 				26C3F4212A76E1510082F068 /* ForecastApp.swift in Sources */,
 				26B51E0A2A78F82500835484 /* ServiceError.swift in Sources */,
+				26E4A2512A7AD43D00EFBA7C /* WeatherDetailView.swift in Sources */,
 				26C3F43A2A76E89B0082F068 /* WeatherTodayViewModel.swift in Sources */,
 				26D658062A77E73D00346A1F /* ViewFactory.swift in Sources */,
 				266DCA2F2A79B3CB00118C05 /* WeatherTodayRequest.swift in Sources */,
