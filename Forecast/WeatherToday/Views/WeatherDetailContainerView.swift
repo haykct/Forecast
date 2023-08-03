@@ -17,8 +17,6 @@ struct WeatherDetailContainerView: View {
     }
 
     var body: some View {
-        var viewData = viewData // Since the getter of lazy var is mutating
-
         Divider()
         Spacer()
         HStack {

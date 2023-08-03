@@ -47,13 +47,11 @@ struct WeatherTodayView: View {
     @EnvironmentObject private var viewModel: WeatherTodayViewModel
 
     private let dimension = Dimension(screenHeight: UIScreen.main.bounds.height)
+    private let Inter = Constants.Fonts.Inter.self
 
     var body: some View {
         if let viewData = viewModel.viewData {
             VStack(alignment: .leading, spacing: 0) {
-                let Inter = Constants.Fonts.Inter.self
-                let titleFont = Font.custom(Inter.bold, size: 64)
-
                 HStack {
                     Spacer()
                     CornerRoundedButton("Share", style: .light) {}
@@ -63,21 +61,14 @@ struct WeatherTodayView: View {
                 }
 
                 Spacer()
-                Text("It's")
-                    .font(titleFont)
-                    .frame(height: 64)
-                Text("raining.")
-                    .font(titleFont)
-                    .frame(height: 64)
-                    .padding(.bottom, dimension.titleBottomPadding)
-                Image("TodayRainLight")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .padding(.bottom, 4)
-                Text("19C")
+
+                createTitleText(viewData)
+                createIconImage(viewData)
+
+                Text(viewData.temperature)
                     .font(Font.custom(Inter.semiBold, size: 32))
                     .padding(.bottom, 8)
-                Text("Prague, Czech Republic")
+                Text(viewData.location)
                     .font(Font.custom(Inter.regular, size: 16))
                     .foregroundColor(Constants.SwiftUIColors.textGrey)
                     .padding(.bottom, dimension.locationBottomPadding)
@@ -94,6 +85,62 @@ struct WeatherTodayView: View {
             ProgressView("Loading")
                 .controlSize(.large)
         }
+    }
+
+    //MARK: Private methods
+    private func createTitleText(_ viewData: WeatherTodayViewData) -> some View {
+        var firstLine = "N/A"
+        var secondLine = "N/A"
+
+        switch viewData.precipitationMode {
+        case Precipitation.rain.rawValue:
+            firstLine = "It's"
+            secondLine = "raining."
+        case Precipitation.snow.rawValue:
+            firstLine = "It's"
+            secondLine = "snowing."
+        case Precipitation.no.rawValue:
+            guard let temp = viewData.temperatureValue else { break }
+            
+            let firstLineBeginning = UIScreen.main.bounds.height <= 667 ? "It's hot" : "It's "
+            let secondLineBeginning = UIScreen.main.bounds.height <= 667 ? "" : "hot "
+
+            firstLine = temp > 29 ? firstLineBeginning : "It's"
+            secondLine = temp > 29 ? "\(secondLineBeginning)as f***." : "sunny."
+        default:
+            break
+        }
+
+        return VStack(alignment: .leading, spacing: 0) {
+            Text(firstLine)
+                .font(Font.custom(Inter.bold, size: 64))
+                .frame(height: 64)
+
+            Text(secondLine)
+                .font(Font.custom(Inter.bold, size: 64))
+                .frame(height: 64)
+                .padding(.bottom, dimension.titleBottomPadding)
+        }
+    }
+
+    private func createIconImage(_ viewData: WeatherTodayViewData) -> some View {
+        let imageName: String
+
+        switch viewData.precipitationMode {
+        case Precipitation.rain.rawValue:
+            imageName = "TodayRainLight"
+        case Precipitation.snow.rawValue:
+            imageName = "TodaySnowLight"
+        case Precipitation.no.rawValue:
+            imageName = "TodaySunLight"
+        default:
+            imageName = ""
+        }
+
+        return Image(imageName)
+            .resizable()
+            .frame(width: 40, height: 40)
+            .padding(.bottom, 4)
     }
 }
 
