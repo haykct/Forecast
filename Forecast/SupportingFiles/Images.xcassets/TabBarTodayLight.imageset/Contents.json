@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "TabBarToday-Light.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
