@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct CornerRoundedButton: View {
+    //MARK: Enums
+    enum Style {
+        case dark
+        case light
+    }
+
     //MARK: Private properties
-    private let callback: () -> Void
     private let title: String
+    private let style: Style
+    private let callback: () -> Void
 
     //MARK: Initializers
-    init(_ title: String, _ callback: @escaping () -> Void) {
+    init(_ title: String, style: Style = .dark, _ callback: @escaping () -> Void) {
         self.title = title
+        self.style = style
         self.callback = callback
     }
 
@@ -22,10 +30,11 @@ struct CornerRoundedButton: View {
         Button(title) {
             callback()
         }
-        .frame(width: 151, height: 40)
+        .frame(height: 40)
+        .padding([.leading, .trailing], 16)
         .font(Font.custom(Constants.Fonts.Inter.semiBold, size: 16))
-        .background(.black)
-        .foregroundColor(.white)
+        .background(style == .light ? .white.opacity(0.3) : .black)
+        .foregroundColor(style == .light ? .black : .white)
         .cornerRadius(20)
     }
 }

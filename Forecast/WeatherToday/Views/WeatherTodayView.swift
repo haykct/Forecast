@@ -29,54 +29,50 @@ struct WeatherTodayView: View {
 
     var body: some View {
         if let viewData = viewModel.viewData {
-            VStack {
-                renderContent(viewData: viewData)
+            VStack(alignment: .leading, spacing: 0) {
+                let Inter = Constants.Fonts.Inter.self
+                let titleFont = Font.custom(Inter.bold, size: 64)
+
+                HStack {
+                    Spacer()
+                    CornerRoundedButton("Share", style: .light) {}
+                        .frame(alignment: .trailing)
+                        .padding(.top, 16)
+                        .padding(.trailing, 24)
+                }
+
+                Spacer()
+                Text("It's")
+                    .font(titleFont)
+                    .frame(height: 64)
+                Text("raining.")
+                    .font(titleFont)
+                    .frame(height: 64)
+                    .padding(.bottom, 48)
+                Image("TodayRainLight")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .padding(.bottom, 4)
+                Text("19C")
+                    .font(Font.custom(Inter.semiBold, size: 32))
+                    .padding(.bottom, 8)
+                Text("Prague, Czech Republic")
+                    .font(Font.custom(Inter.regular, size: 16))
+                    .foregroundColor(Constants.SwiftUIColors.textGrey)
+                    .padding(.bottom, 40)
+                    .lineLimit(1)
+                VStack {
+                    WeatherDetailContainerView(viewData: viewData)
+                }
+                .frame(height: detailContainerHeight)
+                .padding(.bottom, 25)
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
+            .padding([.leading, .trailing], 24)
         } else {
             ProgressView("Loading")
                 .controlSize(.large)
         }
-    }
-
-    private func renderContent(viewData: WeatherTodayViewData) -> some View {
-        VStack {
-            var viewData = viewData //Lazy vars don't allow access from immutable values
-
-            Divider()
-            Spacer()
-            HStack {
-                WeatherDetailView(image: "TodayHumidityLight",
-                                  value: viewData.humidity,
-                                  text: "Humidity")
-                Spacer()
-                WeatherDetailView(image: "TodayPrecipitationLight",
-                                  value: viewData.precipitation,
-                                  text: "Precipitation")
-                Spacer()
-                WeatherDetailView(image: "TodayPressureLight",
-                                  value: viewData.pressure,
-                                  text: "Pressure")
-            }
-            Spacer()
-            HStack {
-                WeatherDetailView(image: "TodayWindSpeedLight",
-                                  value: viewData.wind,
-                                  text: "Wind")
-                Spacer()
-                WeatherDetailView(image: "TodayWindDirectionLight",
-                                  value: viewData.direction,
-                                  text: "Direction")
-                Spacer()
-                Rectangle()
-                    .frame(width: 85, height: 1)
-                    .hidden()
-            }
-            Spacer()
-            Divider()
-        }
-        .frame(height: detailContainerHeight)
-        .padding(EdgeInsets(top: 0, leading: 24, bottom: 25, trailing: 24))
     }
 }
 

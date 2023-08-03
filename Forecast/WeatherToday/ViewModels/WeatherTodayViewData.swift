@@ -16,37 +16,49 @@ struct WeatherTodayViewData {
     }
 
     //MARK: Public properties
-    lazy var temperature: String = {
+    private(set) lazy var location: String = {
+        if let city = model.city, let country = model.country {
+            return "\(city), \(country)"
+        }
+
+        return model.city ?? model.country ?? empty
+    }()
+
+    private(set) lazy var country: String = {
+        model.country ?? empty
+    }()
+
+    private(set) lazy var temperature: String = {
         guard let temperature = model.temperature else { return empty }
 
         return String(Int(temperature)) + "\u{00B0}"
     }()
 
-    lazy var humidity: String = {
+    private(set) lazy var humidity: String = {
         guard let humidity = model.humidity else { return empty }
 
         return String(Int(humidity)) + "%"
     }()
 
-    lazy var precipitation: String = {
+    private(set) lazy var precipitation: String = {
         guard let precipitation = model.precipitation else { return "0.0MM" }
 
         return String(format:"%.1f", precipitation) + "MM"
     }()
 
-    lazy var pressure: String = {
+    private(set) lazy var pressure: String = {
         guard let pressure = model.pressure else { return empty }
 
         return String(Int(pressure)) + " hPa"
     }()
 
-    lazy var wind: String = {
+    private(set) lazy var wind: String = {
         guard let wind = model.wind else { return empty }
 
         return String(Int(wind * 3.6)) + " KM/H"
     }()
 
-    lazy var direction: String = {
+    private(set) lazy var direction: String = {
         model.direction ?? empty
     }()
 }

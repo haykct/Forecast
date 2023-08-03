@@ -6,6 +6,8 @@
 //
 
 struct WeatherTodayModel: Decodable {
+    let city: String?
+    let country: String?
     let temperature: Double?
     let humidity: Double?
     let precipitation: Double?
@@ -15,11 +17,11 @@ struct WeatherTodayModel: Decodable {
     let direction: String?
 
     enum FirstLevelKeys: String, CodingKey {
-        case temperature, humidity, precipitation, pressure, wind
+        case city, temperature, humidity, precipitation, pressure, wind
     }
 
     enum SecondLevelKeys: String, CodingKey {
-        case value, mode, speed, direction
+        case name, country, value, mode, speed, direction
     }
 
     enum ThirdLevelKeys: String, CodingKey {
@@ -28,6 +30,7 @@ struct WeatherTodayModel: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: FirstLevelKeys.self)
+        let cityContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .city)
         let temperatureContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .temperature)
         let humidityContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .humidity)
         let precipitationContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .precipitation)
@@ -36,6 +39,8 @@ struct WeatherTodayModel: Decodable {
         let speedContainer = try windContainer.nestedContainer(keyedBy: ThirdLevelKeys.self, forKey: .speed)
         let directionContainer = try windContainer.nestedContainer(keyedBy: ThirdLevelKeys.self, forKey: .direction)
 
+        city = try? cityContainer.decode(String.self, forKey: .name)
+        country = try? cityContainer.decode(String.self, forKey: .country)
         temperature = try? temperatureContainer.decode(Double.self, forKey: .value)
         humidity = try? humidityContainer.decode(Double.self, forKey: .value)
         precipitation = try? precipitationContainer.decode(Double.self, forKey: .value)

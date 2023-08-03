@@ -35,6 +35,7 @@
 		26D658062A77E73D00346A1F /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D658052A77E73D00346A1F /* ViewFactory.swift */; };
 		26D658082A77E77400346A1F /* WeatherTodayContentViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D658072A77E77400346A1F /* WeatherTodayContentViewFactory.swift */; };
 		26E4A2512A7AD43D00EFBA7C /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */; };
+		26E4A2552A7B840D00EFBA7C /* WeatherDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4A2542A7B840D00EFBA7C /* WeatherDetailContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		26D658052A77E73D00346A1F /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
 		26D658072A77E77400346A1F /* WeatherTodayContentViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTodayContentViewFactory.swift; sourceTree = "<group>"; };
 		26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailView.swift; sourceTree = "<group>"; };
+		26E4A2542A7B840D00EFBA7C /* WeatherDetailContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 			children = (
 				26C3F4222A76E1510082F068 /* WeatherTodayContentView.swift */,
 				2697F1A12A799EFD00B8B7FA /* WeatherTodayView.swift */,
+				26E4A2542A7B840D00EFBA7C /* WeatherDetailContainerView.swift */,
 				26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */,
 			);
 			path = Views;
@@ -366,6 +369,7 @@
 				26D658062A77E73D00346A1F /* ViewFactory.swift in Sources */,
 				266DCA2F2A79B3CB00118C05 /* WeatherTodayRequest.swift in Sources */,
 				26B51E0D2A78F8F300835484 /* NetworkService.swift in Sources */,
+				26E4A2552A7B840D00EFBA7C /* WeatherDetailContainerView.swift in Sources */,
 				26B51E082A785F2B00835484 /* CornerRoundedButton.swift in Sources */,
 				266DCA2D2A79B2D200118C05 /* Request.swift in Sources */,
 				266DCA342A7A7FD900118C05 /* WeatherTodayViewData.swift in Sources */,
