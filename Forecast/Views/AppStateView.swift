@@ -51,8 +51,9 @@ struct AppStateView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            let contentHeight: CGFloat = UIScreen.main.bounds.height > 667 ? 400 : 352
-            let topPadding: CGFloat = UIScreen.main.bounds.height == 568 ? 80 : 100
+            let screenHeight = UIScreen.main.bounds.height
+            let contentHeight: CGFloat = screenHeight > 667 ? 400 : 352
+            let topPadding: CGFloat = screenHeight == 568 ? 80 : 100
 
             if state != .location {
                 HStack {

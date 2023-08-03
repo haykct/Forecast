@@ -8,24 +8,45 @@
 import SwiftUI
 
 struct WeatherTodayView: View {
+    //MARK: Enums
+    enum Precipitation: String {
+        case rain
+        case snow
+        case no
+    }
+
+    //MARK: Structs
+    struct Dimension {
+        private let _detailContainerHeight: CGFloat
+        private let _titleBottomPadding: CGFloat
+        private let _locationBottomPadding: CGFloat
+
+        var detailContainerHeight: CGFloat { _detailContainerHeight }
+        var titleBottomPadding: CGFloat { _titleBottomPadding }
+        var locationBottomPadding: CGFloat { _locationBottomPadding }
+
+        init(screenHeight: CGFloat) {
+            switch screenHeight {
+            case 667:
+                _titleBottomPadding = 24
+                _locationBottomPadding = 24
+                _detailContainerHeight = 208
+            case 568:
+                _titleBottomPadding = 16
+                _locationBottomPadding = 16
+                _detailContainerHeight = 124
+            default:
+                _titleBottomPadding = 48
+                _locationBottomPadding = 40
+                _detailContainerHeight = 248
+            }
+        }
+    }
+
     //MARK: Private properties
     @EnvironmentObject private var viewModel: WeatherTodayViewModel
 
-    private let screenHeight = UIScreen.main.bounds.height
-    private var detailContainerHeight: CGFloat {
-        let height: CGFloat
-
-        switch screenHeight {
-        case 667:
-            height = 208
-        case 568:
-            height = 124
-        default:
-            height = 248
-        }
-
-        return height
-    }
+    private let dimension = Dimension(screenHeight: UIScreen.main.bounds.height)
 
     var body: some View {
         if let viewData = viewModel.viewData {
@@ -48,7 +69,7 @@ struct WeatherTodayView: View {
                 Text("raining.")
                     .font(titleFont)
                     .frame(height: 64)
-                    .padding(.bottom, 48)
+                    .padding(.bottom, dimension.titleBottomPadding)
                 Image("TodayRainLight")
                     .resizable()
                     .frame(width: 40, height: 40)
@@ -59,12 +80,12 @@ struct WeatherTodayView: View {
                 Text("Prague, Czech Republic")
                     .font(Font.custom(Inter.regular, size: 16))
                     .foregroundColor(Constants.SwiftUIColors.textGrey)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, dimension.locationBottomPadding)
                     .lineLimit(1)
                 VStack {
                     WeatherDetailContainerView(viewData: viewData)
                 }
-                .frame(height: detailContainerHeight)
+                .frame(height: dimension.detailContainerHeight)
                 .padding(.bottom, 25)
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
