@@ -55,7 +55,6 @@ struct WeatherDetailContainerView: View {
 
 struct WeatherDetailContainerView_Previews: PreviewProvider {
     static var previews: some View {
-//        WeatherDetailContainerView()
         EmptyView()
     }
 }

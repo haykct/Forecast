@@ -48,14 +48,5 @@ struct ContentView_Previews: PreviewProvider {
         WeatherTodayContentView()
             .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
                                                      networkService: DefaultNetworkService()))
-            .previewDevice("iPhone 12 Pro Max")
-//        WeatherTodayContentView(viewModel: WeatherTodayViewModel())
-//            .previewDevice("iPhone 12")
-//        WeatherTodayContentView(viewModel: WeatherTodayViewModel())
-//            .previewDevice("iPhone 11")
-//        WeatherTodayContentView(viewModel: WeatherTodayViewModel())
-//            .previewDevice("iPhone SE (2nd generation)")
-//        WeatherTodayContentView(viewModel: WeatherTodayViewModel())
-//            .previewDevice("iPhone SE (2nd generation)")
     }
 }

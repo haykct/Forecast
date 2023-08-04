@@ -45,42 +45,58 @@ struct WeatherTodayView: View {
 
     //MARK: Private properties
     @EnvironmentObject private var viewModel: WeatherTodayViewModel
+    @State private var shouldAnimateGradient = false
 
     private let dimension = Dimension(screenHeight: UIScreen.main.bounds.height)
     private let Inter = Constants.Fonts.Inter.self
 
     var body: some View {
         if var viewData = viewModel.viewData {
-            VStack(alignment: .leading, spacing: 0) {
-                HStack {
+            ZStack {
+                let StateColors = Constants.SwiftUIColors.StateColors.self
+                let isSunny = viewData.precipitationMode == Precipitation.no.rawValue
+
+                LinearGradient(colors: isSunny ? StateColors.yellow : StateColors.blue,
+                               startPoint: shouldAnimateGradient ? .topTrailing : .topLeading,
+                               endPoint: shouldAnimateGradient ? .bottomLeading : .bottomTrailing)
+                .ignoresSafeArea()
+                .onAppear {
+                    withAnimation(.linear(duration: 2.0).repeatForever(autoreverses: true)) {
+                        shouldAnimateGradient.toggle()
+                    }
+                }
+
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack {
+                        Spacer()
+                        CornerRoundedButton("Share", style: .light) {}
+                            .frame(alignment: .trailing)
+                            .padding(.top, 16)
+                            .padding(.trailing, 24)
+                    }
+
                     Spacer()
-                    CornerRoundedButton("Share", style: .light) {}
-                        .frame(alignment: .trailing)
-                        .padding(.top, 16)
-                        .padding(.trailing, 24)
+
+                    createTitleText(viewData)
+                    createIconImage(viewData)
+
+                    Text(viewData.temperature)
+                        .font(Font.custom(Inter.semiBold, size: 32))
+                        .padding(.bottom, 8)
+                    Text(viewData.location)
+                        .font(Font.custom(Inter.regular, size: 16))
+                        .foregroundColor(Constants.SwiftUIColors.textGrey)
+                        .padding(.bottom, dimension.locationBottomPadding)
+                        .lineLimit(1)
+                    VStack {
+                        WeatherDetailContainerView(viewData: viewData)
+                    }
+                    .frame(height: dimension.detailContainerHeight)
+                    .padding(.bottom, 25)
                 }
-
-                Spacer()
-
-                createTitleText(viewData)
-                createIconImage(viewData)
-
-                Text(viewData.temperature)
-                    .font(Font.custom(Inter.semiBold, size: 32))
-                    .padding(.bottom, 8)
-                Text(viewData.location)
-                    .font(Font.custom(Inter.regular, size: 16))
-                    .foregroundColor(Constants.SwiftUIColors.textGrey)
-                    .padding(.bottom, dimension.locationBottomPadding)
-                    .lineLimit(1)
-                VStack {
-                    WeatherDetailContainerView(viewData: viewData)
-                }
-                .frame(height: dimension.detailContainerHeight)
-                .padding(.bottom, 25)
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .padding([.leading, .trailing], 24)
             }
-            .frame(maxHeight: .infinity, alignment: .bottom)
-            .padding([.leading, .trailing], 24)
         } else {
             ProgressView("Loading")
                 .controlSize(.large)
@@ -149,5 +165,7 @@ struct WeatherTodayView: View {
 struct WeatherTodayView_Previews: PreviewProvider {
     static var previews: some View {
         WeatherTodayView()
+            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
+                                                     networkService: DefaultNetworkService()))
     }
 }

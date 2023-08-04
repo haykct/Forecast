@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//Using generic type for meking AppStateView reusable
 struct AppStateView<T: ViewModel>: View {
     //MARK: Enums
     enum CurrentState: Equatable {
@@ -41,6 +42,7 @@ struct AppStateView<T: ViewModel>: View {
     @State private var isAlertVisible = false
     @State private var title = ""
     @State private var message = ""
+    @State private var shouldAnimateGradient = false
 
     private var state: CurrentState
 
@@ -54,6 +56,17 @@ struct AppStateView<T: ViewModel>: View {
             let screenHeight = UIScreen.main.bounds.height
             let contentHeight: CGFloat = screenHeight > 667 ? 400 : 352
             let topPadding: CGFloat = screenHeight == 568 ? 80 : 100
+            let StateColors = Constants.SwiftUIColors.StateColors.self
+
+            LinearGradient(colors: state == .location ? StateColors.blue : StateColors.red,
+                           startPoint: shouldAnimateGradient ? .topTrailing : .topLeading,
+                           endPoint: shouldAnimateGradient ? .bottomLeading : .bottomTrailing)
+            .ignoresSafeArea()
+            .onAppear {
+                withAnimation(.linear(duration: 2.0).repeatForever(autoreverses: true)) {
+                    shouldAnimateGradient.toggle()
+                }
+            }
 
             if state != .location {
                 HStack {
@@ -145,10 +158,8 @@ struct AppStateView<T: ViewModel>: View {
 
 struct AppStateView_Previews: PreviewProvider {
     static var previews: some View {
-//        AppStateView<ForecastViewModel>(state: .serviceError(.locationError))
-//            .previewDevice("iPhone SE (1st generation)")
-//            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
-//                                                     networkService: DefaultNetworkService()))
-        EmptyView()
+        AppStateView<ForecastViewModel>(state: .serviceError(.locationError))
+            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
+                                                     networkService: DefaultNetworkService()))
     }
 }

@@ -16,7 +16,7 @@ class ForecastViewController: UIViewController {
     private var cancellable: AnyCancellable?
 
     //MARK: Outlets
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
 
     //MARK: Lifecycle methods
     override func viewDidLoad() {

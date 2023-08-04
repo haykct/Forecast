@@ -9,8 +9,8 @@ import UIKit
 
 final class ForecastSectionHeaderView: UITableViewHeaderFooterView {
     //MARK: Outlets
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var dayLabel: UILabel!
 
     //MARK: Public methods
     func setupSectionHeader(with data: ForecastViewData, section: Int) {

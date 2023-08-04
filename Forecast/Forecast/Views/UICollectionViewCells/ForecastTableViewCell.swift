@@ -9,11 +9,11 @@ import UIKit
 
 final class ForecastTableViewCell: UITableViewCell {
     //MARK: Outlets
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet private weak var containerView: UIView!
+    @IBOutlet private weak var timeLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var iconImageView: UIImageView!
+    @IBOutlet private weak var temperatureLabel: UILabel!
 
     //MARK: Lifecycle methods
     override func didMoveToSuperview() {
