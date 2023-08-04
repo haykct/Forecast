@@ -7,7 +7,7 @@
 
 import Combine
 
-final class WeatherTodayViewModel: ObservableObject {
+final class WeatherTodayViewModel: ObservableObject, ViewModel {
     //MARK: Public properties
     @Published private(set) var authorizationStatus: AuthorizationStatus = .loading
     @Published private(set) var serviceError: ServiceError?

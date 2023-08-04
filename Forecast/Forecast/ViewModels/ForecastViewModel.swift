@@ -7,7 +7,11 @@
 
 import Combine
 
-final class ForecastViewModel {
+final class ForecastViewModel: ViewModel {
+    //MARK: Public properties
+    private(set) var authorizationStatus: AuthorizationStatus = .loading
+    private(set) var viewData = CurrentValueSubject<[[ForecastViewData]], Never>([])
+
     //MARK: Private properties
     private let locationService: LocationService
     private let networkService: NetworkService
@@ -19,7 +23,11 @@ final class ForecastViewModel {
         self.networkService = networkService
     }
     
-    //MARK: Private methods
+    //MARK: Public methods
+    func requestAuthorization() {
+        //Authorization logic
+    }
+
     func requestLocationAndNetworkData() {
         setupLocationSubjects()
         locationService.requestLocation()
@@ -36,8 +44,10 @@ final class ForecastViewModel {
                 return networkService.request(request)
             }
             .sink { completion in
-            } receiveValue: { model in
-//                ForecastViewData.makeViewData(model: model)
+            } receiveValue: { [unowned self] model in
+                let forecastViewData = ForecastViewData.makeViewData(model: model)
+
+                viewData.value = forecastViewData
             }
             .store(in: &cancellables)
     }

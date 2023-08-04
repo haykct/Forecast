@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AppStateView: View {
+struct AppStateView<T: ViewModel>: View {
     //MARK: Enums
     enum CurrentState: Equatable {
         case location
@@ -37,7 +37,7 @@ struct AppStateView: View {
 
     //MARK: Private properties
     @Environment(\.openURL) private var openURL
-    @EnvironmentObject private var viewModel: WeatherTodayViewModel
+    @EnvironmentObject private var viewModel: T
     @State private var isAlertVisible = false
     @State private var title = ""
     @State private var message = ""
@@ -145,9 +145,10 @@ struct AppStateView: View {
 
 struct AppStateView_Previews: PreviewProvider {
     static var previews: some View {
-        AppStateView(state: .serviceError(.locationError))
-            .previewDevice("iPhone SE (1st generation)")
-            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
-                                                     networkService: DefaultNetworkService()))
+//        AppStateView<ForecastViewModel>(state: .serviceError(.locationError))
+//            .previewDevice("iPhone SE (1st generation)")
+//            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
+//                                                     networkService: DefaultNetworkService()))
+        EmptyView()
     }
 }

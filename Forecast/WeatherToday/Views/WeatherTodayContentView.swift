@@ -20,7 +20,7 @@ struct WeatherTodayContentView: View {
                 ProgressView()
             case .authorized:
                 if let error = viewModel.serviceError {
-                    AppStateView(state: .serviceError(error))
+                    AppStateView<WeatherTodayViewModel>(state: .serviceError(error))
                 } else {
                     WeatherTodayView()
                         .onAppear {
@@ -31,7 +31,7 @@ struct WeatherTodayContentView: View {
                         }
                 }
             default:
-                AppStateView(state: .location)
+                AppStateView<WeatherTodayViewModel>(state: .location)
             }
         }
         .onAppear {

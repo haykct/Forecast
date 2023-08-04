@@ -24,6 +24,7 @@ struct MainView: View {
                         .renderingMode(.template)
                     Text("Today")
                 }
+                .edgesIgnoringSafeArea(.all)
         }
         .accentColor(.black)
     }

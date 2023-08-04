@@ -21,13 +21,14 @@ struct ForecastModel: Decodable {
     let temperature: Double?
     let upcomingDateTime: String?
     let condition: String?
+    let icon: String?
 
     enum FirstLevelKeys: String, CodingKey {
         case to, symbol, temperature
     }
 
     enum SecondLevelKeys: String, CodingKey {
-        case name, value
+        case name, icon = "var", value
     }
 
     init(from decoder: Decoder) throws {
@@ -38,5 +39,6 @@ struct ForecastModel: Decodable {
         upcomingDateTime = try? container.decode(String.self, forKey: .to)
         temperature = try? temperatureContainer.decode(Double.self, forKey: .value)
         condition = try? symbolContainer.decode(String.self, forKey: .name)
+        icon = try? symbolContainer.decode(String.self, forKey: .icon)
     }
 }

@@ -7,28 +7,6 @@
 
 import Foundation
 
-struct DateManager {
-    //MARK: Private properties
-    private let formatter = DateFormatter()
-
-    init() {
-        formatter.timeZone = TimeZone.current
-    }
-
-    //MARK: Public methods
-    func date(from string: String, format: String) -> Date? {
-        formatter.dateFormat = format
-
-        return formatter.date(from: string)
-    }
-
-    func string(from date: Date, format: String) -> String {
-        formatter.dateFormat = format
-
-        return formatter.string(from: date)
-    }
-}
-
 struct ForecastViewData {
     //MARK: Private properties
     private let dateManager = DateManager()
@@ -36,6 +14,7 @@ struct ForecastViewData {
     private let _temperature: Double?
     private let _upcomingDateTime: Date
     private let _condition: String?
+    private let _icon: String?
 
     //MARK: Public properties
     private(set) lazy var temperature: String = {
@@ -58,6 +37,10 @@ struct ForecastViewData {
         return condition.first!.uppercased() + condition.dropFirst()
     }()
 
+    private(set) lazy var icon: String = {
+        _icon ?? ""
+    }()
+
     //MARK: Public methods
     static func makeViewData(model: ForecastDataModel) -> [[ForecastViewData]] {
         let dateManager = DateManager()
@@ -67,7 +50,8 @@ struct ForecastViewData {
             let date = dateManager.date(from: dateString, format: "yyyy-MM-dd'T'HH:mm:ss") ?? Date(timeIntervalSince1970: 0)
             let viewData = ForecastViewData(_temperature: forecast.temperature,
                                             _upcomingDateTime: date,
-                                            _condition: forecast.condition)
+                                            _condition: forecast.condition,
+                                            _icon: forecast.icon)
 
             guard let upcomingDateTime = partialResult.last?.last?._upcomingDateTime else {
                 return partialResult.append([viewData])
