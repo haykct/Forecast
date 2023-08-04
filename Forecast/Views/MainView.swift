@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-struct EmptyScreen: View {
-    var body: some View {
-        Text("Empty")
-    }
-}
-
 struct MainView: View {
     var body: some View {
         let weatherTodayContentViewFactory = WeatherTodayContentViewFactory()
@@ -24,7 +18,7 @@ struct MainView: View {
                         .renderingMode(.template)
                     Text("Today")
                 }
-            EmptyScreen()
+            ForecastView()
                 .tabItem {
                     Image("TabBarForecastLight")
                         .renderingMode(.template)

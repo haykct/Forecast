@@ -50,7 +50,7 @@ struct WeatherTodayView: View {
     private let Inter = Constants.Fonts.Inter.self
 
     var body: some View {
-        if let viewData = viewModel.viewData {
+        if var viewData = viewModel.viewData {
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Spacer()
@@ -89,6 +89,7 @@ struct WeatherTodayView: View {
 
     //MARK: Private methods
     private func createTitleText(_ viewData: WeatherTodayViewData) -> some View {
+        var viewData = viewData
         var firstLine = "N/A"
         var secondLine = "N/A"
 
@@ -124,6 +125,7 @@ struct WeatherTodayView: View {
     }
 
     private func createIconImage(_ viewData: WeatherTodayViewData) -> some View {
+        var viewData = viewData
         let imageName: String
 
         switch viewData.precipitationMode {
