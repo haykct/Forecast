@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct AppStateView: View {
+//Using generic type for making AppStateView reusable
+struct AppStateView<T: ViewModel>: View {
     //MARK: Enums
     enum CurrentState: Equatable {
         case location
@@ -37,10 +38,11 @@ struct AppStateView: View {
 
     //MARK: Private properties
     @Environment(\.openURL) private var openURL
-    @EnvironmentObject private var viewModel: WeatherTodayViewModel
+    @EnvironmentObject private var viewModel: T
     @State private var isAlertVisible = false
     @State private var title = ""
     @State private var message = ""
+    @State private var shouldAnimateGradient = false
 
     private var state: CurrentState
 
@@ -54,6 +56,17 @@ struct AppStateView: View {
             let screenHeight = UIScreen.main.bounds.height
             let contentHeight: CGFloat = screenHeight > 667 ? 400 : 352
             let topPadding: CGFloat = screenHeight == 568 ? 80 : 100
+            let StateColors = Constants.SwiftUIColors.StateColors.self
+
+            LinearGradient(colors: state == .location ? StateColors.blue : StateColors.red,
+                           startPoint: shouldAnimateGradient ? .topTrailing : .topLeading,
+                           endPoint: shouldAnimateGradient ? .bottomLeading : .bottomTrailing)
+            .ignoresSafeArea()
+            .onAppear {
+                withAnimation(.linear(duration: 2.0).repeatForever(autoreverses: true)) {
+                    shouldAnimateGradient.toggle()
+                }
+            }
 
             if state != .location {
                 HStack {
@@ -145,8 +158,7 @@ struct AppStateView: View {
 
 struct AppStateView_Previews: PreviewProvider {
     static var previews: some View {
-        AppStateView(state: .serviceError(.locationError))
-            .previewDevice("iPhone SE (1st generation)")
+        AppStateView<ForecastViewModel>(state: .serviceError(.locationError))
             .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
                                                      networkService: DefaultNetworkService()))
     }

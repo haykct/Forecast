@@ -9,20 +9,22 @@ import SwiftUI
 
 struct WeatherTodayContentView: View {
     //MARK: Private properties
-    @State private var isContentViewVisible = false
+    @State private var isContentViewAppeared = false
     @State private var isWeatherTodayViewVisible = false
     @EnvironmentObject private var viewModel: WeatherTodayViewModel
     
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             switch viewModel.authorizationStatus {
             case .loading:
                 ProgressView()
             case .authorized:
                 if let error = viewModel.serviceError {
-                    AppStateView(state: .serviceError(error))
+                    AppStateView<WeatherTodayViewModel>(state: .serviceError(error))
+                        .visibleTabBar()
                 } else {
                     WeatherTodayView()
+                        .visibleTabBar()
                         .onAppear {
                             if !isWeatherTodayViewVisible {
                                 isWeatherTodayViewVisible = true
@@ -31,12 +33,13 @@ struct WeatherTodayContentView: View {
                         }
                 }
             default:
-                AppStateView(state: .location)
+                AppStateView<WeatherTodayViewModel>(state: .location)
+                    .hiddenTabBar()
             }
         }
         .onAppear {
-            if !isContentViewVisible {
-                isContentViewVisible = true
+            if !isContentViewAppeared {
+                isContentViewAppeared = true
                 viewModel.subscribeForAuthorizationStatusUpdate()
             }
         }
@@ -48,14 +51,5 @@ struct ContentView_Previews: PreviewProvider {
         WeatherTodayContentView()
             .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
                                                      networkService: DefaultNetworkService()))
-            .previewDevice("iPhone 12 Pro Max")
-//        WeatherTodayContentView(viewModel: WeatherTodayViewModel())
-//            .previewDevice("iPhone 12")
-//        WeatherTodayContentView(viewModel: WeatherTodayViewModel())
-//            .previewDevice("iPhone 11")
-//        WeatherTodayContentView(viewModel: WeatherTodayViewModel())
-//            .previewDevice("iPhone SE (2nd generation)")
-//        WeatherTodayContentView(viewModel: WeatherTodayViewModel())
-//            .previewDevice("iPhone SE (2nd generation)")
     }
 }

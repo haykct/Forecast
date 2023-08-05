@@ -12,3 +12,7 @@ protocol ViewFactory {
     
     func makeView() -> Scene
 }
+
+protocol ViewControllerFactory {
+    func makeViewController() -> UIViewController
+}

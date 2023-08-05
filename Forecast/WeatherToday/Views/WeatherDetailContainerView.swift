@@ -17,6 +17,8 @@ struct WeatherDetailContainerView: View {
     }
 
     var body: some View {
+        var viewData = viewData // Declared as a var because a lazy var inside a struct is mutable.
+        
         Divider()
         Spacer()
         HStack {
@@ -53,7 +55,6 @@ struct WeatherDetailContainerView: View {
 
 struct WeatherDetailContainerView_Previews: PreviewProvider {
     static var previews: some View {
-//        WeatherDetailContainerView()
         EmptyView()
     }
 }
