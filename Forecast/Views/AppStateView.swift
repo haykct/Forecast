@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//Using generic type for meking AppStateView reusable
+//Using generic type for making AppStateView reusable
 struct AppStateView<T: ViewModel>: View {
     //MARK: Enums
     enum CurrentState: Equatable {

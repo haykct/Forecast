@@ -14,6 +14,7 @@ class ForecastViewController: UIViewController {
     private let forecastSectionHeaderID = "forecastSectionHeader"
     private let viewModel: ForecastViewModel
     private var cancellable: AnyCancellable?
+    private var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
 
     //MARK: Outlets
     @IBOutlet private weak var tableView: UITableView!
@@ -22,6 +23,7 @@ class ForecastViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupSpinner()
         registerReusableElements()
         setupBindings()
         requestData()
@@ -53,14 +55,25 @@ class ForecastViewController: UIViewController {
 
     private func setupBindings() {
         cancellable = viewModel.viewData
-            .sink { _ in
-                //Handle error
+            .sink { [unowned self] _ in
+                //Handle errors
+                spinner.stopAnimating()
             } receiveValue: { [unowned self] forecasts in
                 tableView.reloadData()
+                spinner.stopAnimating()
             }
     }
 
+    private func setupSpinner() {
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.hidesWhenStopped = true
+        view.addSubview(spinner)
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+
     private func requestData() {
+        spinner.startAnimating()
         viewModel.requestLocationAndNetworkData()
     }
 

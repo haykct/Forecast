@@ -9,20 +9,22 @@ import SwiftUI
 
 struct WeatherTodayContentView: View {
     //MARK: Private properties
-    @State private var isContentViewVisible = false
+    @State private var isContentViewAppeared = false
     @State private var isWeatherTodayViewVisible = false
     @EnvironmentObject private var viewModel: WeatherTodayViewModel
     
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             switch viewModel.authorizationStatus {
             case .loading:
                 ProgressView()
             case .authorized:
                 if let error = viewModel.serviceError {
                     AppStateView<WeatherTodayViewModel>(state: .serviceError(error))
+                        .visibleTabBar()
                 } else {
                     WeatherTodayView()
+                        .visibleTabBar()
                         .onAppear {
                             if !isWeatherTodayViewVisible {
                                 isWeatherTodayViewVisible = true
@@ -32,11 +34,12 @@ struct WeatherTodayContentView: View {
                 }
             default:
                 AppStateView<WeatherTodayViewModel>(state: .location)
+                    .hiddenTabBar()
             }
         }
         .onAppear {
-            if !isContentViewVisible {
-                isContentViewVisible = true
+            if !isContentViewAppeared {
+                isContentViewAppeared = true
                 viewModel.subscribeForAuthorizationStatusUpdate()
             }
         }

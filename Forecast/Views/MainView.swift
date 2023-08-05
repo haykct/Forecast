@@ -10,9 +10,10 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         let weatherTodayContentViewFactory = WeatherTodayContentViewFactory()
+        let weatherTodayContentView = weatherTodayContentViewFactory.makeView()
         
         TabView {
-            weatherTodayContentViewFactory.makeView()
+            weatherTodayContentView
                 .tabItem {
                     Image("TabBarTodayLight")
                         .renderingMode(.template)
@@ -22,7 +23,7 @@ struct MainView: View {
                 .tabItem {
                     Image("TabBarForecastLight")
                         .renderingMode(.template)
-                    Text("Today")
+                    Text("Forecast")
                 }
                 .edgesIgnoringSafeArea(.all)
         }
