@@ -235,7 +235,6 @@
 				26C3F4332A76E6330082F068 /* Services */,
 				26C5B41C2A7D188100DB4EF9 /* Managers */,
 				26586B812A771D2C00853FFD /* Constants */,
-				26E3B08D2A7DDFC300B96F99 /* Extensions */,
 				266DCA302A79BA4800118C05 /* Utilities */,
 				26586B772A770C8B00853FFD /* Fonts */,
 				26C3F4262A76E1530082F068 /* Preview Content */,
@@ -432,13 +431,6 @@
 				26E3B08B2A7D537200B96F99 /* ViewModel.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		26E3B08D2A7DDFC300B96F99 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
