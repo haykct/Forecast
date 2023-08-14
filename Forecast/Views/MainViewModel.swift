@@ -7,7 +7,7 @@
 
 import Combine
 
-final class LocationViewModel: ObservableObject {
+final class MainViewModel: ObservableObject {
     //MARK: Public properties
     @Published private(set) var authorizationStatus: AuthorizationStatus = .loading
     let locationService: LocationService

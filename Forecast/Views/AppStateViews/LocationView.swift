@@ -10,13 +10,13 @@ import SwiftUI
 struct LocationView: View {
     //MARK: Private properties
     @Environment(\.openURL) private var openURL
-    @ObservedObject private var viewModel: LocationViewModel
+    @ObservedObject private var viewModel: MainViewModel
     @State private var isAlertVisible = false
     @State private var title = ""
     @State private var message = ""
     @State private var shouldAnimateGradient = false
 
-    init(viewModel: LocationViewModel) {
+    init(viewModel: MainViewModel) {
         self.viewModel = viewModel
     }
 

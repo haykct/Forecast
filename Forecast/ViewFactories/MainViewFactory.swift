@@ -10,7 +10,7 @@ import SwiftUI
 struct MainViewFactory: ViewFactory {
     func makeView() -> some View {
         let service = DefaultLocationService()
-        let viewModel = LocationViewModel(locationService: service)
+        let viewModel = MainViewModel(locationService: service)
         let view = MainView(viewModel: viewModel)
 
         return view
