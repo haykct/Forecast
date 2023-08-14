@@ -24,11 +24,19 @@ struct ForecastViewData {
     }()
 
     private(set) lazy var upcomingDate: String = {
-        dateManager.string(from: _upcomingDateTime, format: "EEEE, d MMM")
+        if Calendar.current.isDate(_upcomingDateTime, inSameDayAs: Date(timeIntervalSince1970: 0)) {
+            return "N/A"
+        } else {
+            return dateManager.string(from: _upcomingDateTime, format: "EEEE, d MMM")
+        }
     }()
 
     private(set) lazy var upcomingTime: String = {
-        dateManager.string(from: _upcomingDateTime, format: "h:mm a")
+        if Calendar.current.isDate(_upcomingDateTime, inSameDayAs: Date(timeIntervalSince1970: 0)) {
+            return "N/A"
+        } else {
+            return dateManager.string(from: _upcomingDateTime, format: "h:mm a")
+        }
     }()
 
     private(set) lazy var condition: String = {
