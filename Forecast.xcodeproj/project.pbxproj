@@ -127,6 +127,7 @@
 			children = (
 				2628D6892A8A229900022A61 /* Error */,
 				26CC45AF2A87FF20006E6156 /* Location */,
+				26D658022A77E63400346A1F /* AppStateDescriptionView.swift */,
 			);
 			path = AppState;
 			sourceTree = "<group>";
@@ -229,7 +230,6 @@
 				26E3B08A2A7D535500B96F99 /* Protocols */,
 				26D6580B2A77F4C100346A1F /* Views */,
 				2628D6882A8A228800022A61 /* AppState */,
-				26D658022A77E63400346A1F /* AppStateDescriptionView.swift */,
 				26C3F4302A76E5BF0082F068 /* WeatherToday */,
 				26DFDCDE2A7BDB6F00725FAF /* Forecast */,
 				26C3F4332A76E6330082F068 /* Services */,
