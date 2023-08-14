@@ -11,7 +11,11 @@ import SwiftUI
 struct ForecastApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            createMainView(factory: MainViewFactory())
         }
+    }
+
+    private func createMainView(factory: some ViewFactory) -> some View {
+        factory.makeView()
     }
 }

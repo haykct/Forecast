@@ -9,7 +9,6 @@ import Combine
 
 final class ForecastViewModel: ViewModel {
     //MARK: Public properties
-    private(set) var authorizationStatus: AuthorizationStatus = .loading
     private(set) var viewData = CurrentValueSubject<[[ForecastViewData]], Never>([])
 
     //MARK: Private properties
@@ -24,10 +23,6 @@ final class ForecastViewModel: ViewModel {
     }
     
     //MARK: Public methods
-    func requestAuthorization() {
-        //Authorization logic
-    }
-
     func requestLocationAndNetworkData() {
         setupLocationSubjects()
         locationService.requestLocation()

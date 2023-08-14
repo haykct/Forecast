@@ -8,8 +8,5 @@
 import Foundation
 
 protocol ViewModel: ObservableObject {
-    var authorizationStatus: AuthorizationStatus { get }
-
-    func requestAuthorization()
     func requestLocationAndNetworkData()
 }

@@ -68,6 +68,8 @@ struct ForecastViewData {
 
         if firstDateTime?.compare(Date.now) == .orderedAscending {
             viewData[0].removeFirst()
+
+            if viewData[0].isEmpty { viewData.removeFirst() }
         }
 
         return viewData
