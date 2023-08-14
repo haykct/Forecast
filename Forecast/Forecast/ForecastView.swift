@@ -28,9 +28,3 @@ struct ForecastView: UIViewControllerRepresentable {
 
     }
 }
-
-//struct ForecastView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ForecastView()
-//    }
-//}
