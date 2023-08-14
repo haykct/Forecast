@@ -166,11 +166,3 @@ struct WeatherTodayView: View {
             .padding(.bottom, 4)
     }
 }
-
-//struct WeatherTodayView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WeatherTodayView()
-//            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
-//                                                     networkService: DefaultNetworkService()))
-//    }
-//}

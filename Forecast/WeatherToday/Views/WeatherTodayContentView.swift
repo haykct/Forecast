@@ -33,11 +33,3 @@ struct WeatherTodayContentView: View {
         }
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WeatherTodayContentView()
-//            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
-//                                                     networkService: DefaultNetworkService()))
-//    }
-//}
