@@ -9,7 +9,6 @@ import Combine
 
 final class WeatherTodayViewModel: ObservableObject, ViewModel {
     //MARK: Public properties
-    @Published private(set) var authorizationStatus: AuthorizationStatus = .loading
     @Published private(set) var serviceError: ServiceError?
     @Published private(set) var viewData: WeatherTodayViewData?
 
@@ -25,20 +24,7 @@ final class WeatherTodayViewModel: ObservableObject, ViewModel {
     }
 
     //MARK: Public methods
-    func subscribeForAuthorizationStatusUpdate() {
-        // Subscribing for getting authorization status updates,
-        // since users can change the status from settings while the app is running
-        locationService.authorizationStatusSubject
-            .assign(to: &$authorizationStatus)
-    }
-
-    func requestAuthorization() {
-        locationService.requestWhenInUseAuthorization()
-    }
-
     func requestLocationAndNetworkData() {
-        serviceError = nil
-
         setupLocationSubjects()
         locationService.requestLocation()
     }
@@ -54,8 +40,11 @@ final class WeatherTodayViewModel: ObservableObject, ViewModel {
                 return networkService.request(request)
             }
             .sink { [unowned self] completion in
-                if case .failure(let error) = completion { serviceError = .networkError(error) }
+                if case .failure(let error) = completion {
+                    serviceError = .networkError(error)
+                }
             } receiveValue: { [unowned self] model in
+                serviceError = nil
                 viewData = WeatherTodayViewData(model: model)
             }
             .store(in: &cancellables)

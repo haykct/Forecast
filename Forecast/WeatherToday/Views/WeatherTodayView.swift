@@ -44,11 +44,16 @@ struct WeatherTodayView: View {
     }
 
     //MARK: Private properties
-    @EnvironmentObject private var viewModel: WeatherTodayViewModel
+    @ObservedObject private var viewModel: WeatherTodayViewModel
     @State private var shouldAnimateGradient = false
 
     private let dimension = Dimension(screenHeight: UIScreen.main.bounds.height)
     private let Inter = Constants.Fonts.Inter.self
+
+    //MARK: Initializers
+    init(viewModel: WeatherTodayViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         if var viewData = viewModel.viewData {
@@ -159,13 +164,5 @@ struct WeatherTodayView: View {
             .resizable()
             .frame(width: 40, height: 40)
             .padding(.bottom, 4)
-    }
-}
-
-struct WeatherTodayView_Previews: PreviewProvider {
-    static var previews: some View {
-        WeatherTodayView()
-            .environmentObject(WeatherTodayViewModel(locationService: DefaultLocationService(),
-                                                     networkService: DefaultNetworkService()))
     }
 }

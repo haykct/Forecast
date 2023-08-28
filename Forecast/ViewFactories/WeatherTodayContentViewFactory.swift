@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct WeatherTodayContentViewFactory: ViewFactory {
+    //MARK: Private properties
+    private let locationService: LocationService
+
+    //MARK: Initializers
+    init(locationService: LocationService) {
+        self.locationService = locationService
+    }
+
+    //MARK: Public methods
     func makeView() -> some View {
-        let locationService = DefaultLocationService()
         let networkService = DefaultNetworkService()
         let viewModel = WeatherTodayViewModel(locationService: locationService, networkService: networkService)
-        let view = WeatherTodayContentView().environmentObject(viewModel)
+        let view = WeatherTodayContentView(viewModel: viewModel)
 
         return view
     }

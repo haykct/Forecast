@@ -44,7 +44,7 @@ final class DefaultNetworkService: NetworkService {
     func request<Response>(_ request: Request) -> AnyPublisher<Response, NetworkError> where Response : Decodable {
         session
             .request(request.url, parameters: request.parameters)
-            .validate()
+            .validate(statusCode: 200...399)
             .publishData()
             .value()
             .mapError { error in
