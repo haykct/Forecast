@@ -15,7 +15,7 @@ struct MainView: View {
     @State private var isContentViewAppeared = false
     
     var body: some View {
-        VStack{
+        VStack {
             switch viewModel.authorizationStatus {
             case .loading:
                 ProgressView()
