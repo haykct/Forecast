@@ -9,22 +9,18 @@ import SwiftUI
 
 struct ForecastView: UIViewControllerRepresentable {
     //MARK: Private properties
-    private let locationService: LocationService
+    private let coordinator: ForecastCoordinator
 
     //MARK: Initializers
     init(locationService: LocationService) {
-        self.locationService = locationService
+        self.coordinator = ForecastCoordinator(navigationController: UINavigationController(), locationService: locationService)
     }
 
     func makeUIViewController(context: Context) -> UINavigationController {
-        let factory = ForecastViewControllerFactory(locationService: locationService)
-        let forecastViewController = factory.makeViewController() as! ForecastViewController
-        let navController = UINavigationController(rootViewController: forecastViewController)
+        coordinator.start()
 
-        return navController
+        return coordinator.navigationController
     }
 
-    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
-
-    }
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {}
 }

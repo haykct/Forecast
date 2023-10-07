@@ -15,11 +15,13 @@ final class ForecastViewModel: ViewModel {
     private let locationService: LocationService
     private let networkService: NetworkService
     private var cancellables = Set<AnyCancellable>()
+    private weak var coordinator: ForecastCoordinator?
 
     //MARK: Initializers
-    init(locationService: LocationService, networkService: NetworkService) {
+    init(locationService: LocationService, networkService: NetworkService, coordinator: ForecastCoordinator?) {
         self.locationService = locationService
         self.networkService = networkService
+        self.coordinator = coordinator
     }
     
     //MARK: Public methods
