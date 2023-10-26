@@ -21,15 +21,13 @@ struct MainView: View {
                 ProgressView()
             case .authorized:
                 TabView {
-                    let factory = WeatherTodayContentViewFactory(locationService: viewModel.locationService)
-
-                    createWeatherTodayContentView(factory: factory)
+                    WeatherTodayContentView(viewModel: WeatherTodayViewModel())
                         .tabItem {
                             Image("TabBarTodayLight")
                                 .renderingMode(.template)
                             Text("Today")
                         }
-                    ForecastView(locationService: viewModel.locationService)
+                    ForecastView()
                         .tabItem {
                             Image("TabBarForecastLight")
                                 .renderingMode(.template)
@@ -48,10 +46,6 @@ struct MainView: View {
                 viewModel.subscribeForAuthorizationStatusUpdate()
             }
         }
-    }
-
-    private func createWeatherTodayContentView(factory: some ViewFactory) -> some View {
-        factory.makeView()
     }
 }
 

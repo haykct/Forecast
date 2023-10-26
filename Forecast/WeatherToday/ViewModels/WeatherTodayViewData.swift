@@ -7,8 +7,8 @@
 
 struct WeatherTodayViewData {
     //MARK: Private properties
+    private static let empty = "N/A"
     private let model: WeatherTodayModel
-    private let empty = "N/A"
 
     //MARK: Initializers
     init(model: WeatherTodayModel) {
@@ -21,11 +21,11 @@ struct WeatherTodayViewData {
             return "\(city), \(country)"
         }
 
-        return model.city ?? model.country ?? empty
+        return model.city ?? model.country ?? Self.empty
     }()
 
     private(set) lazy var country: String = {
-        model.country ?? empty
+        model.country ?? Self.empty
     }()
 
     private(set) lazy var temperatureValue: Int? = {
@@ -35,13 +35,13 @@ struct WeatherTodayViewData {
     }()
 
     private(set) lazy var temperature: String = {
-        guard let temperature = model.temperature else { return empty }
+        guard let temperature = model.temperature else { return Self.empty }
 
         return String(Int(temperature)) + "\u{00B0}C"
     }()
 
     private(set) lazy var humidity: String = {
-        guard let humidity = model.humidity else { return empty }
+        guard let humidity = model.humidity else { return Self.empty }
 
         return String(Int(humidity)) + "%"
     }()
@@ -53,22 +53,22 @@ struct WeatherTodayViewData {
     }()
 
     private(set) lazy var precipitationMode: String = {
-        model.precipitationMode ?? empty
+        model.precipitationMode ?? Self.empty
     }()
 
     private(set) lazy var pressure: String = {
-        guard let pressure = model.pressure else { return empty }
+        guard let pressure = model.pressure else { return Self.empty }
 
         return String(Int(pressure)) + " hPa"
     }()
 
     private(set) lazy var wind: String = {
-        guard let wind = model.wind else { return empty }
+        guard let wind = model.wind else { return Self.empty }
 
         return String(Int(wind * 3.6)) + " KM/H"
     }()
 
     private(set) lazy var direction: String = {
-        model.direction ?? empty
+        model.direction ?? Self.empty
     }()
 }

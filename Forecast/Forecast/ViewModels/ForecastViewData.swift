@@ -9,8 +9,8 @@ import Foundation
 
 struct ForecastViewData {
     //MARK: Private properties
-    private let dateManager = DateManager()
-    private let empty = "N/A"
+    private static let empty = "N/A"
+    private let dateManager: DateManager
     private let _temperature: Double?
     private let _upcomingDateTime: Date
     private let _condition: String?
@@ -18,7 +18,7 @@ struct ForecastViewData {
 
     //MARK: Public properties
     private(set) lazy var temperature: String = {
-        guard let temperature = _temperature else { return empty }
+        guard let temperature = _temperature else { return Self.empty }
 
         return String(Int(temperature)) + "\u{00B0}C"
     }()
@@ -40,7 +40,7 @@ struct ForecastViewData {
     }()
 
     private(set) lazy var condition: String = {
-        guard let condition = _condition, !condition.isEmpty else { return empty }
+        guard let condition = _condition, !condition.isEmpty else { return Self.empty }
 
         return condition.first!.uppercased() + condition.dropFirst()
     }()
@@ -56,7 +56,8 @@ struct ForecastViewData {
         var viewData = model.forecast.forecastList.reduce(into: [[ForecastViewData]]()) { partialResult, forecast in
             let dateString = forecast.upcomingDateTime ?? ""
             let date = dateManager.date(from: dateString, format: "yyyy-MM-dd'T'HH:mm:ss") ?? Date(timeIntervalSince1970: 0)
-            let viewData = ForecastViewData(_temperature: forecast.temperature,
+            let viewData = ForecastViewData(dateManager: dateManager,
+                                            _temperature: forecast.temperature,
                                             _upcomingDateTime: date,
                                             _condition: forecast.condition,
                                             _icon: forecast.icon)

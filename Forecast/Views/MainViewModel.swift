@@ -10,12 +10,9 @@ import Combine
 final class MainViewModel: ObservableObject {
     //MARK: Public properties
     @Published private(set) var authorizationStatus: AuthorizationStatus = .loading
-    let locationService: LocationService
 
-    //MARK: Initializers
-    init(locationService: LocationService) {
-        self.locationService = locationService
-    }
+    //MARK: Private properties
+    @Injected private var locationService: LocationService
 
     //MARK: Public methods
     func subscribeForAuthorizationStatusUpdate() {

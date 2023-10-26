@@ -12,15 +12,13 @@ final class ForecastViewModel: ViewModel {
     private(set) var viewData = CurrentValueSubject<[[ForecastViewData]], Never>([])
 
     //MARK: Private properties
-    private let locationService: LocationService
-    private let networkService: NetworkService
+    @Injected private var locationService: LocationService
+    @Injected private var networkService: NetworkService
     private var cancellables = Set<AnyCancellable>()
     private weak var coordinator: ForecastCoordinator?
 
     //MARK: Initializers
-    init(locationService: LocationService, networkService: NetworkService, coordinator: ForecastCoordinator?) {
-        self.locationService = locationService
-        self.networkService = networkService
+    init(coordinator: ForecastCoordinator?) {
         self.coordinator = coordinator
     }
     

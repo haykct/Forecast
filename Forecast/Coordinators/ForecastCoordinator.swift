@@ -8,19 +8,19 @@
 import UIKit
 
 final class ForecastCoordinator: Coordinator {
+    //MARK: Public properties
     var childCoordinators: [Coordinator] = []
-    var navigationController: UINavigationController
+    @Injected var navigationController: UINavigationController
 
-    private let locationService: LocationService
+    //MARK: Private properties
+    @Injected private var locationService: LocationService
 
-    init(navigationController: UINavigationController, locationService: LocationService) {
-        self.navigationController = navigationController
-        self.locationService = locationService
-    }
-
+    //MARK: Public methods
     func start() {
-        let factory = ForecastViewControllerFactory(locationService: locationService, coordinator: self)
-        let forecastViewController = factory.makeViewController() as! ForecastViewController
+        let viewModel = ForecastViewModel(coordinator: self)
+        let creator = { ForecastViewController(coder: $0, viewModel: viewModel) }
+        let storyboard = UIStoryboard(name: "Forecast", bundle: .main)
+        let forecastViewController = storyboard.instantiateViewController(identifier: "forecastVC", creator: creator)
 
         navigationController.setViewControllers([forecastViewController], animated: false)
     }

@@ -44,12 +44,13 @@ final class DefaultLocationService: NSObject, LocationService {
     var locationErrorSubject = Subjects.LocationErrorSubject()
 
     //MARK: Private properties
-    private let locationManager = CLLocationManager()
+    private let locationManager: CLLocationManager
 
     //MARK: Initializers
-    override init() {
-        super.init()
+    init(locationManager: CLLocationManager) {
+        self.locationManager = locationManager
 
+        super.init()
         setupLocationManager()
     }
 

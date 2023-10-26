@@ -13,15 +13,9 @@ final class WeatherTodayViewModel: ObservableObject, ViewModel {
     @Published private(set) var viewData: WeatherTodayViewData?
 
     //MARK: Private properties
-    private let locationService: LocationService
-    private let networkService: NetworkService
+    @Injected private var networkService: NetworkService
+    @Injected private var locationService: LocationService
     private var cancellables = Set<AnyCancellable>()
-
-    //MARK: Initializers
-    init(locationService: LocationService, networkService: NetworkService) {
-        self.locationService = locationService
-        self.networkService = networkService
-    }
 
     //MARK: Public methods
     func requestLocationAndNetworkData() {
