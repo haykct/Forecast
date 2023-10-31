@@ -12,19 +12,19 @@ struct WeatherDetailView: View {
     private let screenHeight = UIScreen.main.bounds.height
     private let image: String
     private let value: String
-    private let text: String
+    private let textKey: String
 
     //MARK: Initializers
-    init(image: String, value: String, text: String) {
+    init(image: String, value: String, textKey: String) {
         self.image = image
         self.value = value
-        self.text = text
+        self.textKey = textKey
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            let Inter = Constants.Fonts.Inter.self
-            
+            let inter = Constants.Fonts.Inter.self
+
             if screenHeight != 568 {
                 Image(image)
                     .resizable()
@@ -36,11 +36,11 @@ struct WeatherDetailView: View {
 
             Text(value)
                 .lineLimit(1)
-                .font(Font.custom(Inter.medium, size: 14))
+                .font(Font.custom(inter.medium, size: 14))
                 .padding(.top, 8)
-            Text(text)
+            Text(textKey.localized)
                 .lineLimit(1)
-                .font(Font.custom(Inter.medium, size: 14))
+                .font(Font.custom(inter.medium, size: 14))
                 .padding(.top, 5)
                 .foregroundColor(Constants.SwiftUIColors.textGrey)
         }
@@ -50,6 +50,6 @@ struct WeatherDetailView: View {
 
 struct WeatherDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherDetailView(image: "", value: "", text: "")
+        WeatherDetailView(image: "", value: "", textKey: "")
     }
 }

@@ -9,7 +9,6 @@ import Foundation
 
 struct ForecastViewData {
     //MARK: Private properties
-    private static let empty = "N/A"
     private let dateManager: DateManager
     private let _temperature: Double?
     private let _upcomingDateTime: Date
@@ -18,14 +17,14 @@ struct ForecastViewData {
 
     //MARK: Public properties
     private(set) lazy var temperature: String = {
-        guard let temperature = _temperature else { return Self.empty }
+        guard let temperature = _temperature else { return LocalizationKeys.notAvailable }
 
         return String(Int(temperature)) + "\u{00B0}C"
     }()
 
     private(set) lazy var upcomingDate: String = {
         if Calendar.current.isDate(_upcomingDateTime, inSameDayAs: Date(timeIntervalSince1970: 0)) {
-            return "N/A"
+            return LocalizationKeys.notAvailable
         } else {
             return dateManager.string(from: _upcomingDateTime, format: "EEEE, d MMM")
         }
@@ -33,14 +32,14 @@ struct ForecastViewData {
 
     private(set) lazy var upcomingTime: String = {
         if Calendar.current.isDate(_upcomingDateTime, inSameDayAs: Date(timeIntervalSince1970: 0)) {
-            return "N/A"
+            return LocalizationKeys.notAvailable
         } else {
             return dateManager.string(from: _upcomingDateTime, format: "h:mm a")
         }
     }()
 
-    private(set) lazy var condition: String = {
-        guard let condition = _condition, !condition.isEmpty else { return Self.empty }
+    private(set) lazy var condition: String = { //TODO: Should be localized all 55 condition texts
+        guard let condition = _condition, !condition.isEmpty else { return LocalizationKeys.notAvailable }
 
         return condition.first!.uppercased() + condition.dropFirst()
     }()

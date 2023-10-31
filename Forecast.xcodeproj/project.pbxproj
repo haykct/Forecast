@@ -14,6 +14,9 @@
 		2650A3702AE7D6A300D97CBB /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 2650A36F2AE7D6A300D97CBB /* Swinject */; };
 		2650A37B2AE7F4AB00D97CBB /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A37A2AE7F4AB00D97CBB /* DI.swift */; };
 		2650A37D2AE90DD500D97CBB /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A37C2AE90DD500D97CBB /* Injected.swift */; };
+		2650A3822AEAE3FC00D97CBB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2650A3812AEAE3FC00D97CBB /* Localizable.strings */; };
+		2650A3872AEFFDC400D97CBB /* LocalizationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A3862AEFFDC400D97CBB /* LocalizationKeys.swift */; };
+		2650A38A2AF127A000D97CBB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A3892AF127A000D97CBB /* String.swift */; };
 		26586B7C2A770C8B00853FFD /* Inter-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26586B782A770C8B00853FFD /* Inter-Bold.otf */; };
 		26586B7D2A770C8B00853FFD /* Inter-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26586B792A770C8B00853FFD /* Inter-Regular.otf */; };
 		26586B7E2A770C8B00853FFD /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26586B7A2A770C8B00853FFD /* Inter-Medium.otf */; };
@@ -63,6 +66,9 @@
 		2628D68C2A8A22F800022A61 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		2650A37A2AE7F4AB00D97CBB /* DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
 		2650A37C2AE90DD500D97CBB /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
+		2650A3812AEAE3FC00D97CBB /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		2650A3862AEFFDC400D97CBB /* LocalizationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKeys.swift; sourceTree = "<group>"; };
+		2650A3892AF127A000D97CBB /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		26586B782A770C8B00853FFD /* Inter-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.otf"; sourceTree = "<group>"; };
 		26586B792A770C8B00853FFD /* Inter-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.otf"; sourceTree = "<group>"; };
 		26586B7A2A770C8B00853FFD /* Inter-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.otf"; sourceTree = "<group>"; };
@@ -141,6 +147,22 @@
 			path = DI;
 			sourceTree = "<group>";
 		};
+		2650A3802AEAE3CA00D97CBB /* LocalizedStrings */ = {
+			isa = PBXGroup;
+			children = (
+				2650A3812AEAE3FC00D97CBB /* Localizable.strings */,
+			);
+			path = LocalizedStrings;
+			sourceTree = "<group>";
+		};
+		2650A3882AF1278100D97CBB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2650A3892AF127A000D97CBB /* String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		26586B772A770C8B00853FFD /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				26586B822A771D4B00853FFD /* Constants.swift */,
+				2650A3862AEFFDC400D97CBB /* LocalizationKeys.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -243,7 +266,9 @@
 				26DFDCDE2A7BDB6F00725FAF /* Forecast */,
 				26C3F4332A76E6330082F068 /* Services */,
 				26C5B41C2A7D188100DB4EF9 /* Managers */,
+				2650A3802AEAE3CA00D97CBB /* LocalizedStrings */,
 				26586B812A771D2C00853FFD /* Constants */,
+				2650A3882AF1278100D97CBB /* Extensions */,
 				266DCA302A79BA4800118C05 /* Utilities */,
 				26586B772A770C8B00853FFD /* Fonts */,
 				26C3F4262A76E1530082F068 /* Preview Content */,
@@ -289,8 +314,8 @@
 		26C3F4312A76E5DD0082F068 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				26C3F4222A76E1510082F068 /* WeatherTodayContentView.swift */,
 				2697F1A12A799EFD00B8B7FA /* WeatherTodayView.swift */,
+				26C3F4222A76E1510082F068 /* WeatherTodayContentView.swift */,
 				26E4A2542A7B840D00EFBA7C /* WeatherDetailContainerView.swift */,
 				26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */,
 			);
@@ -497,6 +522,7 @@
 				26586B7D2A770C8B00853FFD /* Inter-Regular.otf in Resources */,
 				26C3F4252A76E1530082F068 /* Images.xcassets in Resources */,
 				26586B7E2A770C8B00853FFD /* Inter-Medium.otf in Resources */,
+				2650A3822AEAE3FC00D97CBB /* Localizable.strings in Resources */,
 				26C5B41B2A7D08C300DB4EF9 /* ForecastTableViewCell.xib in Resources */,
 				26586B7C2A770C8B00853FFD /* Inter-Bold.otf in Resources */,
 				26586B7F2A770C8B00853FFD /* Inter-SemiBold.otf in Resources */,
@@ -511,6 +537,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2650A38A2AF127A000D97CBB /* String.swift in Sources */,
 				26586B832A771D4B00853FFD /* Constants.swift in Sources */,
 				26C5B41E2A7D189A00DB4EF9 /* DateManager.swift in Sources */,
 				2650A37D2AE90DD500D97CBB /* Injected.swift in Sources */,
@@ -518,6 +545,7 @@
 				26D658012A77CDB000346A1F /* MainView.swift in Sources */,
 				26DFDCEB2A7C0F2E00725FAF /* ForecastDataModel.swift in Sources */,
 				266538FE2AD1A9FF0028D78A /* ForecastCoordinator.swift in Sources */,
+				2650A3872AEFFDC400D97CBB /* LocalizationKeys.swift in Sources */,
 				266538FB2AD1A9D50028D78A /* Coordinator.swift in Sources */,
 				266DCA322A79BADB00118C05 /* PlistReader.swift in Sources */,
 				26C3F4232A76E1510082F068 /* WeatherTodayContentView.swift in Sources */,
@@ -686,7 +714,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -722,7 +750,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

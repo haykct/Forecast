@@ -20,9 +20,9 @@ final class ForecastSectionHeaderView: UITableViewHeaderFooterView {
 
         switch section {
         case 0:
-            dayLabel.text = "Today"
+            dayLabel.text = LocalizationKeys.today
         case 1:
-            dayLabel.text = "Tomorrow"
+            dayLabel.text = "tomorrow".localized
         default:
             dayLabel.text = ""
         }

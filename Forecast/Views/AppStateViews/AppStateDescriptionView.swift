@@ -13,17 +13,17 @@ struct AppStateDescriptionView: View {
         case location
         case serviceError(ServiceError)
 
-        var description: String {
+        var descriptionKey: String {
             switch self {
             case .location:
-                return "Give us permission to see forecast for your current location."
+                return "location_permission"
             case .serviceError(let error):
-                return error.description
+                return error.descriptionKey
             }
         }
 
         var firstLineText: String {
-            self == .location ? "Enable" : "Error"
+            self == .location ? "enable" : "error"
         }
 
         var secondLineText: String {
@@ -55,9 +55,9 @@ struct AppStateDescriptionView: View {
                 .frame(width: 43, height: 43)
                 .padding(.top, 7)
             Spacer()
-            Text(state.firstLineText)
+            Text(state.firstLineText.localized)
                 .font(titleFont)
-            Text(state.secondLineText)
+            Text(state.secondLineText.localized)
                 .font(titleFont)
                 .padding(.top, -52)
 
@@ -68,7 +68,7 @@ struct AppStateDescriptionView: View {
             }
 
             Spacer()
-            Text(state.description)
+            Text(state.descriptionKey.localized)
                 .font(Font.custom(Inter.medium, size: 16))
                 .lineSpacing(4)
             Spacer()

@@ -15,14 +15,14 @@ enum NetworkError: Error, Equatable {
     case dataNotAvailable
     case unableToDecode
 
-    var errorDescription: String {
+    var descriptionKey: String {
         switch self {
         case .noConnection:
-            return "No internet connection. Please check your internet connection and try again."
+            return "no_internet"
         case .dataNotAvailable:
-            return "Something unexpected happened. Please try again later."
+            return "try_later"
         case .unableToDecode:
-            return "The data received is in an unexpected format. Please contact support for assistance."
+            return "unexpected_format"
         }
     }
 }

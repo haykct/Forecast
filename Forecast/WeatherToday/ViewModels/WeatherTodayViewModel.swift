@@ -10,7 +10,7 @@ import Combine
 final class WeatherTodayViewModel: ObservableObject, ViewModel {
     //MARK: Public properties
     @Published private(set) var serviceError: ServiceError?
-    @Published private(set) var viewData: WeatherTodayViewData?
+    @Published var viewData: WeatherTodayViewData?
 
     //MARK: Private properties
     @Injected private var networkService: NetworkService

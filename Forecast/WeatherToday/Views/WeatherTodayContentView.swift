@@ -18,13 +18,11 @@ struct WeatherTodayContentView: View {
     var body: some View {
         VStack {
             if let error = viewModel.serviceError {
-                let _ = print("error")
                 ErrorView(viewModel: viewModel, serviceError: error)
             } else {
                 WeatherTodayView(viewModel: viewModel)
                     .onAppear {
                         if !isWeatherTodayViewVisible {
-                            print("onAppear")
                             isWeatherTodayViewVisible = true
                             viewModel.requestLocationAndNetworkData()
                         }

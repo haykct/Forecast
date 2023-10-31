@@ -15,19 +15,19 @@ struct CornerRoundedButton: View {
     }
 
     //MARK: Private properties
-    private let title: String
+    private let titleKey: String
     private let style: Style
     private let callback: () -> Void
 
     //MARK: Initializers
-    init(_ title: String, style: Style = .dark, _ callback: @escaping () -> Void) {
-        self.title = title
+    init(_ titleKey: String, style: Style = .dark, _ callback: @escaping () -> Void) {
+        self.titleKey = titleKey
         self.style = style
         self.callback = callback
     }
 
     var body: some View {
-        Button(title) {
+        Button(titleKey.localized) {
             callback()
         }
         .frame(height: 40)

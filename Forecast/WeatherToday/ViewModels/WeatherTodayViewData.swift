@@ -7,7 +7,6 @@
 
 struct WeatherTodayViewData {
     //MARK: Private properties
-    private static let empty = "N/A"
     private let model: WeatherTodayModel
 
     //MARK: Initializers
@@ -21,11 +20,11 @@ struct WeatherTodayViewData {
             return "\(city), \(country)"
         }
 
-        return model.city ?? model.country ?? Self.empty
+        return model.city ?? model.country ?? LocalizationKeys.notAvailable
     }()
 
     private(set) lazy var country: String = {
-        model.country ?? Self.empty
+        model.country ?? LocalizationKeys.notAvailable
     }()
 
     private(set) lazy var temperatureValue: Int? = {
@@ -35,13 +34,13 @@ struct WeatherTodayViewData {
     }()
 
     private(set) lazy var temperature: String = {
-        guard let temperature = model.temperature else { return Self.empty }
+        guard let temperature = model.temperature else { return LocalizationKeys.notAvailable }
 
         return String(Int(temperature)) + "\u{00B0}C"
     }()
 
     private(set) lazy var humidity: String = {
-        guard let humidity = model.humidity else { return Self.empty }
+        guard let humidity = model.humidity else { return LocalizationKeys.notAvailable }
 
         return String(Int(humidity)) + "%"
     }()
@@ -53,22 +52,22 @@ struct WeatherTodayViewData {
     }()
 
     private(set) lazy var precipitationMode: String = {
-        model.precipitationMode ?? Self.empty
+        model.precipitationMode ?? LocalizationKeys.notAvailable
     }()
 
     private(set) lazy var pressure: String = {
-        guard let pressure = model.pressure else { return Self.empty }
+        guard let pressure = model.pressure else { return LocalizationKeys.notAvailable }
 
         return String(Int(pressure)) + " hPa"
     }()
 
     private(set) lazy var wind: String = {
-        guard let wind = model.wind else { return Self.empty }
+        guard let wind = model.wind else { return LocalizationKeys.notAvailable }
 
         return String(Int(wind * 3.6)) + " KM/H"
     }()
 
     private(set) lazy var direction: String = {
-        model.direction ?? Self.empty
+        model.direction ?? LocalizationKeys.notAvailable
     }()
 }

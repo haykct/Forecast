@@ -44,12 +44,12 @@ class ForecastViewController: UIViewController {
     //MARK: Private methods
     private func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        let Inter = Constants.Fonts.Inter.self
+        let inter = Constants.Fonts.Inter.self
 
-        navigationItem.title = "Forecast"
+        navigationItem.title = LocalizationKeys.forecast
         navigationController?.navigationBar.prefersLargeTitles = true
-        appearance.titleTextAttributes = [.font: UIFont(name: Inter.bold, size: 20) as Any]
-        appearance.largeTitleTextAttributes = [.font: UIFont(name: Inter.bold, size: 40) as Any]
+        appearance.titleTextAttributes = [.font: UIFont(name: inter.bold, size: 20) as Any]
+        appearance.largeTitleTextAttributes = [.font: UIFont(name: inter.bold, size: 40) as Any]
         navigationController?.navigationBar.standardAppearance = appearance
     }
 

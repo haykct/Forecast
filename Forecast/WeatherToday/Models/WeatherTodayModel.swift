@@ -28,6 +28,18 @@ struct WeatherTodayModel: Decodable {
         case value, code
     }
 
+    init(city: String?, country: String?, temperature: Double?, humidity: Double?, precipitation: Double?, precipitationMode: String?, pressure: Double?, wind: Double?, direction: String?) {
+        self.city = city
+        self.country = country
+        self.temperature = temperature
+        self.humidity = humidity
+        self.precipitation = precipitation
+        self.precipitationMode = precipitationMode
+        self.pressure = pressure
+        self.wind = wind
+        self.direction = direction
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: FirstLevelKeys.self)
         let cityContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .city)

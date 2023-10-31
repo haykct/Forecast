@@ -25,13 +25,13 @@ struct MainView: View {
                         .tabItem {
                             Image("TabBarTodayLight")
                                 .renderingMode(.template)
-                            Text("Today")
+                            Text("today")
                         }
                     ForecastView()
                         .tabItem {
                             Image("TabBarForecastLight")
                                 .renderingMode(.template)
-                            Text("Forecast")
+                            Text(LocalizationKeys.forecast)
                         }
                         .edgesIgnoringSafeArea(.all)
                 }

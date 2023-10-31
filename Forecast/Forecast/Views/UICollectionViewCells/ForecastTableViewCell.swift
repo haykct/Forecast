@@ -26,7 +26,7 @@ final class ForecastTableViewCell: UITableViewCell {
     func setupCell(with data: ForecastViewData, row: Int) {
         var data = data
 
-        timeLabel.text = row == 0 ? "Now" : data.upcomingTime
+        timeLabel.text = row == 0 ? "now".localized : data.upcomingTime
         descriptionLabel.text = data.condition
         iconImageView.image = UIImage(named: data.icon) ?? UIImage(named: data.icon.filter { $0.isNumber })
         temperatureLabel.text = data.temperature

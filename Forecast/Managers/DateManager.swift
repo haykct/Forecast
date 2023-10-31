@@ -13,6 +13,7 @@ struct DateManager {
 
     init() {
         formatter.timeZone = TimeZone.current
+        formatter.locale = .current
     }
 
     //MARK: Public methods

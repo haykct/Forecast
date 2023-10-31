@@ -58,10 +58,10 @@ struct WeatherTodayView: View {
     var body: some View {
         if var viewData = viewModel.viewData {
             ZStack {
-                let StateColors = Constants.SwiftUIColors.StateColors.self
+                let stateColors = Constants.SwiftUIColors.StateColors.self
                 let isSunny = viewData.precipitationMode == Precipitation.no.rawValue
 
-                LinearGradient(colors: isSunny ? StateColors.yellow : StateColors.blue,
+                LinearGradient(colors: isSunny ? stateColors.yellow : stateColors.blue,
                                startPoint: shouldAnimateGradient ? .topTrailing : .topLeading,
                                endPoint: shouldAnimateGradient ? .bottomLeading : .bottomTrailing)
                 .ignoresSafeArea()
@@ -74,7 +74,7 @@ struct WeatherTodayView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
                         Spacer()
-                        CornerRoundedButton("Share", style: .light) {}
+                        CornerRoundedButton("share", style: .light) {}
                             .frame(alignment: .trailing)
                             .padding(.top, 16)
                             .padding(.trailing, 24)
@@ -103,7 +103,7 @@ struct WeatherTodayView: View {
                 .padding([.leading, .trailing], 24)
             }
         } else {
-            ProgressView("Loading")
+            ProgressView("loading")
                 .controlSize(.large)
         }
     }
@@ -111,36 +111,22 @@ struct WeatherTodayView: View {
     //MARK: Private methods
     private func createTitleText(_ viewData: WeatherTodayViewData) -> some View {
         var viewData = viewData
-        var firstLine = "N/A"
-        var secondLine = "N/A"
+        var title = LocalizationKeys.notAvailable
 
         switch viewData.precipitationMode {
-        case Precipitation.rain.rawValue:
-            firstLine = "It's"
-            secondLine = "raining."
-        case Precipitation.snow.rawValue:
-            firstLine = "It's"
-            secondLine = "snowing."
+        case Precipitation.rain.rawValue, Precipitation.snow.rawValue:
+            title = viewData.precipitationMode
         case Precipitation.no.rawValue:
             guard let temp = viewData.temperatureValue else { break }
-            
-            let firstLineBeginning = UIScreen.main.bounds.height <= 667 ? "It's hot" : "It's "
-            let secondLineBeginning = UIScreen.main.bounds.height <= 667 ? "" : "hot "
 
-            firstLine = temp > 29 ? firstLineBeginning : "It's"
-            secondLine = temp > 29 ? "\(secondLineBeginning)as f***." : "sunny."
+            title = temp > 29 ? "hot" : "sunny"
         default:
             break
         }
 
         return VStack(alignment: .leading, spacing: 0) {
-            Text(firstLine)
+            Text(title.localized)
                 .font(Font.custom(Inter.bold, size: 64))
-                .frame(height: 64)
-
-            Text(secondLine)
-                .font(Font.custom(Inter.bold, size: 64))
-                .frame(height: 64)
                 .padding(.bottom, dimension.titleBottomPadding)
         }
     }
@@ -164,5 +150,23 @@ struct WeatherTodayView: View {
             .resizable()
             .frame(width: 40, height: 40)
             .padding(.bottom, 4)
+    }
+}
+
+struct WeatherTodayView_Previews: PreviewProvider {
+    // Add private(set) for viewData, remove init in model
+    static var vm = WeatherTodayViewModel()
+
+    static var previews: some View {
+        Self.vm.viewData = WeatherTodayViewData(model: WeatherTodayModel(city: "Yerevan",
+                                                                    country: "Armenia",
+                                                                    temperature: 22,
+                                                                    humidity: 33,
+                                                                    precipitation: 0.0,
+                                                                    precipitationMode: "no",
+                                                                    pressure: 1016,
+                                                                    wind: 5,
+                                                                    direction: "SE"))
+       return WeatherTodayView(viewModel: Self.vm)
     }
 }

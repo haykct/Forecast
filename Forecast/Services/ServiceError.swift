@@ -9,12 +9,12 @@ enum ServiceError: Error, Equatable {
     case locationError
     case networkError(NetworkError)
 
-    var description: String {
+    var descriptionKey: String {
         switch self {
         case .locationError:
-            return "Reload the location or search for a different one."
+            return "reload_location"
         case .networkError(let error):
-            return error.errorDescription
+            return error.descriptionKey
         }
     }
 }
