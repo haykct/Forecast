@@ -152,21 +152,3 @@ struct WeatherTodayView: View {
             .padding(.bottom, 4)
     }
 }
-
-struct WeatherTodayView_Previews: PreviewProvider {
-    // Add private(set) for viewData, remove init in model
-    static var vm = WeatherTodayViewModel()
-
-    static var previews: some View {
-        Self.vm.viewData = WeatherTodayViewData(model: WeatherTodayModel(city: "Yerevan",
-                                                                    country: "Armenia",
-                                                                    temperature: 22,
-                                                                    humidity: 33,
-                                                                    precipitation: 0.0,
-                                                                    precipitationMode: "no",
-                                                                    pressure: 1016,
-                                                                    wind: 5,
-                                                                    direction: "SE"))
-       return WeatherTodayView(viewModel: Self.vm)
-    }
-}
