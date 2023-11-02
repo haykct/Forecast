@@ -12,9 +12,6 @@ final class ForecastCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     @Injected var navigationController: UINavigationController
 
-    //MARK: Private properties
-    @Injected private var locationService: LocationService
-
     //MARK: Public methods
     func start() {
         let viewModel = ForecastViewModel(coordinator: self)

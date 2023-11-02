@@ -27,11 +27,11 @@ extension DI {
         container.register(NetworkService.self) { _ in
             DefaultNetworkService()
         }
+        .inObjectScope(.container)
 
         container.register(LocationService.self) { _ in
             DefaultLocationService(locationManager: CLLocationManager())
         }
-        .inObjectScope(.container)
 
         container.register(UINavigationController.self) { _ in
             UINavigationController()
