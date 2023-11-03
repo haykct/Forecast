@@ -94,7 +94,7 @@ extension ForecastViewController: UITableViewDataSource {
                                                       for: indexPath) as! ForecastTableViewCell
         let cellData = viewModel.viewData.value[indexPath.section][indexPath.row]
 
-        cell.setupCell(with: cellData, row: indexPath.row)
+        cell.setupCell(with: cellData, indexPath: indexPath)
 
         return cell
     }

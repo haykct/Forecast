@@ -49,17 +49,17 @@ struct ForecastViewData {
     }()
 
     //MARK: Public methods
-    static func makeViewData(model: ForecastDataModel) -> [[ForecastViewData]] {
+    static func makeViewData(model: ForecastModel) -> [[ForecastViewData]] {
         let dateManager = DateManager()
 
-        var viewData = model.forecast.forecastList.reduce(into: [[ForecastViewData]]()) { partialResult, forecast in
-            let dateString = forecast.upcomingDateTime ?? ""
+        var viewData = model.forecast.details.reduce(into: [[ForecastViewData]]()) { partialResult, detail in
+            let dateString = detail.upcomingDateTime ?? ""
             let date = dateManager.date(from: dateString, format: "yyyy-MM-dd'T'HH:mm:ss") ?? Date(timeIntervalSince1970: 0)
             let viewData = ForecastViewData(dateManager: dateManager,
-                                            _temperature: forecast.temperature,
+                                            _temperature: detail.temperature?.value,
                                             _upcomingDateTime: date,
-                                            _condition: forecast.condition,
-                                            _icon: forecast.icon)
+                                            _condition: detail.weatherCondition?.name,
+                                            _icon: detail.weatherCondition?.icon)
 
             guard let upcomingDateTime = partialResult.last?.last?._upcomingDateTime else {
                 return partialResult.append([viewData])

@@ -33,7 +33,7 @@ final class ForecastViewModel: ViewModel {
         cancellables.removeAll()
         
         locationService.locationSubject
-            .flatMap { [unowned self] coordinates -> AnyPublisher<ForecastDataModel, NetworkError> in
+            .flatMap { [unowned self] coordinates -> AnyPublisher<ForecastModel, NetworkError> in
                 let request = ForecastRequest(coordinates: coordinates)
 
                 return networkService.request(request)
