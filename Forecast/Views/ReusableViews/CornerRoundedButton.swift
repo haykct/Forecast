@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct CornerRoundedButton: View {
-    //MARK: Enums
+    // MARK: Enums
     enum Style {
         case dark
         case light
     }
 
-    //MARK: Private properties
+    // MARK: Private properties
     private let titleKey: String
     private let style: Style
     private let callback: () -> Void
 
-    //MARK: Initializers
+    // MARK: Initializers
     init(_ titleKey: String, style: Style = .dark, _ callback: @escaping () -> Void) {
         self.titleKey = titleKey
         self.style = style
@@ -32,7 +32,7 @@ struct CornerRoundedButton: View {
         }
         .frame(height: 40)
         .padding([.leading, .trailing], 16)
-        .font(Font.custom(Constants.Fonts.Inter.semiBold, size: 16))
+        .font(Font.custom(Fonts.Inter.semiBold, size: 16))
         .background(style == .light ? .white.opacity(0.3) : .black)
         .foregroundColor(style == .light ? .black : .white)
         .cornerRadius(20)

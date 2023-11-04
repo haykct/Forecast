@@ -9,20 +9,20 @@ import Swinject
 import UIKit
 import CoreLocation
 
-class DI {
-    //MARK: Public properties
-    static let shared = DI()
+class Injection {
+    // MARK: Public properties
+    static let shared = Injection()
 
     lazy var container = Container { container in
         register(using: container)
     }
 
-    //MARK: Initializers
+    // MARK: Initializers
     private init() {}
 
 }
 
-extension DI {
+extension Injection {
     private func register(using container: Container) {
         container.register(NetworkService.self) { _ in
             DefaultNetworkService()

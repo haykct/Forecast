@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ForecastView: UIViewControllerRepresentable {
-    //MARK: Private properties
+    // MARK: Private properties
     private let coordinator = ForecastCoordinator()
 
-    //MARK: Public methods
+    // MARK: Public methods
     func makeUIViewController(context: Context) -> UINavigationController {
         coordinator.start()
 

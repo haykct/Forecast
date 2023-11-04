@@ -8,10 +8,10 @@
 import Alamofire
 
 struct WeatherTodayRequest: Request {
-    //MARK: Private properties
+    // MARK: Private properties
     private let coordinates: (lat: Double, long: Double)
 
-    //MARK: Private properties
+    // MARK: Private properties
     var path: String { "data/2.5/weather" }
 
     var parameters: Parameters {
@@ -29,5 +29,4 @@ struct WeatherTodayRequest: Request {
     init(coordinates: (lat: Double, long: Double)) {
         self.coordinates = coordinates
     }
-    
 }

@@ -38,13 +38,13 @@ struct WeatherTodayModel: Decodable {
     struct Wind: Decodable {
         let speed: Speed?
         let direction: Direction?
+    }
 
-        struct Speed: Decodable {
-            let value: Double?
-        }
+    struct Speed: Decodable {
+        let value: Double?
+    }
 
-        struct Direction: Decodable {
-            let code: String?
-        }
+    struct Direction: Decodable {
+        let code: String?
     }
 }

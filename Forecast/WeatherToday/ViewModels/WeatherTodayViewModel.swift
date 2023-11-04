@@ -8,25 +8,25 @@
 import Combine
 
 final class WeatherTodayViewModel: ObservableObject, ViewModel {
-    //MARK: Public properties
+    // MARK: Public properties
     @Published private(set) var serviceError: ServiceError?
     @Published private(set) var viewData: WeatherTodayViewData?
 
-    //MARK: Private properties
+    // MARK: Private properties
     @Injected private var networkService: NetworkService
     @Injected private var locationService: LocationService
     private var cancellables = Set<AnyCancellable>()
 
-    //MARK: Public methods
+    // MARK: Public methods
     func requestLocationAndNetworkData() {
         setupLocationSubjects()
         locationService.requestLocation()
     }
 
-    //MARK: Private methods
+    // MARK: Private methods
     private func setupLocationSubjects() {
         cancellables.removeAll()
-        
+
         locationService.locationSubject
             .flatMap { [unowned self] coordinates -> AnyPublisher<WeatherTodayModel, NetworkError> in
                 let request = WeatherTodayRequest(coordinates: coordinates)
@@ -44,7 +44,7 @@ final class WeatherTodayViewModel: ObservableObject, ViewModel {
             .store(in: &cancellables)
 
         locationService.locationErrorSubject
-            .sink { [unowned self] error in
+            .sink { [unowned self] _ in
                 serviceError = .locationError
             }
             .store(in: &cancellables)

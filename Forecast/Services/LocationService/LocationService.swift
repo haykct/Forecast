@@ -8,7 +8,7 @@
 import CoreLocation
 import Combine
 
-//MARK: Enums
+// MARK: Enums
 enum AuthorizationStatus {
     case loading
     case authorized
@@ -27,7 +27,7 @@ enum Subjects {
     typealias StatusSubject = CurrentValueSubject<AuthorizationStatus, Never>
 }
 
-//MARK: Protocols
+// MARK: Protocols
 protocol LocationService {
     var authorizationStatusSubject: Subjects.StatusSubject { get }
     var locationSubject: Subjects.LocationSubject { get }
@@ -38,15 +38,15 @@ protocol LocationService {
 }
 
 final class DefaultLocationService: NSObject, LocationService {
-    //MARK: Public properties
+    // MARK: Public properties
     var authorizationStatusSubject = Subjects.StatusSubject(.loading)
     var locationSubject = Subjects.LocationSubject()
     var locationErrorSubject = Subjects.LocationErrorSubject()
 
-    //MARK: Private properties
+    // MARK: Private properties
     private let locationManager: CLLocationManager
 
-    //MARK: Initializers
+    // MARK: Initializers
     init(locationManager: CLLocationManager) {
         self.locationManager = locationManager
 
@@ -54,7 +54,7 @@ final class DefaultLocationService: NSObject, LocationService {
         setupLocationManager()
     }
 
-    //MARK: Private methods
+    // MARK: Private methods
     private func setupLocationManager() {
         locationManager.delegate = self
         // Since there is no need for high accuracy, we can set this value
@@ -73,7 +73,9 @@ final class DefaultLocationService: NSObject, LocationService {
                 let isLocationServicesEnables = CLLocationManager.locationServicesEnabled()
 
                 DispatchQueue.main.async {
-                    self.authorizationStatusSubject.value = isLocationServicesEnables ? .appLocationDenied : .locationServicesDenied
+                    self.authorizationStatusSubject.value = isLocationServicesEnables
+                    ? .appLocationDenied
+                    : .locationServicesDenied
                 }
             }
         case .notDetermined:
@@ -85,7 +87,7 @@ final class DefaultLocationService: NSObject, LocationService {
         }
     }
 
-    //MARK: Public methods
+    // MARK: Public methods
     func requestWhenInUseAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
@@ -96,7 +98,7 @@ final class DefaultLocationService: NSObject, LocationService {
 }
 
 extension DefaultLocationService: CLLocationManagerDelegate {
-    //MARK: Public methods
+    // MARK: Public methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
             locationManager.stopUpdatingLocation()

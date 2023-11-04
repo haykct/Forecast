@@ -9,17 +9,17 @@ import UIKit
 import Combine
 
 class ForecastViewController: UIViewController {
-    //MARK: Private properties
+    // MARK: Private properties
     private let forecastCellID = "forecastCell"
     private let forecastSectionHeaderID = "forecastSectionHeader"
     private let viewModel: ForecastViewModel
     private var cancellable: AnyCancellable?
     private var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
 
-    //MARK: Outlets
+    // MARK: Outlets
     @IBOutlet private weak var tableView: UITableView!
 
-    //MARK: Lifecycle methods
+    // MARK: Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,7 +30,7 @@ class ForecastViewController: UIViewController {
         setupNavigationBar()
     }
 
-    //MARK: Initializers
+    // MARK: Initializers
     required init?(coder: NSCoder) {
         fatalError("Use `init(coder:)` to initialize an `ForecastViewController` instance.")
     }
@@ -41,24 +41,23 @@ class ForecastViewController: UIViewController {
         super.init(coder: coder)
     }
 
-    //MARK: Private methods
+    // MARK: Private methods
     private func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        let inter = Constants.Fonts.Inter.self
 
         navigationItem.title = LocalizationKeys.forecast
         navigationController?.navigationBar.prefersLargeTitles = true
-        appearance.titleTextAttributes = [.font: UIFont(name: inter.bold, size: 20) as Any]
-        appearance.largeTitleTextAttributes = [.font: UIFont(name: inter.bold, size: 40) as Any]
+        appearance.titleTextAttributes = [.font: UIFont(name: Fonts.Inter.bold, size: 20) as Any]
+        appearance.largeTitleTextAttributes = [.font: UIFont(name: Fonts.Inter.bold, size: 40) as Any]
         navigationController?.navigationBar.standardAppearance = appearance
     }
 
     private func setupBindings() {
         cancellable = viewModel.viewData
             .sink { [unowned self] _ in
-                //Handle errors
+                // Handle errors
                 spinner.stopAnimating()
-            } receiveValue: { [unowned self] forecasts in
+            } receiveValue: { [unowned self] _ in
                 tableView.reloadData()
                 spinner.stopAnimating()
             }
@@ -87,16 +86,16 @@ class ForecastViewController: UIViewController {
 
 }
 
-//MARK: UITableViewDataSource
+// MARK: UITableViewDataSource
 extension ForecastViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: forecastCellID,
-                                                      for: indexPath) as! ForecastTableViewCell
+                                                      for: indexPath) as? ForecastTableViewCell
         let cellData = viewModel.viewData.value[indexPath.section][indexPath.row]
 
-        cell.setupCell(with: cellData, indexPath: indexPath)
+        cell?.setupCell(with: cellData, indexPath: indexPath)
 
-        return cell
+        return cell ?? UITableViewCell()
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -108,7 +107,7 @@ extension ForecastViewController: UITableViewDataSource {
     }
 }
 
-//MARK: UITableViewDelegate
+// MARK: UITableViewDelegate
 extension ForecastViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
@@ -116,11 +115,11 @@ extension ForecastViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeader = tableView
-            .dequeueReusableHeaderFooterView(withIdentifier: forecastSectionHeaderID) as! ForecastSectionHeaderView
+            .dequeueReusableHeaderFooterView(withIdentifier: forecastSectionHeaderID) as? ForecastSectionHeaderView
 
         let sectionData = viewModel.viewData.value[section][0]
 
-        sectionHeader.setupSectionHeader(with: sectionData, section: section)
+        sectionHeader?.setupSectionHeader(with: sectionData, section: section)
 
         return sectionHeader
     }

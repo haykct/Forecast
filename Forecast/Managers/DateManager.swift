@@ -8,7 +8,7 @@
 import Foundation
 
 struct DateManager {
-    //MARK: Private properties
+    // MARK: Private properties
     private let formatter = DateFormatter()
 
     init() {
@@ -16,7 +16,7 @@ struct DateManager {
         formatter.locale = .current
     }
 
-    //MARK: Public methods
+    // MARK: Public methods
     func date(from string: String, format: String) -> Date? {
         formatter.dateFormat = format
 

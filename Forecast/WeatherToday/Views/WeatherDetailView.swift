@@ -8,41 +8,39 @@
 import SwiftUI
 
 struct WeatherDetailView: View {
-    //MARK: Private properties
+    // MARK: Private properties
     private let screenHeight = UIScreen.main.bounds.height
     private let image: String
     private let value: String
     private let textKey: String
 
-    //MARK: Initializers
+    // MARK: Initializers
     init(image: String, value: String, textKey: String) {
         self.image = image
         self.value = value
         self.textKey = textKey
     }
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            let inter = Constants.Fonts.Inter.self
-
             if screenHeight != 568 {
                 Image(image)
                     .resizable()
                     .frame(width: 22, height: 22)
                     .padding(9)
-                    .background(Constants.SwiftUIColors.detailsGrey)
+                    .background(SwiftUIColors.detailsGrey)
                     .cornerRadius(40)
             }
 
             Text(value)
                 .lineLimit(1)
-                .font(Font.custom(inter.medium, size: 14))
+                .font(Font.custom(Fonts.Inter.medium, size: 14))
                 .padding(.top, 8)
             Text(textKey.localized)
                 .lineLimit(1)
-                .font(Font.custom(inter.medium, size: 14))
+                .font(Font.custom(Fonts.Inter.medium, size: 14))
                 .padding(.top, 5)
-                .foregroundColor(Constants.SwiftUIColors.textGrey)
+                .foregroundColor(SwiftUIColors.textGrey)
         }
         .frame(width: 85, alignment: .leading)
     }

@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct WeatherTodayView: View {
-    //MARK: Enums
+    // MARK: Enums
     enum Precipitation: String {
         case rain
         case snow
-        case no
+        case clear = "no"
     }
 
-    //MARK: Structs
+    // MARK: Structs
     struct Dimension {
         private let _detailContainerHeight: CGFloat
         private let _titleBottomPadding: CGFloat
@@ -43,14 +43,13 @@ struct WeatherTodayView: View {
         }
     }
 
-    //MARK: Private properties
+    // MARK: Private properties
     @ObservedObject private var viewModel: WeatherTodayViewModel
     @State private var shouldAnimateGradient = false
 
     private let dimension = Dimension(screenHeight: UIScreen.main.bounds.height)
-    private let Inter = Constants.Fonts.Inter.self
 
-    //MARK: Initializers
+    // MARK: Initializers
     init(viewModel: WeatherTodayViewModel) {
         self.viewModel = viewModel
     }
@@ -58,8 +57,8 @@ struct WeatherTodayView: View {
     var body: some View {
         if var viewData = viewModel.viewData {
             ZStack {
-                let stateColors = Constants.SwiftUIColors.StateColors.self
-                let isSunny = viewData.precipitationMode == Precipitation.no.rawValue
+                let stateColors = SwiftUIColors.StateColors.self
+                let isSunny = viewData.precipitationMode == Precipitation.clear.rawValue
 
                 LinearGradient(colors: isSunny ? stateColors.yellow : stateColors.blue,
                                startPoint: shouldAnimateGradient ? .topTrailing : .topLeading,
@@ -86,11 +85,11 @@ struct WeatherTodayView: View {
                     createIconImage(viewData)
 
                     Text(viewData.temperature)
-                        .font(Font.custom(Inter.semiBold, size: 32))
+                        .font(Font.custom(Fonts.Inter.semiBold, size: 32))
                         .padding(.bottom, 8)
                     Text(viewData.location)
-                        .font(Font.custom(Inter.regular, size: 16))
-                        .foregroundColor(Constants.SwiftUIColors.textGrey)
+                        .font(Font.custom(Fonts.Inter.regular, size: 16))
+                        .foregroundColor(SwiftUIColors.textGrey)
                         .padding(.bottom, dimension.locationBottomPadding)
                         .lineLimit(1)
                     VStack {
@@ -108,7 +107,7 @@ struct WeatherTodayView: View {
         }
     }
 
-    //MARK: Private methods
+    // MARK: Private methods
     private func createTitleText(_ viewData: WeatherTodayViewData) -> some View {
         var viewData = viewData
         var title = LocalizationKeys.notAvailable
@@ -116,7 +115,7 @@ struct WeatherTodayView: View {
         switch viewData.precipitationMode {
         case Precipitation.rain.rawValue, Precipitation.snow.rawValue:
             title = viewData.precipitationMode
-        case Precipitation.no.rawValue:
+        case Precipitation.clear.rawValue:
             guard let temp = viewData.temperatureValue else { break }
 
             title = temp > 29 ? "hot" : "sunny"
@@ -126,7 +125,7 @@ struct WeatherTodayView: View {
 
         return VStack(alignment: .leading, spacing: 0) {
             Text(title.localized)
-                .font(Font.custom(Inter.bold, size: 64))
+                .font(Font.custom(Fonts.Inter.bold, size: 64))
                 .padding(.bottom, dimension.titleBottomPadding)
         }
     }
@@ -140,7 +139,7 @@ struct WeatherTodayView: View {
             imageName = "TodayRainLight"
         case Precipitation.snow.rawValue:
             imageName = "TodaySnowLight"
-        case Precipitation.no.rawValue:
+        case Precipitation.clear.rawValue:
             imageName = "TodaySunLight"
         default:
             imageName = ""

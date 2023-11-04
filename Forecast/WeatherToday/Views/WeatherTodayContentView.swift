@@ -9,12 +9,12 @@ import SwiftUI
 import CoreLocation
 
 struct WeatherTodayContentView: View {
-    //MARK: Public properties
+    // MARK: Public properties
     @StateObject var viewModel: WeatherTodayViewModel
 
-    //MARK: Private properties
+    // MARK: Private properties
     @State private var isWeatherTodayViewVisible = false
-    
+
     var body: some View {
         VStack {
             if let error = viewModel.serviceError {

@@ -12,7 +12,7 @@
 		2639DF072A79B103000545BD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2639DF062A79B103000545BD /* Alamofire */; };
 		2639DF0A2A79B149000545BD /* XMLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 2639DF092A79B149000545BD /* XMLCoder */; };
 		2650A3702AE7D6A300D97CBB /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 2650A36F2AE7D6A300D97CBB /* Swinject */; };
-		2650A37B2AE7F4AB00D97CBB /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A37A2AE7F4AB00D97CBB /* DI.swift */; };
+		2650A37B2AE7F4AB00D97CBB /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A37A2AE7F4AB00D97CBB /* Injection.swift */; };
 		2650A37D2AE90DD500D97CBB /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A37C2AE90DD500D97CBB /* Injected.swift */; };
 		2650A3822AEAE3FC00D97CBB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2650A3812AEAE3FC00D97CBB /* Localizable.strings */; };
 		2650A3872AEFFDC400D97CBB /* LocalizationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2650A3862AEFFDC400D97CBB /* LocalizationKeys.swift */; };
@@ -64,7 +64,7 @@
 		2628D6872A88E5A000022A61 /* Forecast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Forecast.entitlements; sourceTree = "<group>"; };
 		2628D68A2A8A22B100022A61 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		2628D68C2A8A22F800022A61 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		2650A37A2AE7F4AB00D97CBB /* DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
+		2650A37A2AE7F4AB00D97CBB /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 		2650A37C2AE90DD500D97CBB /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
 		2650A3812AEAE3FC00D97CBB /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		2650A3862AEFFDC400D97CBB /* LocalizationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKeys.swift; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		2650A3792AE7F01700D97CBB /* DI */ = {
 			isa = PBXGroup;
 			children = (
-				2650A37A2AE7F4AB00D97CBB /* DI.swift */,
+				2650A37A2AE7F4AB00D97CBB /* Injection.swift */,
 				2650A37C2AE90DD500D97CBB /* Injected.swift */,
 			);
 			path = DI;
@@ -459,6 +459,7 @@
 				26C3F4192A76E1510082F068 /* Sources */,
 				26C3F41A2A76E1510082F068 /* Frameworks */,
 				26C3F41B2A76E1510082F068 /* Resources */,
+				2650A3952AF6A88F00D97CBB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -482,7 +483,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					26C3F41C2A76E1510082F068 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -502,6 +503,7 @@
 				2639DF052A79B103000545BD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				2639DF082A79B149000545BD /* XCRemoteSwiftPackageReference "XMLCoder" */,
 				2650A36E2AE7D6A300D97CBB /* XCRemoteSwiftPackageReference "Swinject" */,
+				2650A3942AF6A84B00D97CBB /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = 26C3F41E2A76E1510082F068 /* Products */;
 			projectDirPath = "";
@@ -532,6 +534,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2650A3952AF6A88F00D97CBB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		26C3F4192A76E1510082F068 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -551,7 +574,7 @@
 				26C3F4232A76E1510082F068 /* WeatherTodayContentView.swift in Sources */,
 				26E3B0872A7D2F9A00B96F99 /* ForecastSectionHeaderView.swift in Sources */,
 				26B51E0F2A7920C100835484 /* ReloadButton.swift in Sources */,
-				2650A37B2AE7F4AB00D97CBB /* DI.swift in Sources */,
+				2650A37B2AE7F4AB00D97CBB /* Injection.swift in Sources */,
 				2697F1A22A799EFD00B8B7FA /* WeatherTodayView.swift in Sources */,
 				26C3F4352A76E79D0082F068 /* LocationService.swift in Sources */,
 				26DFDCF02A7C1D6400725FAF /* ForecastViewModel.swift in Sources */,
@@ -631,7 +654,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -685,7 +708,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -813,6 +836,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.8.4;
+			};
+		};
+		2650A3942AF6A84B00D97CBB /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.53.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

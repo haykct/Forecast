@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppStateDescriptionView: View {
-    //MARK: Enums
+    // MARK: Enums
     enum CurrentState: Equatable {
         case location
         case serviceError(ServiceError)
@@ -35,18 +35,17 @@ struct AppStateDescriptionView: View {
         }
     }
 
-    //MARK: Private properties
+    // MARK: Private properties
     private var state: CurrentState
 
-    //MARK: Initializers
+    // MARK: Initializers
     init(state: CurrentState) {
         self.state = state
     }
 
     var body: some View {
         VStack(alignment: .leading) {
-            let Inter = Constants.Fonts.Inter.self
-            let titleFont = Font.custom(Inter.bold, size: 64)
+            let titleFont = Font.custom(Fonts.Inter.bold, size: 64)
 
             Image(state.imageName)
                 .resizable()
@@ -69,7 +68,7 @@ struct AppStateDescriptionView: View {
 
             Spacer()
             Text(state.descriptionKey.localized)
-                .font(Font.custom(Inter.medium, size: 16))
+                .font(Font.custom(Fonts.Inter.medium, size: 16))
                 .lineSpacing(4)
             Spacer()
         }

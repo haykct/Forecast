@@ -8,10 +8,10 @@
 import Alamofire
 
 struct ForecastRequest: Request {
-    //MARK: Private properties
+    // MARK: Private properties
     private let coordinates: (lat: Double, long: Double)
 
-    //MARK: Private properties
+    // MARK: Private properties
     var path: String { "data/2.5/forecast" }
 
     var parameters: Parameters {

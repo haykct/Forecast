@@ -6,15 +6,15 @@
 //
 
 struct WeatherTodayViewData {
-    //MARK: Private properties
+    // MARK: Private properties
     private let model: WeatherTodayModel
 
-    //MARK: Initializers
+    // MARK: Initializers
     init(model: WeatherTodayModel) {
         self.model = model
     }
 
-    //MARK: Public properties
+    // MARK: Public properties
     private(set) lazy var location: String = {
         if let city = model.city?.name, let country = model.city?.country {
             return "\(city), \(country)"
@@ -44,7 +44,7 @@ struct WeatherTodayViewData {
     private(set) lazy var precipitation: String = {
         guard let precipitation = model.precipitation?.value else { return "0.0MM" }
 
-        return String(format:"%.1f", precipitation) + "MM"
+        return String(format: "%.1f", precipitation) + "MM"
     }()
 
     private(set) lazy var precipitationMode: String = {

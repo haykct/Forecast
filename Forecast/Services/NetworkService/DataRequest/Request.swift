@@ -15,5 +15,5 @@ protocol Request {
 
 extension Request {
     var url: String { baseURL + path }
-    var baseURL: String { Constants.BaseUrls.weatherApi }
+    var baseURL: String { BaseUrls.weatherApi }
 }

@@ -8,13 +8,13 @@
 import Combine
 
 final class MainViewModel: ObservableObject {
-    //MARK: Public properties
+    // MARK: Public properties
     @Published private(set) var authorizationStatus: AuthorizationStatus = .loading
 
-    //MARK: Private properties
+    // MARK: Private properties
     @Injected private var locationService: LocationService
 
-    //MARK: Public methods
+    // MARK: Public methods
     func subscribeForAuthorizationStatusUpdate() {
         // Subscribing for getting authorization status updates,
         // since users can change the status from settings while the app is running

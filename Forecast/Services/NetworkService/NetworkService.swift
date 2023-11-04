@@ -32,16 +32,16 @@ protocol NetworkService {
 }
 
 final class DefaultNetworkService: NetworkService {
-    //MARK: Private properties
+    // MARK: Private properties
     private let session: Session
 
-    //MARK: Initializers
+    // MARK: Initializers
     init(session: Session = AF) {
         self.session = session
     }
 
-    //MARK: Public methods
-    func request<Response>(_ request: Request) -> AnyPublisher<Response, NetworkError> where Response : Decodable {
+    // MARK: Public methods
+    func request<Response>(_ request: Request) -> AnyPublisher<Response, NetworkError> where Response: Decodable {
         session
             .request(request.url, parameters: request.parameters)
             .validate(statusCode: 200...399)

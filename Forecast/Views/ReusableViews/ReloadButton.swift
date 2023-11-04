@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ReloadButton: View {
-    //MARK: Private properties
+    // MARK: Private properties
     private let callback: () -> Void
 
-    //MARK: Initializers
+    // MARK: Initializers
     init(_ callback: @escaping () -> Void) {
         self.callback = callback
     }
-    
+
     var body: some View {
         Button {
             callback()

@@ -11,6 +11,6 @@ import Foundation
     var wrappedValue: Value
 
     init() {
-        wrappedValue = DI.shared.container.resolve(Value.self)!
+        wrappedValue = Injection.shared.container.resolve(Value.self)!
     }
 }

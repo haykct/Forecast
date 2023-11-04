@@ -8,21 +8,21 @@
 import UIKit
 
 final class ForecastTableViewCell: UITableViewCell {
-    //MARK: Outlets
+    // MARK: Outlets
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var temperatureLabel: UILabel!
 
-    //MARK: Lifecycle methods
+    // MARK: Lifecycle methods
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
 
         setupCell()
     }
 
-    //MARK: Private methods
+    // MARK: Private methods
     func setupCell(with data: ForecastViewData, indexPath: IndexPath) {
         var data = data
 
@@ -32,7 +32,7 @@ final class ForecastTableViewCell: UITableViewCell {
         temperatureLabel.text = data.temperature
     }
 
-    //MARK: Private methods
+    // MARK: Private methods
     private func setupCell() {
         containerView.layer.cornerRadius = 16
         iconImageView.layer.cornerRadius = 24
