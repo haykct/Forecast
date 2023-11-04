@@ -10,12 +10,14 @@ import SwiftUI
 // Using generic type for making ErrorView reusable
 struct ErrorView<T: ViewModel>: View {
     // MARK: Private properties
+
     @ObservedObject private var viewModel: T
     @State private var shouldAnimateGradient = false
 
     private let serviceError: ServiceError
 
     // MARK: Private initializers
+
     init(viewModel: T, serviceError: ServiceError) {
         self.serviceError = serviceError
         self.viewModel = viewModel

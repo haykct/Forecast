@@ -1,5 +1,5 @@
 //
-//  DataRequest.swift
+//  Request.swift
 //  Forecast
 //
 //  Created by Hayk Hayrapetyan on 01.08.23.

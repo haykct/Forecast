@@ -9,26 +9,31 @@ import Combine
 
 final class ForecastViewModel: ViewModel {
     // MARK: Public properties
+
     private(set) var viewData = CurrentValueSubject<[[ForecastViewData]], Never>([])
 
     // MARK: Private properties
+
     @Injected private var locationService: LocationService
     @Injected private var networkService: NetworkService
     private var cancellables = Set<AnyCancellable>()
     private weak var coordinator: ForecastCoordinator?
 
     // MARK: Initializers
+
     init(coordinator: ForecastCoordinator?) {
         self.coordinator = coordinator
     }
 
     // MARK: Public methods
+
     func requestLocationAndNetworkData() {
         setupLocationSubjects()
         locationService.requestLocation()
     }
 
     // MARK: Private methods
+
     private func setupLocationSubjects() {
         cancellables.removeAll()
 

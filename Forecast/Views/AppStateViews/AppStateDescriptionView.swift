@@ -1,5 +1,5 @@
 //
-//  WeatherTodayView.swift
+//  AppStateDescriptionView.swift
 //  Forecast
 //
 //  Created by Hayk Hayrapetyan on 31.07.23.
@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AppStateDescriptionView: View {
     // MARK: Enums
+
     enum CurrentState: Equatable {
         case location
         case serviceError(ServiceError)
@@ -17,7 +18,7 @@ struct AppStateDescriptionView: View {
             switch self {
             case .location:
                 return "location_permission"
-            case .serviceError(let error):
+            case let .serviceError(error):
                 return error.descriptionKey
             }
         }
@@ -36,9 +37,11 @@ struct AppStateDescriptionView: View {
     }
 
     // MARK: Private properties
+
     private var state: CurrentState
 
     // MARK: Initializers
+
     init(state: CurrentState) {
         self.state = state
     }

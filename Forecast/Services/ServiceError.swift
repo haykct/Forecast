@@ -13,7 +13,7 @@ enum ServiceError: Error, Equatable {
         switch self {
         case .locationError:
             return "reload_location"
-        case .networkError(let error):
+        case let .networkError(error):
             return error.descriptionKey
         }
     }

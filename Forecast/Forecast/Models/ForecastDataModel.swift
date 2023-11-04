@@ -1,5 +1,5 @@
 //
-//  ForecastModel.swift
+//  ForecastDataModel.swift
 //  Forecast
 //
 //  Created by Hayk Hayrapetyan on 03.08.23.

@@ -7,14 +7,17 @@
 
 struct WeatherTodayViewData {
     // MARK: Private properties
+
     private let model: WeatherTodayModel
 
     // MARK: Initializers
+
     init(model: WeatherTodayModel) {
         self.model = model
     }
 
     // MARK: Public properties
+
     private(set) lazy var location: String = {
         if let city = model.city?.name, let country = model.city?.country {
             return "\(city), \(country)"
@@ -47,9 +50,7 @@ struct WeatherTodayViewData {
         return String(format: "%.1f", precipitation) + "MM"
     }()
 
-    private(set) lazy var precipitationMode: String = {
-        model.precipitation?.mode ?? LocalizationKeys.notAvailable
-    }()
+    private(set) lazy var precipitationMode: String = model.precipitation?.mode ?? LocalizationKeys.notAvailable
 
     private(set) lazy var pressure: String = {
         guard let pressure = model.pressure?.value else { return LocalizationKeys.notAvailable }
@@ -63,7 +64,5 @@ struct WeatherTodayViewData {
         return String(Int(wind * 3.6)) + " KM/H"
     }()
 
-    private(set) lazy var direction: String = {
-        model.wind?.direction?.code ?? LocalizationKeys.notAvailable
-    }()
+    private(set) lazy var direction: String = model.wind?.direction?.code ?? LocalizationKeys.notAvailable
 }

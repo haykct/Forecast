@@ -1,18 +1,20 @@
 //
-//  ContentView.swift
+//  WeatherTodayContentView.swift
 //  Forecast
 //
 //  Created by Hayk Hayrapetyan on 30.07.23.
 //
 
-import SwiftUI
 import CoreLocation
+import SwiftUI
 
 struct WeatherTodayContentView: View {
     // MARK: Public properties
+
     @StateObject var viewModel: WeatherTodayViewModel
 
     // MARK: Private properties
+
     @State private var isWeatherTodayViewVisible = false
 
     var body: some View {

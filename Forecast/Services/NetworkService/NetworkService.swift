@@ -5,9 +5,9 @@
 //  Created by Hayk Hayrapetyan on 01.08.23.
 //
 
-import Foundation
 import Alamofire
 import Combine
+import Foundation
 import XMLCoder
 
 enum NetworkError: Error, Equatable {
@@ -33,23 +33,26 @@ protocol NetworkService {
 
 final class DefaultNetworkService: NetworkService {
     // MARK: Private properties
+
     private let session: Session
 
     // MARK: Initializers
+
     init(session: Session = AF) {
         self.session = session
     }
 
     // MARK: Public methods
+
     func request<Response>(_ request: Request) -> AnyPublisher<Response, NetworkError> where Response: Decodable {
         session
             .request(request.url, parameters: request.parameters)
-            .validate(statusCode: 200...399)
+            .validate(statusCode: 200 ... 399)
             .publishData()
             .value()
             .mapError { error in
                 if let urlError = error.underlyingError as? URLError,
-                    urlError.code == .notConnectedToInternet {
+                   urlError.code == .notConnectedToInternet {
                     return NetworkError.noConnection
                 }
 

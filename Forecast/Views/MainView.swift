@@ -9,9 +9,11 @@ import SwiftUI
 
 struct MainView: View {
     // MARK: Public properties
+
     @StateObject var viewModel: MainViewModel
 
     // MARK: Private properties
+
     @State private var isContentViewAppeared = false
 
     var body: some View {

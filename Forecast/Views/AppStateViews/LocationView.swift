@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LocationView: View {
     // MARK: Private properties
+
     @Environment(\.openURL) private var openURL
     @ObservedObject private var viewModel: MainViewModel
     @State private var isAlertVisible = false
@@ -43,9 +44,10 @@ struct LocationView: View {
                 }
                 .alert(title.localized, isPresented: $isAlertVisible, actions: {
                     Button("settings", action: {
-                    // Opening settings to turn on location services.
-                    // I'm testing on simulator which doesn't support location settings,
-                    // therefore I'm opening settings instead of app location settings or location services settings.
+                        // Opening settings to turn on location services.
+                        // I'm testing on simulator which doesn't support location settings,
+                        // therefore I'm opening settings instead of app location settings 
+                        // or location services settings.
                         openURL(URL(string: UIApplication.openSettingsURLString)!)
                     })
                     Button("cancel", action: {})
@@ -60,6 +62,7 @@ struct LocationView: View {
     }
 
     // MARK: Private methods
+
     private func openAlert() {
         switch viewModel.authorizationStatus {
         case .notDetermined:

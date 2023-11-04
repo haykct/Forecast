@@ -9,9 +9,11 @@ import SwiftUI
 
 struct WeatherDetailContainerView: View {
     // MARK: Private properties
+
     private let viewData: WeatherTodayViewData
 
     // MARK: Initializers
+
     init(viewData: WeatherTodayViewData) {
         self.viewData = viewData
     }

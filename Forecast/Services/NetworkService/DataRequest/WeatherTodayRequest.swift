@@ -9,9 +9,11 @@ import Alamofire
 
 struct WeatherTodayRequest: Request {
     // MARK: Private properties
+
     private let coordinates: (lat: Double, long: Double)
 
     // MARK: Private properties
+
     var path: String { "data/2.5/weather" }
 
     var parameters: Parameters {

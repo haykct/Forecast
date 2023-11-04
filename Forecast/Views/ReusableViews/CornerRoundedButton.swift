@@ -1,5 +1,5 @@
 //
-//  AppButton.swift
+//  CornerRoundedButton.swift
 //  Forecast
 //
 //  Created by Hayk Hayrapetyan on 31.07.23.
@@ -9,17 +9,20 @@ import SwiftUI
 
 struct CornerRoundedButton: View {
     // MARK: Enums
+
     enum Style {
         case dark
         case light
     }
 
     // MARK: Private properties
+
     private let titleKey: String
     private let style: Style
     private let callback: () -> Void
 
     // MARK: Initializers
+
     init(_ titleKey: String, style: Style = .dark, _ callback: @escaping () -> Void) {
         self.titleKey = titleKey
         self.style = style
@@ -41,6 +44,6 @@ struct CornerRoundedButton: View {
 
 struct AppButton_Previews: PreviewProvider {
     static var previews: some View {
-        CornerRoundedButton("", {})
+        CornerRoundedButton("") {}
     }
 }

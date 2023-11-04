@@ -5,10 +5,11 @@
 //  Created by Hayk Hayrapetyan on 30.07.23.
 //
 
-import CoreLocation
 import Combine
+import CoreLocation
 
 // MARK: Enums
+
 enum AuthorizationStatus {
     case loading
     case authorized
@@ -28,6 +29,7 @@ enum Subjects {
 }
 
 // MARK: Protocols
+
 protocol LocationService {
     var authorizationStatusSubject: Subjects.StatusSubject { get }
     var locationSubject: Subjects.LocationSubject { get }
@@ -39,14 +41,17 @@ protocol LocationService {
 
 final class DefaultLocationService: NSObject, LocationService {
     // MARK: Public properties
+
     var authorizationStatusSubject = Subjects.StatusSubject(.loading)
     var locationSubject = Subjects.LocationSubject()
     var locationErrorSubject = Subjects.LocationErrorSubject()
 
     // MARK: Private properties
+
     private let locationManager: CLLocationManager
 
     // MARK: Initializers
+
     init(locationManager: CLLocationManager) {
         self.locationManager = locationManager
 
@@ -55,6 +60,7 @@ final class DefaultLocationService: NSObject, LocationService {
     }
 
     // MARK: Private methods
+
     private func setupLocationManager() {
         locationManager.delegate = self
         // Since there is no need for high accuracy, we can set this value
@@ -74,8 +80,8 @@ final class DefaultLocationService: NSObject, LocationService {
 
                 DispatchQueue.main.async {
                     self.authorizationStatusSubject.value = isLocationServicesEnables
-                    ? .appLocationDenied
-                    : .locationServicesDenied
+                        ? .appLocationDenied
+                        : .locationServicesDenied
                 }
             }
         case .notDetermined:
@@ -88,6 +94,7 @@ final class DefaultLocationService: NSObject, LocationService {
     }
 
     // MARK: Public methods
+
     func requestWhenInUseAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
@@ -99,18 +106,19 @@ final class DefaultLocationService: NSObject, LocationService {
 
 extension DefaultLocationService: CLLocationManagerDelegate {
     // MARK: Public methods
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+    func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
             locationManager.stopUpdatingLocation()
             locationSubject.send((lat: coordinate.latitude, long: coordinate.longitude))
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    func locationManager(_: CLLocationManager, didFailWithError error: Error) {
         locationErrorSubject.send(error)
     }
 
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    func locationManagerDidChangeAuthorization(_: CLLocationManager) {
         getAuthorizationStatus()
     }
 }

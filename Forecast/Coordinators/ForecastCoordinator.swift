@@ -9,10 +9,12 @@ import UIKit
 
 final class ForecastCoordinator: Coordinator {
     // MARK: Public properties
+
     var childCoordinators: [Coordinator] = []
     @Injected var navigationController: UINavigationController
 
     // MARK: Public methods
+
     func start() {
         let viewModel = ForecastViewModel(coordinator: self)
         let creator = { ForecastViewController(coder: $0, viewModel: viewModel) }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WeatherTodayView: View {
     // MARK: Enums
+
     enum Precipitation: String {
         case rain
         case snow
@@ -16,6 +17,7 @@ struct WeatherTodayView: View {
     }
 
     // MARK: Structs
+
     struct Dimension {
         private let _detailContainerHeight: CGFloat
         private let _titleBottomPadding: CGFloat
@@ -44,12 +46,14 @@ struct WeatherTodayView: View {
     }
 
     // MARK: Private properties
+
     @ObservedObject private var viewModel: WeatherTodayViewModel
     @State private var shouldAnimateGradient = false
 
     private let dimension = Dimension(screenHeight: UIScreen.main.bounds.height)
 
     // MARK: Initializers
+
     init(viewModel: WeatherTodayViewModel) {
         self.viewModel = viewModel
     }
@@ -108,6 +112,7 @@ struct WeatherTodayView: View {
     }
 
     // MARK: Private methods
+
     private func createTitleText(_ viewData: WeatherTodayViewData) -> some View {
         var viewData = viewData
         var title = LocalizationKeys.notAvailable

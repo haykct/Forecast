@@ -9,12 +9,14 @@ import SwiftUI
 
 struct WeatherDetailView: View {
     // MARK: Private properties
+
     private let screenHeight = UIScreen.main.bounds.height
     private let image: String
     private let value: String
     private let textKey: String
 
     // MARK: Initializers
+
     init(image: String, value: String, textKey: String) {
         self.image = image
         self.value = value

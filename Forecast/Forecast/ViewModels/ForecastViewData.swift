@@ -9,6 +9,7 @@ import Foundation
 
 struct ForecastViewData {
     // MARK: Private properties
+
     private let dateManager: DateManager
     private let _temperature: Double?
     private let _upcomingDateTime: Date
@@ -16,6 +17,7 @@ struct ForecastViewData {
     private let _icon: String?
 
     // MARK: Public properties
+
     private(set) lazy var temperature: String = {
         guard let temperature = _temperature else { return LocalizationKeys.notAvailable }
 
@@ -38,17 +40,16 @@ struct ForecastViewData {
         }
     }()
 
-    private(set) lazy var condition: String = { // TODO: Should be localized all 55 condition texts
+    private(set) lazy var condition: String = { // MARK: Should be localized all 55 condition texts
         guard let condition = _condition, !condition.isEmpty else { return LocalizationKeys.notAvailable }
 
         return condition.first!.uppercased() + condition.dropFirst()
     }()
 
-    private(set) lazy var icon: String = {
-        _icon ?? ""
-    }()
+    private(set) lazy var icon: String = _icon ?? ""
 
     // MARK: Public methods
+
     static func makeViewData(model: ForecastModel) -> [[ForecastViewData]] {
         let dateManager = DateManager()
 

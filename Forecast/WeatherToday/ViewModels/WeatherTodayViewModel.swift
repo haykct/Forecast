@@ -1,5 +1,5 @@
 //
-//  TodayWeatherViewModel.swift
+//  WeatherTodayViewModel.swift
 //  Forecast
 //
 //  Created by Hayk Hayrapetyan on 30.07.23.
@@ -9,21 +9,25 @@ import Combine
 
 final class WeatherTodayViewModel: ObservableObject, ViewModel {
     // MARK: Public properties
+
     @Published private(set) var serviceError: ServiceError?
     @Published private(set) var viewData: WeatherTodayViewData?
 
     // MARK: Private properties
+
     @Injected private var networkService: NetworkService
     @Injected private var locationService: LocationService
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: Public methods
+
     func requestLocationAndNetworkData() {
         setupLocationSubjects()
         locationService.requestLocation()
     }
 
     // MARK: Private methods
+
     private func setupLocationSubjects() {
         cancellables.removeAll()
 
@@ -34,7 +38,7 @@ final class WeatherTodayViewModel: ObservableObject, ViewModel {
                 return networkService.request(request)
             }
             .sink { [unowned self] completion in
-                if case .failure(let error) = completion {
+                if case let .failure(error) = completion {
                     serviceError = .networkError(error)
                 }
             } receiveValue: { [unowned self] model in

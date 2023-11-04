@@ -9,9 +9,11 @@ import Alamofire
 
 struct ForecastRequest: Request {
     // MARK: Private properties
+
     private let coordinates: (lat: Double, long: Double)
 
     // MARK: Private properties
+
     var path: String { "data/2.5/forecast" }
 
     var parameters: Parameters {
@@ -29,5 +31,4 @@ struct ForecastRequest: Request {
     init(coordinates: (lat: Double, long: Double)) {
         self.coordinates = coordinates
     }
-
 }

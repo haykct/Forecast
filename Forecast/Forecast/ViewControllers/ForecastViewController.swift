@@ -5,11 +5,12 @@
 //  Created by Hayk Hayrapetyan on 03.08.23.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 class ForecastViewController: UIViewController {
     // MARK: Private properties
+
     private let forecastCellID = "forecastCell"
     private let forecastSectionHeaderID = "forecastSectionHeader"
     private let viewModel: ForecastViewModel
@@ -17,9 +18,11 @@ class ForecastViewController: UIViewController {
     private var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
 
     // MARK: Outlets
-    @IBOutlet private weak var tableView: UITableView!
+
+    @IBOutlet private var tableView: UITableView!
 
     // MARK: Lifecycle methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +34,9 @@ class ForecastViewController: UIViewController {
     }
 
     // MARK: Initializers
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("Use `init(coder:)` to initialize an `ForecastViewController` instance.")
     }
 
@@ -42,6 +47,7 @@ class ForecastViewController: UIViewController {
     }
 
     // MARK: Private methods
+
     private func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
 
@@ -83,14 +89,14 @@ class ForecastViewController: UIViewController {
         tableView.register(forecastCellNib, forCellReuseIdentifier: forecastCellID)
         tableView.register(sectionHeaderNib, forHeaderFooterViewReuseIdentifier: forecastSectionHeaderID)
     }
-
 }
 
 // MARK: UITableViewDataSource
+
 extension ForecastViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: forecastCellID,
-                                                      for: indexPath) as? ForecastTableViewCell
+                                                 for: indexPath) as? ForecastTableViewCell
         let cellData = viewModel.viewData.value[indexPath.section][indexPath.row]
 
         cell?.setupCell(with: cellData, indexPath: indexPath)
@@ -98,18 +104,19 @@ extension ForecastViewController: UITableViewDataSource {
         return cell ?? UITableViewCell()
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         viewModel.viewData.value.count
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.viewData.value[section].count
     }
 }
 
 // MARK: UITableViewDelegate
+
 extension ForecastViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return 80
     }
 
@@ -124,7 +131,7 @@ extension ForecastViewController: UITableViewDelegate {
         return sectionHeader
     }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         56
     }
 }

@@ -9,9 +9,11 @@ import SwiftUI
 
 struct ReloadButton: View {
     // MARK: Private properties
+
     private let callback: () -> Void
 
     // MARK: Initializers
+
     init(_ callback: @escaping () -> Void) {
         self.callback = callback
     }
@@ -32,6 +34,6 @@ struct ReloadButton: View {
 
 struct ReloadButton_Previews: PreviewProvider {
     static var previews: some View {
-        ReloadButton({})
+        ReloadButton {}
     }
 }
