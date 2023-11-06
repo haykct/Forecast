@@ -58,6 +58,7 @@
 		26E3B08C2A7D537200B96F99 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3B08B2A7D537200B96F99 /* ViewModel.swift */; };
 		26E4A2512A7AD43D00EFBA7C /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */; };
 		26E4A2552A7B840D00EFBA7C /* WeatherDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4A2542A7B840D00EFBA7C /* WeatherDetailContainerView.swift */; };
+		26EED46D2AF91D0B00936880 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26EED46C2AF91D0B00936880 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		26E3B08B2A7D537200B96F99 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailView.swift; sourceTree = "<group>"; };
 		26E4A2542A7B840D00EFBA7C /* WeatherDetailContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailContainerView.swift; sourceTree = "<group>"; };
+		26EED46C2AF91D0B00936880 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +291,7 @@
 			children = (
 				26586B802A770CD200853FFD /* Info.plist */,
 				26C3F4242A76E1530082F068 /* Images.xcassets */,
+				26EED46C2AF91D0B00936880 /* Colors.xcassets */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 			files = (
 				26DFDCE62A7BDD4C00725FAF /* Forecast.storyboard in Resources */,
 				26C3F4282A76E1530082F068 /* Preview Assets.xcassets in Resources */,
+				26EED46D2AF91D0B00936880 /* Colors.xcassets in Resources */,
 				26586B7D2A770C8B00853FFD /* Inter-Regular.otf in Resources */,
 				26C3F4252A76E1530082F068 /* Images.xcassets in Resources */,
 				26586B7E2A770C8B00853FFD /* Inter-Medium.otf in Resources */,

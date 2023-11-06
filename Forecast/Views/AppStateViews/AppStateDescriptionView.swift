@@ -48,7 +48,7 @@ struct AppStateDescriptionView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            let titleFont = Font.custom(Fonts.Inter.bold, size: 64)
+            let titleFont: Font = .custom(Fonts.Inter.bold, size: 64)
 
             Image(state.imageName)
                 .resizable()
@@ -71,7 +71,7 @@ struct AppStateDescriptionView: View {
 
             Spacer()
             Text(state.descriptionKey.localized)
-                .font(Font.custom(Fonts.Inter.medium, size: 16))
+                .font(.custom(Fonts.Inter.medium, size: 16))
                 .lineSpacing(4)
             Spacer()
         }

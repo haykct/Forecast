@@ -25,7 +25,7 @@ struct ErrorView<T: ViewModel>: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            LinearGradient(colors: SwiftUIColors.StateColors.red,
+            LinearGradient(colors: SwiftUIColors.StateGradientColors.red,
                            startPoint: shouldAnimateGradient ? .topTrailing : .topLeading,
                            endPoint: shouldAnimateGradient ? .bottomLeading : .bottomTrailing)
             .ignoresSafeArea()

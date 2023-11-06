@@ -36,11 +36,11 @@ struct WeatherDetailView: View {
 
             Text(value)
                 .lineLimit(1)
-                .font(Font.custom(Fonts.Inter.medium, size: 14))
+                .font(.custom(Fonts.Inter.medium, size: 14))
                 .padding(.top, 8)
             Text(textKey.localized)
                 .lineLimit(1)
-                .font(Font.custom(Fonts.Inter.medium, size: 14))
+                .font(.custom(Fonts.Inter.medium, size: 14))
                 .padding(.top, 5)
                 .foregroundColor(SwiftUIColors.textGrey)
         }

@@ -23,7 +23,7 @@ struct LocationView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            LinearGradient(colors: SwiftUIColors.StateColors.blue,
+            LinearGradient(colors: SwiftUIColors.StateGradientColors.blue,
                            startPoint: shouldAnimateGradient ? .topTrailing : .topLeading,
                            endPoint: shouldAnimateGradient ? .bottomLeading : .bottomTrailing)
             .ignoresSafeArea()

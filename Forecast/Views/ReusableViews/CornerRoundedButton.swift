@@ -35,7 +35,7 @@ struct CornerRoundedButton: View {
         }
         .frame(height: 40)
         .padding([.leading, .trailing], 16)
-        .font(Font.custom(Fonts.Inter.semiBold, size: 16))
+        .font(.custom(Fonts.Inter.semiBold, size: 16))
         .background(style == .light ? .white.opacity(0.3) : .black)
         .foregroundColor(style == .light ? .black : .white)
         .cornerRadius(20)

@@ -61,7 +61,7 @@ struct WeatherTodayView: View {
     var body: some View {
         if var viewData = viewModel.viewData {
             ZStack {
-                let stateColors = SwiftUIColors.StateColors.self
+                let stateColors = SwiftUIColors.StateGradientColors.self
                 let isSunny = viewData.precipitationMode == Precipitation.clear.rawValue
 
                 LinearGradient(colors: isSunny ? stateColors.yellow : stateColors.blue,
@@ -89,10 +89,10 @@ struct WeatherTodayView: View {
                     createIconImage(viewData)
 
                     Text(viewData.temperature)
-                        .font(Font.custom(Fonts.Inter.semiBold, size: 32))
+                        .font(.custom(Fonts.Inter.semiBold, size: 32))
                         .padding(.bottom, 8)
                     Text(viewData.location)
-                        .font(Font.custom(Fonts.Inter.regular, size: 16))
+                        .font(.custom(Fonts.Inter.regular, size: 16))
                         .foregroundColor(SwiftUIColors.textGrey)
                         .padding(.bottom, dimension.locationBottomPadding)
                         .lineLimit(1)
@@ -130,7 +130,7 @@ struct WeatherTodayView: View {
 
         return VStack(alignment: .leading, spacing: 0) {
             Text(title.localized)
-                .font(Font.custom(Fonts.Inter.bold, size: 64))
+                .font(.custom(Fonts.Inter.bold, size: 64))
                 .padding(.bottom, dimension.titleBottomPadding)
         }
     }
