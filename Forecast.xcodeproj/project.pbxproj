@@ -59,6 +59,7 @@
 		26E4A2512A7AD43D00EFBA7C /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */; };
 		26E4A2552A7B840D00EFBA7C /* WeatherDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4A2542A7B840D00EFBA7C /* WeatherDetailContainerView.swift */; };
 		26EED46D2AF91D0B00936880 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26EED46C2AF91D0B00936880 /* Colors.xcassets */; };
+		26EED4712AFAC5B100936880 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EED4702AFAC5B100936880 /* UIFont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +115,7 @@
 		26E4A2502A7AD43D00EFBA7C /* WeatherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailView.swift; sourceTree = "<group>"; };
 		26E4A2542A7B840D00EFBA7C /* WeatherDetailContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailContainerView.swift; sourceTree = "<group>"; };
 		26EED46C2AF91D0B00936880 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		26EED4702AFAC5B100936880 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				2650A3892AF127A000D97CBB /* String.swift */,
+				26EED4702AFAC5B100936880 /* UIFont.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				26E4A2552A7B840D00EFBA7C /* WeatherDetailContainerView.swift in Sources */,
 				26B51E082A785F2B00835484 /* CornerRoundedButton.swift in Sources */,
 				266DCA2D2A79B2D200118C05 /* Request.swift in Sources */,
+				26EED4712AFAC5B100936880 /* UIFont.swift in Sources */,
 				26C5B41A2A7D08C300DB4EF9 /* ForecastTableViewCell.swift in Sources */,
 				26DFDCED2A7C1CE700725FAF /* ForecastRequest.swift in Sources */,
 				266DCA342A7A7FD900118C05 /* WeatherTodayViewData.swift in Sources */,

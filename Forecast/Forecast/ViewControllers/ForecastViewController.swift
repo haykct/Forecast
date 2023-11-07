@@ -53,8 +53,8 @@ class ForecastViewController: UIViewController {
 
         navigationItem.title = LocalizationKeys.forecast
         navigationController?.navigationBar.prefersLargeTitles = true
-        appearance.titleTextAttributes = [.font: UIFont(name: Fonts.Inter.bold, size: 20) as Any]
-        appearance.largeTitleTextAttributes = [.font: UIFont(name: Fonts.Inter.bold, size: 40) as Any]
+        appearance.titleTextAttributes = [.font: UIFont.custom(name: Fonts.Inter.bold, size: 20)]
+        appearance.largeTitleTextAttributes = [.font: UIFont.custom(name: Fonts.Inter.bold, size: 20)]
         navigationController?.navigationBar.standardAppearance = appearance
     }
 
