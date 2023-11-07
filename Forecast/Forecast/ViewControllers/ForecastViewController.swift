@@ -59,7 +59,8 @@ class ForecastViewController: UIViewController {
     }
 
     private func setupBindings() {
-        cancellable = viewModel.viewData
+        cancellable = viewModel.$viewData
+            .receive(on: RunLoop.main)
             .sink { [unowned self] _ in
                 // Handle errors
                 spinner.stopAnimating()
@@ -97,7 +98,7 @@ extension ForecastViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: forecastCellID,
                                                  for: indexPath) as? ForecastTableViewCell
-        let cellData = viewModel.viewData.value[indexPath.section][indexPath.row]
+        let cellData = viewModel.viewData[indexPath.section][indexPath.row]
 
         cell?.setupCell(with: cellData, indexPath: indexPath)
 
@@ -105,11 +106,11 @@ extension ForecastViewController: UITableViewDataSource {
     }
 
     func numberOfSections(in _: UITableView) -> Int {
-        viewModel.viewData.value.count
+        viewModel.viewData.count
     }
 
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.viewData.value[section].count
+        viewModel.viewData[section].count
     }
 }
 
@@ -124,7 +125,7 @@ extension ForecastViewController: UITableViewDelegate {
         let sectionHeader = tableView
             .dequeueReusableHeaderFooterView(withIdentifier: forecastSectionHeaderID) as? ForecastSectionHeaderView
 
-        let sectionData = viewModel.viewData.value[section][0]
+        let sectionData = viewModel.viewData[section][0]
 
         sectionHeader?.setupSectionHeader(with: sectionData, section: section)
 

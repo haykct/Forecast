@@ -19,18 +19,21 @@ final class WeatherTodayViewModel: ObservableObject, ViewModel {
     @Injected private var locationService: LocationService
     private var cancellables = Set<AnyCancellable>()
 
+    // MARK: Initializers
+
+    init() {
+        setupLocationSubjects()
+    }
+
     // MARK: Public methods
 
     func requestLocationAndNetworkData() {
-        setupLocationSubjects()
         locationService.requestLocation()
     }
 
     // MARK: Private methods
 
     private func setupLocationSubjects() {
-        cancellables.removeAll()
-
         locationService.locationSubject
             .flatMap { [unowned self] coordinates -> AnyPublisher<WeatherTodayModel, NetworkError> in
                 let request = WeatherTodayRequest(coordinates: coordinates)
