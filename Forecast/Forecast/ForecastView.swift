@@ -8,23 +8,17 @@
 import SwiftUI
 
 struct ForecastView: UIViewControllerRepresentable {
-    //MARK: Private properties
-    private let locationService: LocationService
+    // MARK: Private properties
 
-    //MARK: Initializers
-    init(locationService: LocationService) {
-        self.locationService = locationService
+    private let coordinator = ForecastCoordinator()
+
+    // MARK: Public methods
+
+    func makeUIViewController(context _: Context) -> UINavigationController {
+        coordinator.start()
+
+        return coordinator.navigationController
     }
 
-    func makeUIViewController(context: Context) -> UINavigationController {
-        let factory = ForecastViewControllerFactory(locationService: locationService)
-        let forecastViewController = factory.makeViewController() as! ForecastViewController
-        let navController = UINavigationController(rootViewController: forecastViewController)
-
-        return navController
-    }
-
-    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
-
-    }
+    func updateUIViewController(_: UINavigationController, context _: Context) {}
 }

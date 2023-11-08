@@ -5,10 +5,11 @@
 //  Created by Hayk Hayrapetyan on 30.07.23.
 //
 
-import CoreLocation
 import Combine
+import CoreLocation
 
-//MARK: Enums
+// MARK: Enums
+
 enum AuthorizationStatus {
     case loading
     case authorized
@@ -27,7 +28,8 @@ enum Subjects {
     typealias StatusSubject = CurrentValueSubject<AuthorizationStatus, Never>
 }
 
-//MARK: Protocols
+// MARK: Protocols
+
 protocol LocationService {
     var authorizationStatusSubject: Subjects.StatusSubject { get }
     var locationSubject: Subjects.LocationSubject { get }
@@ -38,22 +40,27 @@ protocol LocationService {
 }
 
 final class DefaultLocationService: NSObject, LocationService {
-    //MARK: Public properties
+    // MARK: Public properties
+
     var authorizationStatusSubject = Subjects.StatusSubject(.loading)
     var locationSubject = Subjects.LocationSubject()
     var locationErrorSubject = Subjects.LocationErrorSubject()
 
-    //MARK: Private properties
-    private let locationManager = CLLocationManager()
+    // MARK: Private properties
 
-    //MARK: Initializers
-    override init() {
+    private let locationManager: CLLocationManager
+
+    // MARK: Initializers
+
+    init(locationManager: CLLocationManager) {
+        self.locationManager = locationManager
+
         super.init()
-
         setupLocationManager()
     }
 
-    //MARK: Private methods
+    // MARK: Private methods
+
     private func setupLocationManager() {
         locationManager.delegate = self
         // Since there is no need for high accuracy, we can set this value
@@ -72,7 +79,9 @@ final class DefaultLocationService: NSObject, LocationService {
                 let isLocationServicesEnables = CLLocationManager.locationServicesEnabled()
 
                 DispatchQueue.main.async {
-                    self.authorizationStatusSubject.value = isLocationServicesEnables ? .appLocationDenied : .locationServicesDenied
+                    self.authorizationStatusSubject.value = isLocationServicesEnables
+                        ? .appLocationDenied
+                        : .locationServicesDenied
                 }
             }
         case .notDetermined:
@@ -84,7 +93,8 @@ final class DefaultLocationService: NSObject, LocationService {
         }
     }
 
-    //MARK: Public methods
+    // MARK: Public methods
+
     func requestWhenInUseAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
@@ -95,19 +105,20 @@ final class DefaultLocationService: NSObject, LocationService {
 }
 
 extension DefaultLocationService: CLLocationManagerDelegate {
-    //MARK: Public methods
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    // MARK: Public methods
+
+    func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
             locationManager.stopUpdatingLocation()
             locationSubject.send((lat: coordinate.latitude, long: coordinate.longitude))
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    func locationManager(_: CLLocationManager, didFailWithError error: Error) {
         locationErrorSubject.send(error)
     }
 
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    func locationManagerDidChangeAuthorization(_: CLLocationManager) {
         getAuthorizationStatus()
     }
 }

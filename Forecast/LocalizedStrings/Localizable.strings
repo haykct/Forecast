@@ -1,0 +1,41 @@
+/* 
+  Localizable.strings
+  Forecast
+
+  Created by Hayk Hayrapetyan on 26.10.23.
+  
+*/
+
+"enable_location" = "Enable location";
+"settings" = "Settings";
+"cancel" = "Cancel";
+"forecast_location_off" = "Location service for \"Forecast\" is off";
+"location_off" = "Location Services are off";
+"location_restricted" = "Location is restricted";
+"turn_on_location_settings" = "Turn on your location settings in \"Forecast\" to determine your location.";
+"turn_on_location_services" =  "Turn on Location Services to allow \"Forecast\" to determine your location.";
+"change_restriction_settings" = "Change restriction settings to allow \"Forecast\" to determine your location.";
+"location_permission" = "Give us permission to see forecast for your current location.";
+"enable_location" = "Enable location";
+"error_fetching_data" = "Error fetching data";
+"warning" = "warning";
+"today" = "Today";
+"tomorrow"= "Tomorrow";
+"forecast" = "Forecast";
+"share" = "Share";
+"loading" = "Loading";
+"n_a" = "N/A";
+"rain" = "It's raining.";
+"snow" = "It's snowing.";
+"hot" = "It's hot as f***.";
+"sunny" = "It's sunny.";
+"humidity" = "Humidity";
+"precipitation" = "Precipitation";
+"pressure" = "Pressure";
+"wind" = "Wind";
+"direction" = "Direction";
+"now" = "Now";
+"no_internet" = "No internet connection. Please check your internet connection and try again.";
+"try_later" = "Something unexpected happened. Please try again later.";
+"unexpected_format" = "The data received is in an unexpected format. Please contact support for assistance.";
+"reload_location" = "Reload the location or search for a different one.";

@@ -7,15 +7,17 @@
 
 import SwiftUI
 
-//Using generic type for making ErrorView reusable
+// Using generic type for making ErrorView reusable
 struct ErrorView<T: ViewModel>: View {
-    //MARK: Private properties
-    @ObservedObject private var viewModel: T
+    // MARK: Private properties
+
+    private var viewModel: T
     @State private var shouldAnimateGradient = false
 
     private let serviceError: ServiceError
 
-    //MARK: Private initializers
+    // MARK: Private initializers
+
     init(viewModel: T, serviceError: ServiceError) {
         self.serviceError = serviceError
         self.viewModel = viewModel
@@ -23,7 +25,7 @@ struct ErrorView<T: ViewModel>: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            LinearGradient(colors: Constants.SwiftUIColors.StateColors.red,
+            LinearGradient(colors: SwiftUIColors.StateGradientColors.red,
                            startPoint: shouldAnimateGradient ? .topTrailing : .topLeading,
                            endPoint: shouldAnimateGradient ? .bottomLeading : .bottomTrailing)
             .ignoresSafeArea()

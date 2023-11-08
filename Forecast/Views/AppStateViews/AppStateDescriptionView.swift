@@ -1,5 +1,5 @@
 //
-//  WeatherTodayView.swift
+//  AppStateDescriptionView.swift
 //  Forecast
 //
 //  Created by Hayk Hayrapetyan on 31.07.23.
@@ -8,26 +8,23 @@
 import SwiftUI
 
 struct AppStateDescriptionView: View {
-    //MARK: Enums
+    // MARK: Enums
+
     enum CurrentState: Equatable {
         case location
         case serviceError(ServiceError)
 
-        var description: String {
+        var descriptionKey: String {
             switch self {
             case .location:
-                return "Give us permission to see forecast for your current location."
-            case .serviceError(let error):
-                return error.description
+                return "location_permission"
+            case let .serviceError(error):
+                return error.descriptionKey
             }
         }
 
-        var firstLineText: String {
-            self == .location ? "Enable" : "Error"
-        }
-
-        var secondLineText: String {
-            self == .location ? "location" : "fetching"
+        var titleText: String {
+            self == .location ? "enable_location" : "error_fetching_data"
         }
 
         var imageName: String {
@@ -35,18 +32,19 @@ struct AppStateDescriptionView: View {
         }
     }
 
-    //MARK: Private properties
+    // MARK: Private properties
+
     private var state: CurrentState
 
-    //MARK: Initializers
+    // MARK: Initializers
+
     init(state: CurrentState) {
         self.state = state
     }
 
     var body: some View {
         VStack(alignment: .leading) {
-            let Inter = Constants.Fonts.Inter.self
-            let titleFont = Font.custom(Inter.bold, size: 64)
+            let titleFont: Font = .custom(Fonts.Inter.bold, size: 64)
 
             Image(state.imageName)
                 .resizable()
@@ -55,21 +53,11 @@ struct AppStateDescriptionView: View {
                 .frame(width: 43, height: 43)
                 .padding(.top, 7)
             Spacer()
-            Text(state.firstLineText)
+            Text(state.titleText.localized)
                 .font(titleFont)
-            Text(state.secondLineText)
-                .font(titleFont)
-                .padding(.top, -52)
-
-            if state != .location {
-                Text("data")
-                    .font(titleFont)
-                    .padding(.top, -52)
-            }
-
             Spacer()
-            Text(state.description)
-                .font(Font.custom(Inter.medium, size: 16))
+            Text(state.descriptionKey.localized)
+                .font(.custom(Fonts.Inter.medium, size: 16))
                 .lineSpacing(4)
             Spacer()
         }

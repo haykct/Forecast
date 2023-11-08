@@ -8,11 +8,13 @@
 import UIKit
 
 final class ForecastSectionHeaderView: UITableViewHeaderFooterView {
-    //MARK: Outlets
-    @IBOutlet private weak var dateLabel: UILabel!
-    @IBOutlet private weak var dayLabel: UILabel!
+    // MARK: Outlets
 
-    //MARK: Public methods
+    @IBOutlet private var dateLabel: UILabel!
+    @IBOutlet private var dayLabel: UILabel!
+
+    // MARK: Public methods
+
     func setupSectionHeader(with data: ForecastViewData, section: Int) {
         var data = data
 
@@ -20,9 +22,9 @@ final class ForecastSectionHeaderView: UITableViewHeaderFooterView {
 
         switch section {
         case 0:
-            dayLabel.text = "Today"
+            dayLabel.text = LocalizationKeys.today
         case 1:
-            dayLabel.text = "Tomorrow"
+            dayLabel.text = "tomorrow".localized
         default:
             dayLabel.text = ""
         }

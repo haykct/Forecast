@@ -6,47 +6,45 @@
 //
 
 struct WeatherTodayModel: Decodable {
-    let city: String?
-    let country: String?
-    let temperature: Double?
-    let humidity: Double?
-    let precipitation: Double?
-    let precipitationMode: String?
-    let pressure: Double?
-    let wind: Double?
-    let direction: String?
+    let city: City?
+    let temperature: Temperature?
+    let humidity: Humidity?
+    let precipitation: Precipitation?
+    let pressure: Pressure?
+    let wind: Wind?
 
-    enum FirstLevelKeys: String, CodingKey {
-        case city, temperature, humidity, precipitation, pressure, wind
+    struct City: Decodable {
+        let country: String?
+        let name: String?
     }
 
-    enum SecondLevelKeys: String, CodingKey {
-        case name, country, value, mode, speed, direction
+    struct Temperature: Decodable {
+        let value: Double?
     }
 
-    enum ThirdLevelKeys: String, CodingKey {
-        case value, code
+    struct Humidity: Decodable {
+        let value: Double?
     }
 
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: FirstLevelKeys.self)
-        let cityContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .city)
-        let temperatureContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .temperature)
-        let humidityContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .humidity)
-        let precipitationContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .precipitation)
-        let pressureContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .pressure)
-        let windContainer = try container.nestedContainer(keyedBy: SecondLevelKeys.self, forKey: .wind)
-        let speedContainer = try windContainer.nestedContainer(keyedBy: ThirdLevelKeys.self, forKey: .speed)
-        let directionContainer = try windContainer.nestedContainer(keyedBy: ThirdLevelKeys.self, forKey: .direction)
+    struct Precipitation: Decodable {
+        let value: Double?
+        let mode: String?
+    }
 
-        city = try? cityContainer.decode(String.self, forKey: .name)
-        country = try? cityContainer.decode(String.self, forKey: .country)
-        temperature = try? temperatureContainer.decode(Double.self, forKey: .value)
-        humidity = try? humidityContainer.decode(Double.self, forKey: .value)
-        precipitation = try? precipitationContainer.decode(Double.self, forKey: .value)
-        precipitationMode = try? precipitationContainer.decode(String.self, forKey: .mode)
-        pressure = try? pressureContainer.decode(Double.self, forKey: .value)
-        wind = try? speedContainer.decode(Double.self, forKey: .value)
-        direction = try? directionContainer.decode(String.self, forKey: .code)
+    struct Pressure: Decodable {
+        let value: Double?
+    }
+
+    struct Wind: Decodable {
+        let speed: Speed?
+        let direction: Direction?
+    }
+
+    struct Speed: Decodable {
+        let value: Double?
+    }
+
+    struct Direction: Decodable {
+        let code: String?
     }
 }

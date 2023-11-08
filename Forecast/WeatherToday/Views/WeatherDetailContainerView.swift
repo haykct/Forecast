@@ -8,41 +8,43 @@
 import SwiftUI
 
 struct WeatherDetailContainerView: View {
-    //MARK: Private properties
+    // MARK: Private properties
+
     private let viewData: WeatherTodayViewData
 
-    //MARK: Initializers
+    // MARK: Initializers
+
     init(viewData: WeatherTodayViewData) {
         self.viewData = viewData
     }
 
     var body: some View {
         var viewData = viewData // Declared as a var because a lazy var inside a struct is mutable.
-        
+
         Divider()
         Spacer()
         HStack {
             WeatherDetailView(image: "TodayHumidityLight",
                               value: viewData.humidity,
-                              text: "Humidity")
+                              textKey: "humidity")
             Spacer()
             WeatherDetailView(image: "TodayPrecipitationLight",
                               value: viewData.precipitation,
-                              text: "Precipitation")
+                              textKey: "precipitation")
             Spacer()
             WeatherDetailView(image: "TodayPressureLight",
                               value: viewData.pressure,
-                              text: "Pressure")
+                              textKey: "pressure")
         }
         Spacer()
         HStack {
             WeatherDetailView(image: "TodayWindSpeedLight",
                               value: viewData.wind,
-                              text: "Wind")
+                              textKey: "wind")
             Spacer()
             WeatherDetailView(image: "TodayWindDirectionLight",
                               value: viewData.direction,
-                              text: "Direction")
+                              textKey: "direction")
             Spacer()
             Rectangle()
                 .frame(width: 85, height: 0)

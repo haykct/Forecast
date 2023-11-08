@@ -8,42 +8,47 @@
 import Combine
 
 final class ForecastViewModel: ViewModel {
-    //MARK: Public properties
-    private(set) var viewData = CurrentValueSubject<[[ForecastViewData]], Never>([])
+    // MARK: Public properties
 
-    //MARK: Private properties
-    private let locationService: LocationService
-    private let networkService: NetworkService
-    private var cancellables = Set<AnyCancellable>()
+    @Published private(set) var viewData: [[ForecastViewData]] = []
 
-    //MARK: Initializers
-    init(locationService: LocationService, networkService: NetworkService) {
-        self.locationService = locationService
-        self.networkService = networkService
-    }
-    
-    //MARK: Public methods
-    func requestLocationAndNetworkData() {
+    // MARK: Private properties
+
+    @Injected private var locationService: LocationService
+    @Injected private var networkService: NetworkService
+    private var cancellable: AnyCancellable?
+    private weak var coordinator: ForecastCoordinator?
+
+    // MARK: Initializers
+
+    init(coordinator: ForecastCoordinator?) {
+        self.coordinator = coordinator
+
         setupLocationSubjects()
+    }
+
+    // MARK: Public methods
+
+    func requestLocationAndNetworkData() {
         locationService.requestLocation()
     }
 
-    //MARK: Private methods
+    // MARK: Private methods
+
     private func setupLocationSubjects() {
-        cancellables.removeAll()
-        
-        locationService.locationSubject
-            .flatMap { [unowned self] coordinates -> AnyPublisher<ForecastDataModel, NetworkError> in
+        cancellable = locationService.locationSubject
+            .flatMap { [unowned self] coordinates -> AnyPublisher<ForecastModel, Never> in
                 let request = ForecastRequest(coordinates: coordinates)
 
                 return networkService.request(request)
+                    .catch { _ in
+                        // Handle error
+                        return Empty<ForecastModel, Never>()
+                    }
+                    .eraseToAnyPublisher()
             }
-            .sink { completion in
-            } receiveValue: { [unowned self] model in
-                let forecastViewData = ForecastViewData.makeViewData(model: model)
-
-                viewData.value = forecastViewData
+            .sink { [unowned self] model in
+                viewData = ForecastViewData.makeViewData(model: model)
             }
-            .store(in: &cancellables)
     }
 }

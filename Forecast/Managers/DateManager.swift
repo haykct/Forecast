@@ -8,14 +8,17 @@
 import Foundation
 
 struct DateManager {
-    //MARK: Private properties
+    // MARK: Private properties
+
     private let formatter = DateFormatter()
 
     init() {
         formatter.timeZone = TimeZone.current
+        formatter.locale = .current
     }
 
-    //MARK: Public methods
+    // MARK: Public methods
+
     func date(from string: String, format: String) -> Date? {
         formatter.dateFormat = format
 

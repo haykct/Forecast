@@ -5,21 +5,24 @@
 //  Created by Hayk Hayrapetyan on 03.08.23.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 class ForecastViewController: UIViewController {
-    //MARK: Private properties
+    // MARK: Private properties
+
     private let forecastCellID = "forecastCell"
     private let forecastSectionHeaderID = "forecastSectionHeader"
     private let viewModel: ForecastViewModel
     private var cancellable: AnyCancellable?
     private var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
 
-    //MARK: Outlets
-    @IBOutlet private weak var tableView: UITableView!
+    // MARK: Outlets
 
-    //MARK: Lifecycle methods
+    @IBOutlet private var tableView: UITableView!
+
+    // MARK: Lifecycle methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,8 +33,10 @@ class ForecastViewController: UIViewController {
         setupNavigationBar()
     }
 
-    //MARK: Initializers
-    required init?(coder: NSCoder) {
+    // MARK: Initializers
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("Use `init(coder:)` to initialize an `ForecastViewController` instance.")
     }
 
@@ -41,24 +46,25 @@ class ForecastViewController: UIViewController {
         super.init(coder: coder)
     }
 
-    //MARK: Private methods
+    // MARK: Private methods
+
     private func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        let Inter = Constants.Fonts.Inter.self
 
-        navigationItem.title = "Forecast"
+        navigationItem.title = LocalizationKeys.forecast
         navigationController?.navigationBar.prefersLargeTitles = true
-        appearance.titleTextAttributes = [.font: UIFont(name: Inter.bold, size: 20) as Any]
-        appearance.largeTitleTextAttributes = [.font: UIFont(name: Inter.bold, size: 40) as Any]
+        appearance.titleTextAttributes = [.font: UIFont.custom(name: Fonts.Inter.bold, size: 20)]
+        appearance.largeTitleTextAttributes = [.font: UIFont.custom(name: Fonts.Inter.bold, size: 20)]
         navigationController?.navigationBar.standardAppearance = appearance
     }
 
     private func setupBindings() {
-        cancellable = viewModel.viewData
+        cancellable = viewModel.$viewData
+            .receive(on: RunLoop.main)
             .sink { [unowned self] _ in
-                //Handle errors
+                // Handle errors
                 spinner.stopAnimating()
-            } receiveValue: { [unowned self] forecasts in
+            } receiveValue: { [unowned self] _ in
                 tableView.reloadData()
                 spinner.stopAnimating()
             }
@@ -84,48 +90,49 @@ class ForecastViewController: UIViewController {
         tableView.register(forecastCellNib, forCellReuseIdentifier: forecastCellID)
         tableView.register(sectionHeaderNib, forHeaderFooterViewReuseIdentifier: forecastSectionHeaderID)
     }
-
 }
 
-//MARK: UITableViewDataSource
+// MARK: UITableViewDataSource
+
 extension ForecastViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: forecastCellID,
-                                                      for: indexPath) as! ForecastTableViewCell
-        let cellData = viewModel.viewData.value[indexPath.section][indexPath.row]
+                                                 for: indexPath) as? ForecastTableViewCell
+        let cellData = viewModel.viewData[indexPath.section][indexPath.row]
 
-        cell.setupCell(with: cellData, row: indexPath.row)
+        cell?.setupCell(with: cellData, indexPath: indexPath)
 
-        return cell
+        return cell ?? UITableViewCell()
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        viewModel.viewData.value.count
+    func numberOfSections(in _: UITableView) -> Int {
+        viewModel.viewData.count
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.viewData.value[section].count
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.viewData[section].count
     }
 }
 
-//MARK: UITableViewDelegate
+// MARK: UITableViewDelegate
+
 extension ForecastViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return 80
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeader = tableView
-            .dequeueReusableHeaderFooterView(withIdentifier: forecastSectionHeaderID) as! ForecastSectionHeaderView
+            .dequeueReusableHeaderFooterView(withIdentifier: forecastSectionHeaderID) as? ForecastSectionHeaderView
 
-        let sectionData = viewModel.viewData.value[section][0]
+        let sectionData = viewModel.viewData[section][0]
 
-        sectionHeader.setupSectionHeader(with: sectionData, section: section)
+        sectionHeader?.setupSectionHeader(with: sectionData, section: section)
 
         return sectionHeader
     }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         56
     }
 }

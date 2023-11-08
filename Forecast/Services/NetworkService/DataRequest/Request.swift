@@ -1,5 +1,5 @@
 //
-//  DataRequest.swift
+//  Request.swift
 //  Forecast
 //
 //  Created by Hayk Hayrapetyan on 01.08.23.
@@ -15,5 +15,5 @@ protocol Request {
 
 extension Request {
     var url: String { baseURL + path }
-    var baseURL: String { Constants.BaseUrls.weatherApi }
+    var baseURL: String { BaseUrls.weatherApi }
 }
