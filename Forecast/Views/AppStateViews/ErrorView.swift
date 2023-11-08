@@ -11,7 +11,7 @@ import SwiftUI
 struct ErrorView<T: ViewModel>: View {
     // MARK: Private properties
 
-    @ObservedObject private var viewModel: T
+    private var viewModel: T
     @State private var shouldAnimateGradient = false
 
     private let serviceError: ServiceError

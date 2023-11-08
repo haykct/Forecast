@@ -23,12 +23,8 @@ struct AppStateDescriptionView: View {
             }
         }
 
-        var firstLineText: String {
-            self == .location ? "enable" : "error"
-        }
-
-        var secondLineText: String {
-            self == .location ? "location" : "fetching"
+        var titleText: String {
+            self == .location ? "enable_location" : "error_fetching_data"
         }
 
         var imageName: String {
@@ -57,18 +53,8 @@ struct AppStateDescriptionView: View {
                 .frame(width: 43, height: 43)
                 .padding(.top, 7)
             Spacer()
-            Text(state.firstLineText.localized)
+            Text(state.titleText.localized)
                 .font(titleFont)
-            Text(state.secondLineText.localized)
-                .font(titleFont)
-                .padding(.top, -52)
-
-            if state != .location {
-                Text("data")
-                    .font(titleFont)
-                    .padding(.top, -52)
-            }
-
             Spacer()
             Text(state.descriptionKey.localized)
                 .font(.custom(Fonts.Inter.medium, size: 16))

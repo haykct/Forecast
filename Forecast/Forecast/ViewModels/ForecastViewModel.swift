@@ -37,15 +37,18 @@ final class ForecastViewModel: ViewModel {
 
     private func setupLocationSubjects() {
         cancellable = locationService.locationSubject
-            .flatMap { [unowned self] coordinates -> AnyPublisher<ForecastModel, NetworkError> in
+            .flatMap { [unowned self] coordinates -> AnyPublisher<ForecastModel, Never> in
                 let request = ForecastRequest(coordinates: coordinates)
 
                 return networkService.request(request)
+                    .catch { _ in
+                        // Handle error
+                        return Empty<ForecastModel, Never>()
+                    }
+                    .eraseToAnyPublisher()
             }
-            .sink { _ in } receiveValue: { [unowned self] model in
-                let forecastViewData = ForecastViewData.makeViewData(model: model)
-
-                viewData = forecastViewData
+            .sink { [unowned self] model in
+                viewData = ForecastViewData.makeViewData(model: model)
             }
     }
 }

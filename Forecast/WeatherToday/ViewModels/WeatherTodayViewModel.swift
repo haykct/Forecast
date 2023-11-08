@@ -35,19 +35,21 @@ final class WeatherTodayViewModel: ObservableObject, ViewModel {
 
     private func setupLocationSubjects() {
         locationService.locationSubject
-            .flatMap { [unowned self] coordinates -> AnyPublisher<WeatherTodayModel, NetworkError> in
+            .flatMap { [unowned self] coordinates -> AnyPublisher<WeatherTodayModel, Never> in
                 let request = WeatherTodayRequest(coordinates: coordinates)
 
                 return networkService.request(request)
+                    .catch { [unowned self] error in
+                        serviceError = .networkError(error)
+
+                        return Empty<WeatherTodayModel, Never>()
+                    }
+                    .eraseToAnyPublisher()
             }
-            .sink { [unowned self] completion in
-                if case let .failure(error) = completion {
-                    serviceError = .networkError(error)
-                }
-            } receiveValue: { [unowned self] model in
+            .sink(receiveValue: { [unowned self] model in
                 serviceError = nil
                 viewData = WeatherTodayViewData(model: model)
-            }
+            })
             .store(in: &cancellables)
 
         locationService.locationErrorSubject

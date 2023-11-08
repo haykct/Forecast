@@ -16,12 +16,9 @@
 "turn_on_location_services" =  "Turn on Location Services to allow \"Forecast\" to determine your location.";
 "change_restriction_settings" = "Change restriction settings to allow \"Forecast\" to determine your location.";
 "location_permission" = "Give us permission to see forecast for your current location.";
-"enable" = "Enable";
-"error" = "Error";
-"location" = "location";
-"fetching" = "fetching";
+"enable_location" = "Enable location";
+"error_fetching_data" = "Error fetching data";
 "warning" = "warning";
-"data" = "data";
 "today" = "Today";
 "tomorrow"= "Tomorrow";
 "forecast" = "Forecast";
