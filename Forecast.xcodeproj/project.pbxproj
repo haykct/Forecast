@@ -509,7 +509,6 @@
 				2639DF052A79B103000545BD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				2639DF082A79B149000545BD /* XCRemoteSwiftPackageReference "XMLCoder" */,
 				2650A36E2AE7D6A300D97CBB /* XCRemoteSwiftPackageReference "Swinject" */,
-				2650A3942AF6A84B00D97CBB /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = 26C3F41E2A76E1510082F068 /* Products */;
 			projectDirPath = "";
@@ -844,14 +843,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.8.4;
-			};
-		};
-		2650A3942AF6A84B00D97CBB /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.53.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
