@@ -5,7 +5,7 @@ The Forecast app will keep you up to date with the weather and forecasts in your
 #  Description
 
 A forecast app that shows the current weather and forecast for the next 5 days using location information.
-It also shows additional information such as relative humidity, precipitation, atmospheric pressure, wind speed, and direction.
+It also shows additional information such as relative humidity, precipitation, atmospheric pressure, wind speed and direction.
 
 #  Getting started
 
