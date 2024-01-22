@@ -18,7 +18,7 @@ It also shows additional information such as relative humidity, precipitation, a
 
 To start getting weather updates, allow the app to use your location.
 After getting your location, the app will show the weather in your area and a blue or yellow motion animation depending on whether it's raining, snowing, or sunny.
-It will also show information about relative humidity, precipitation, atmospheric pressure, wind speed, and direction.
+It will also show information about relative humidity, precipitation, atmospheric pressure, wind speed and direction.
 By selecting the Forecast tab, you will find the weather forecast for the next 5 days with 3 hour updates.
 
 # Architecture
