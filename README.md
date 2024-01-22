@@ -32,6 +32,6 @@ By selecting the Forecast tab, you will find the weather forecast for the next 5
 # Dependencies
 
 * 'Alamofire' is a networking library which ensures that the message reaches everyone in the world.
-* 'XMLCoder' is a third party lib to help encode and decode XML data.
+* 'XMLCoder' is a third party library to help encode and decode XML data.
 * 'Swinject' is a dependency injection framework that allows you to get loosely-coupled components in your app.
 
